@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import os
 import json
 import pandas as pd
@@ -30,3 +30,22 @@ def get_anime_reviews():
   reviews_json = reviews_df_sorted.to_dict(orient='records') # Convert the sorted DataFrame to a JSON-like structure
 
   return reviews_json
+
+
+
+@app.route("/review/<id_anime_name>", methods=["POST"])
+def search_anime_review(id_anime_name):
+  reviews_json = request.get_json()    # Receives the request body (JSON)
+  review_target = None
+
+  # Iterate through the reviews
+  for review_info in reviews_json:
+    # Checks if the id matches the id in the URL
+    if(review_info.get("id") == id_anime_name):
+      review_target = review_info   # Saves the matching review
+      break
+
+  if review_target:
+    return jsonify(review_target)   # Returns the matching review as JSON
+  else:
+    return jsonify({"message": "Review not found"}), 404

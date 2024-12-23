@@ -1,0 +1,19 @@
+{
+  "id": "nana",
+  "name": "Nana",
+  "intro": "Vestibulum ut libero id lacus lobortis varius sed et augue. Nunc feugiat tempor consequat. Mauris orci ligula, iaculis nec justo id, sodales euismod dolor. In ultrices, nulla eu sodales blandit, urna diam vulputate enim, vel tempus erat erat eu mi. Nunc feugiat tincidunt tortor.",
+  "rate": 7,
+  "type": "TV",
+  "episodes": 47,
+  "startDate": "2006-04-05",
+  "endDate": "2007-03-28",
+  "season": "Spring",
+  "studio": "Madhouse",
+  "demographic": "Shoujo",
+  "source": "Manga",
+  "genres": ["Drama", "Romance"],
+  "dataReview": "2024-12-23",
+  "malLink": "https://myanimelist.net/anime/877/Nana",
+  "anilistLink": "https://anilist.co/anime/877/NANA",
+  "kitsuLink": "https://kitsu.app/anime/nana"
+}

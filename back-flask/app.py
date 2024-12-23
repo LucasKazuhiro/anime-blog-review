@@ -13,7 +13,7 @@ def get_anime_reviews():
   # For loop to iterate over the files in a folder
   for file_name in os.listdir(reviews_path):
     # Filter for JSON files
-    if(file_name.endswith('.json')):
+    if file_name.endswith('.json'):
       review_path = os.path.join(reviews_path, file_name)
       with open(review_path, 'r', encoding='utf-8') as json_file:
         review_dict = json.load(json_file)  # Load json as a dict
@@ -45,7 +45,7 @@ def search_anime_review(id_anime_name):
   # Iterate through the reviews
   for review_info in reviews_json:
     # Checks if the id matches the id in the URL
-    if(review_info.get("id") == id_anime_name):
+    if review_info.get("id") == id_anime_name:
       review_target = review_info   # Saves the matching review
       break
 
@@ -68,7 +68,7 @@ def get_anime_musics(music_type):
   # For loop to iterate over the files in a folder
   for file_name in os.listdir(musics_path):
     # Filter for JSON files
-    if (file_name.endswith('.json')):
+    if file_name.endswith('.json'):
       music_path = os.path.join(musics_path, file_name)
       with open(music_path, 'r', encoding='utf-8') as json_file:
         music_dict = json.load(json_file)  # Load json as a dict

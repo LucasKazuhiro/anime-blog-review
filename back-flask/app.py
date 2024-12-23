@@ -19,6 +19,10 @@ def get_anime_reviews():
         review_dict = json.load(json_file)  # Load json as a dict
         reviews_data.append(review_dict)    # Saves it in the dict array
 
+  # Return a message if no reviews are found
+  if not reviews_data:
+    return jsonify({"message": "No reviews found"}), 404
+
   reviews_dataframe = pd.DataFrame(reviews_data) # Convert dict array into pandas dataframe
 
   # Converts date value to datetime type

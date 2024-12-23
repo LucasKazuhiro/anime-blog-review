@@ -85,3 +85,22 @@ def get_anime_musics(music_type):
   musics_json = musics_df_sorted.to_dict(orient='records')  # Convert the sorted DataFrame to a JSON-like structure
 
   return musics_json
+
+
+
+@app.route("/favorites/<fav_type>")
+def get_favorites(fav_type):
+  fav_file = f"./data/favorites_json/{fav_type}.json"  # Path to specific fav type json file
+
+  # Check if fav type json file exists
+  if not os.path.exists(fav_file):
+    return jsonify({"message": f"No data found for favorite type: {fav_type}"}), 404
+
+  with open(fav_file, 'r', encoding='utf-8') as json_file:
+    fav_dict = json.load(json_file)  # Load json as a dict
+
+  # Return a message if no favorites are found
+  if not fav_dict:
+    return jsonify({"message": f"No favorites {fav_type} found"}), 404
+
+  return fav_dict

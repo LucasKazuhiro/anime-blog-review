@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-8">
+  <div *ngFor="let review of reviewsBanner">
+    <p> {{review.reviewDate}} </p>
+    <h1> {{review.name}} </h1>
+    <img src="/review_banner/{{review.id}}-banner.jpg" alt="Imagem de {{review.name}}">
+    <p>{{review.intro}}</p>
+  </div>
+</div>

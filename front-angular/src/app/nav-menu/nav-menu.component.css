@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+
   /* Menu items style */
   .button-menu {
     @apply relative px-4 py-2 text-sm text-neutral-300 hover:text-main focus:text-main;
@@ -53,21 +54,21 @@
     transition: .5s;
   }
 
-  .button-menu:hover ~ .dot{
+  .button-menu:hover~.dot {
     @apply opacity-100;
   }
 
-  .button-menu:nth-child(1):hover ~ .dot{
+  .button-menu:nth-child(1):hover~.dot {
     background-color: #cf3d6e;
     transform: translateX(40px);
   }
 
-  .button-menu:nth-child(2):hover ~ .dot{
+  .button-menu:nth-child(2):hover~.dot {
     background-color: #e4a42d;
     transform: translateX(150px);
   }
 
-  .button-menu:nth-child(3):hover ~ .dot{
+  .button-menu:nth-child(3):hover~.dot {
     background-color: #14afc4;
     transform: translateX(255px);
   }

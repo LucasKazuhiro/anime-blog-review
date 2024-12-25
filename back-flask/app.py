@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import json
 import pandas as pd
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "https://korosenku.vercel.app"]}})
 
 @app.route("/reviews")
 def get_anime_reviews():

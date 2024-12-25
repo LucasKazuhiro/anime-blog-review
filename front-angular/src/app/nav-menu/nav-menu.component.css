@@ -47,4 +47,28 @@
     @apply top-0;
     transform: rotateX(0deg);
   }
+
+  .dot {
+    @apply absolute -bottom-4 h-2 w-2 rounded-full bg-slate-200 opacity-0;
+    transition: .5s;
+  }
+
+  .button-menu:hover ~ .dot{
+    @apply opacity-100;
+  }
+
+  .button-menu:nth-child(1):hover ~ .dot{
+    background-color: #cf3d6e;
+    transform: translateX(40px);
+  }
+
+  .button-menu:nth-child(2):hover ~ .dot{
+    background-color: #e4a42d;
+    transform: translateX(150px);
+  }
+
+  .button-menu:nth-child(3):hover ~ .dot{
+    background-color: #14afc4;
+    transform: translateX(255px);
+  }
 }

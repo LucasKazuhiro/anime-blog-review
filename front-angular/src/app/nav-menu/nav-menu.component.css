@@ -2,70 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-  /* Nav Menu style */
-  .nav-menu{
-    display: flex;
-    gap: 15px;
-  }
+@layer components {
 
-  /* Button style */
-  .nav-menu button{
-    padding: 7px 14px;
-    position: relative;
-    @apply text-sm;
-    @apply text-neutral-300;
-  }
-
-  /* Color of text on Hover/Focus */
-  .nav-menu button:hover, .nav-menu button:focus{
-    color: theme('colors.main');
+  /* Menu items style */
+  .button-menu {
+    @apply relative px-4 py-2 text-sm text-neutral-300 hover:text-main focus:text-main;
   }
 
   /* Colorized rectangle */
-  .nav-menu button::after {
-    content: attr(data-title);
-    position: absolute;
-    display: block;
-    left: 0;
-    top: 8px;
-    transform: rotateX(-90deg);
-    @apply rounded-full;
-    padding: 7px 14px;
-    color: transparent;
-    transition: all 200ms ease-out;
+  .button-menu::after {
+    @apply absolute left-0 top-4 block rotate-90 rounded-full px-4 py-2 text-transparent transition-all content-[attr(data-title)];
+    transform: rotateX(88deg);
     z-index: -1;
   }
 
   /* Color of each rectangle (which will show on hover) */
-  .nav-menu button:nth-child(1)::after {
+  .button-menu:nth-child(1)::after {
     background-color: #ac1648;
   }
 
-  .nav-menu button:nth-child(2)::after {
+  .button-menu:nth-child(2)::after {
     background-color: #cc880b;
   }
 
-  .nav-menu button:nth-child(3)::after {
+  .button-menu:nth-child(3)::after {
     background-color: #008697;
   }
 
   /* Color of each rectangle on focus */
-  .nav-menu button:nth-child(1):focus::after {
+  .button-menu:nth-child(1):focus::after {
     background-color: #cf3d6e;
   }
 
-  .nav-menu button:nth-child(2):focus::after {
+  .button-menu:nth-child(2):focus::after {
     background-color: #e4a42d;
   }
 
-  .nav-menu button:nth-child(3):focus::after {
+  .button-menu:nth-child(3):focus::after {
     background-color: #14afc4;
   }
 
   /* Show rectangle on Hover/Focus */
-  .nav-menu button:hover::after, .nav-menu button:focus::after{
-    top: 0;
+  .button-menu:hover::after,
+  .button-menu:focus::after {
+    @apply top-0;
     transform: rotateX(0deg);
+  }
+
+  .dot {
+    @apply absolute -bottom-4 h-2 w-2 rounded-full bg-slate-200 opacity-0;
+    transition: .5s;
+  }
+
+  .button-menu:hover~.dot {
+    @apply opacity-100;
+  }
+
+  .button-menu:nth-child(1):hover~.dot {
+    background-color: #cf3d6e;
+    transform: translateX(40px);
+  }
+
+  .button-menu:nth-child(2):hover~.dot {
+    background-color: #e4a42d;
+    transform: translateX(150px);
+  }
+
+  .button-menu:nth-child(3):hover~.dot {
+    background-color: #14afc4;
+    transform: translateX(255px);
   }
 }

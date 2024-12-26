@@ -20,7 +20,21 @@ export class AnimeService {
     // Subscribe to the Observable returned by http.get()
     this.http.get<Review[]>("https://korosenku-flask.vercel.app/reviews").subscribe({
       next: (data) => {
-        this.reviewsBanner.next(data); // Update BehaviorSubject
+        const formatter = new Intl.DateTimeFormat('en-us', {
+          month: 'long',
+          day: '2-digit',
+          year: 'numeric'
+        })
+
+        const updatedData = data.map(review => {
+          // Change date format
+          review.reviewDate = formatter.format(new Date(review.reviewDate)).toUpperCase();
+          review.startDate = formatter.format(new Date(review.startDate)).toUpperCase();
+          review.endDate = formatter.format(new Date(review.endDate)).toUpperCase();
+          return review;
+        })
+
+        this.reviewsBanner.next(updatedData); // Update BehaviorSubject
       },
       error: (err) => {
         console.error('Error: ', err); // Error mensage

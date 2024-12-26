@@ -7,11 +7,11 @@ export class Review {
   public studio: string = "";
   public source: string = "";
   public demographic: string = "";
-  public startDate: Date = new Date();
-  public endDate: Date = new Date();
+  public startDate: string = "";
+  public endDate: string = "";
   public genres: string[] = [];
   public rate: number = 0;
-  public reviewDate: Date = new Date();
+  public reviewDate: string = "";
   public malLink: string = "";
   public anilistLink: string = "";
   public kitsuLink: string = "";

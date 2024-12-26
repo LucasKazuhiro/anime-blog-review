@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .box {
+    @apply flex min-w-96 flex-col gap-6;
+  }
+
+  /* Link Box */
+  .link-box {
+    @apply flex w-full flex-col rounded-xl bg-neutral-950 pb-3 pt-4;
+  }
+
+  /* Title box */
+  .title-box {
+    @apply flex w-full flex-row items-center justify-between px-6 pb-4;
+  }
+
+  .title-box h3 {
+    @apply text-lg font-bold text-neutral-500;
+  }
+
+  .link-svg {
+    @apply h-fit w-7 fill-neutral-900;
+  }
+
+  /* Link Line */
+  .link-line {
+    @apply h-0.5 w-full bg-[#141414];
+  }
+
+  /* Info Box */
+  .info-box {
+    @apply flex flex-row gap-3 px-6 pb-4 pt-4 duration-200 hover:bg-neutral-900;
+  }
+
+  .link-img {
+    @apply w-[46px] rounded-full;
+  }
+
+  .info {
+    @apply flex flex-col gap-0;
+  }
+
+  .info h4 {
+    @apply font-medium text-neutral-400;
+  }
+
+  .external-website {
+    @apply inline-block h-fit w-4 fill-gray-600;
+  }
+  .info h5 {
+    @apply flex items-center gap-[2px] text-base text-sm font-normal text-gray-600;
+  }
+}

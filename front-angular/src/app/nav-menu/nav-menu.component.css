@@ -65,11 +65,11 @@
 
   .button-menu:nth-child(2):hover~.dot {
     background-color: #e4a42d;
-    transform: translateX(150px);
+    transform: translateX(146px);
   }
 
   .button-menu:nth-child(3):hover~.dot {
     background-color: #14afc4;
-    transform: translateX(255px);
+    transform: translateX(248px);
   }
 }

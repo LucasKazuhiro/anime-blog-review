@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .box:hover img {
+    @apply scale-100;
+  }
+
+  .box:hover h1{
+    @apply text-orange-400;
+  };
+
+  .box:hover > p{
+    @apply text-neutral-100;
+  }
+}

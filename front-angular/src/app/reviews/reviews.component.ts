@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reviews',
@@ -13,10 +14,13 @@ import { CommonModule } from '@angular/common';
 export class ReviewsComponent {
   public reviewsBanner:Review[] = []
 
-  constructor(private animeService: AnimeService) {
+  constructor(private router: Router, private animeService: AnimeService) {
     this.animeService.reviewsBanner$.subscribe(reviewsBanner => {
       this.reviewsBanner = reviewsBanner;
     })
   }
 
+  navigateTo(animeId: String): void{
+    this.router.navigate([`/review/${animeId}`]);
+  }
 }

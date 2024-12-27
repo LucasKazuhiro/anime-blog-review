@@ -17,6 +17,10 @@
     @apply flex w-full flex-row items-center justify-between px-6 pb-4;
   }
 
+  .title-box-2 {
+    @apply relative flex items-center;
+  }
+
   .title-box h3 {
     @apply text-lg font-bold text-neutral-500;
   }

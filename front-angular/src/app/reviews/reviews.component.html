@@ -1,8 +1,8 @@
-<div class="flex flex-row gap-14">
-  <div class="flex flex-col gap-12">
+<div class="flex flex-col gap-14 md:flex-row md:gap-6 lg:gap-14">
+  <div class="flex w-full flex-col gap-12 lg:max-w-lg 2xl:max-w-xl">
     <div
       *ngFor="let review of reviewsBannerDisplay; let isFirst = first"
-      class="box flex max-w-xl cursor-pointer flex-col gap-4"
+      class="box flex cursor-pointer flex-col gap-4"
       (click)="navigateTo(review.id)"
     >
       <div>
@@ -34,7 +34,7 @@
     <button
       *ngIf="reviewsBannerDisplay.length < reviewsBanner.length"
       (click)="showMore()"
-      class="group relative inline-flex m-auto w-fit items-center justify-start overflow-hidden rounded bg-orange-500 px-8 py-3 font-medium transition-all"
+      class="group relative m-auto inline-flex w-fit items-center justify-start overflow-hidden rounded bg-orange-500 px-8 py-3 font-medium transition-all"
     >
       <span
         class="absolute right-0 top-0 inline-block h-4 w-4 rounded bg-orange-700 transition-all duration-500 ease-in-out group-hover:-mr-4 group-hover:-mt-4"
@@ -44,7 +44,7 @@
         ></span>
       </span>
       <span
-        class="absolute bottom-0 left-0 h-full w-full border-0 -translate-x-full translate-y-full rounded bg-orange-600 transition-all delay-200 duration-300 ease-in-out group-hover:mb-12 group-hover:translate-x-0"
+        class="absolute bottom-0 left-0 h-full w-full -translate-x-full translate-y-full rounded border-0 bg-orange-600 transition-all delay-200 duration-300 ease-in-out group-hover:mb-12 group-hover:translate-x-0"
       ></span>
       <span
         class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"

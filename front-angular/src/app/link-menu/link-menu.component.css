@@ -4,7 +4,7 @@
 
 @layer components {
   .box {
-    @apply flex min-w-96 flex-col gap-6;
+    @apply flex w-full flex-col gap-6 md:min-w-72 lg:max-w-96;
   }
 
   /* Link Box */
@@ -40,7 +40,7 @@
   }
 
   .link-img {
-    @apply w-[46px] rounded-full;
+    @apply h-fit w-[46px] rounded-full;
   }
 
   .info {

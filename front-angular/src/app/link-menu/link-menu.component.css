@@ -51,6 +51,6 @@
     @apply inline-block h-fit w-4 fill-gray-600;
   }
   .info h5 {
-    @apply flex items-center gap-[2px] text-base text-sm font-normal text-gray-600;
+    @apply flex items-center gap-[2px] text-sm font-normal text-gray-600;
   }
 }

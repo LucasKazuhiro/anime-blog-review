@@ -1,8 +1,29 @@
 <div>
   <nav class="relative flex gap-3">
-    <button data-title="REVIEWS" class="button-menu">REVIEWS</button>
-    <button data-title="FAVORITES" class="button-menu">FAVORITES</button>
-    <button data-title="MUSICS" class="button-menu">MUSICS</button>
+    <button
+      data-title="REVIEWS"
+      class="button-menu"
+      id="button-menu-reviews"
+      (mouseenter)="calcCenterDot($event.target)"
+    >
+      REVIEWS
+    </button>
+    <button
+      data-title="FAVORITES"
+      class="button-menu"
+      id="button-menu-favorites"
+      (mouseenter)="calcCenterDot($event.target)"
+    >
+      FAVORITES
+    </button>
+    <button
+      data-title="MUSICS"
+      class="button-menu"
+      id="button-menu-musics"
+      (mouseenter)="calcCenterDot($event.target)"
+    >
+      MUSICS
+    </button>
     <div class="dot"></div>
   </nav>
 </div>

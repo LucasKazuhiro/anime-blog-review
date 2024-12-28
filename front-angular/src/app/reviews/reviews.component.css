@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 @layer components {
-  .box:hover img {
-    @apply scale-100;
+  .box:hover div > p{
+    @apply text-neutral-500
   }
 
   .box:hover h1{
     @apply text-orange-400;
   };
+
+  .box:hover span{
+    @apply bg-rose-500 bg-opacity-20 text-rose-600;
+  }
+
+  .box:hover img {
+    @apply scale-100;
+  }
 
   .box:hover > p{
     @apply text-neutral-100;

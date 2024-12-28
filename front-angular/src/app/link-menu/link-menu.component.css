@@ -4,7 +4,7 @@
 
 @layer components {
   .box {
-    @apply flex min-w-96 flex-col gap-6;
+    @apply flex w-full flex-col gap-6 md:min-w-72 lg:max-w-96;
   }
 
   /* Link Box */
@@ -17,8 +17,12 @@
     @apply flex w-full flex-row items-center justify-between px-6 pb-4;
   }
 
+  .title-box-2 {
+    @apply relative flex items-center;
+  }
+
   .title-box h3 {
-    @apply text-lg font-bold text-neutral-500;
+    @apply text-lg font-bold text-neutral-500 z-[15];
   }
 
   .link-svg {
@@ -36,7 +40,7 @@
   }
 
   .link-img {
-    @apply w-[46px] rounded-full;
+    @apply h-fit w-[46px] rounded-full select-none;
   }
 
   .info {
@@ -51,6 +55,6 @@
     @apply inline-block h-fit w-4 fill-gray-600;
   }
   .info h5 {
-    @apply flex items-center gap-[2px] text-base text-sm font-normal text-gray-600;
+    @apply flex items-center gap-[2px] text-sm font-normal text-gray-600;
   }
 }

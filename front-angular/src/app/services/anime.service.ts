@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AnimeService {
 
+  private backend_domain = "korosenku-flask.vercel.app";
+
   constructor(private http: HttpClient) { }
 
   // Create an Observable of type BehaviorSubject that will store the reviews banner array.
@@ -15,10 +17,15 @@ export class AnimeService {
   // Create an Observable for reviewsBanner (read only)
   reviewsBanner$ = this.reviewsBanner.asObservable();
 
+  // Create an Observable of type BehaviorSubject that will store the anime review selected
+  private reviewSelected = new BehaviorSubject<Review>(new Review);
+  // Create an Observable for reviewSelected (read only)
+  reviewSelected$ = this.reviewSelected.asObservable();
+
 
   getAllReviews() {
     // Subscribe to the Observable returned by http.get()
-    this.http.get<Review[]>("https://korosenku-flask.vercel.app/reviews").subscribe({
+    this.http.get<Review[]>(`https://${this.backend_domain}/reviews`).subscribe({
       next: (data) => {
         const formatter = new Intl.DateTimeFormat('en-us', {
           month: 'long',
@@ -38,6 +45,21 @@ export class AnimeService {
       },
       error: (err) => {
         console.error('Error: ', err); // Error mensage
+      }
+    })
+  }
+
+  getReview(reviewId: string) {
+    // Searches for the review that matches the review_id
+    this.reviewsBanner.subscribe(data => {
+      const foundReview = data.find((review) => review.id === reviewId);
+
+      if (foundReview) {
+        // Saves the found review
+        this.reviewSelected.next(foundReview);
+      }
+      else {
+        this.reviewSelected.next(new Review());
       }
     })
   }

@@ -22,7 +22,7 @@
   }
 
   .title-box h3 {
-    @apply text-lg font-bold text-neutral-500;
+    @apply text-lg font-bold text-neutral-500 z-[15];
   }
 
   .link-svg {
@@ -40,7 +40,7 @@
   }
 
   .link-img {
-    @apply h-fit w-[46px] rounded-full;
+    @apply h-fit w-[46px] rounded-full select-none;
   }
 
   .info {

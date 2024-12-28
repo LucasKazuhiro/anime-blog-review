@@ -1,5 +1,7 @@
 <div class="flex flex-col gap-14 md:flex-row md:gap-6 lg:gap-14">
-  <div class="flex w-full flex-col gap-12 lg:max-w-lg 2xl:max-w-xl">
+  <div
+    class="flex w-full flex-col gap-12 lg:max-w-lg 2xl:min-w-[576px] 2xl:max-w-xl"
+  >
     <div
       *ngFor="let review of reviewsBannerDisplay; let isFirst = first"
       class="box flex cursor-pointer flex-col gap-4"

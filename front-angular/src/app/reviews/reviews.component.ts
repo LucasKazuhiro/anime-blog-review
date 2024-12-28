@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 
 @Component({
-  selector: 'app-reviews',
-  standalone: true,
-  imports: [CommonModule, LinkMenuComponent],
-  templateUrl: './reviews.component.html',
-  styleUrl: './reviews.component.css'
+    selector: 'app-reviews',
+    imports: [CommonModule, LinkMenuComponent],
+    templateUrl: './reviews.component.html',
+    styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent {
   public reviewsBanner: Review[] = [];

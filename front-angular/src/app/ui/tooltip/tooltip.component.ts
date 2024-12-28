@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'tooltip',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './tooltip.component.html',
-  styleUrl: './tooltip.component.css'
+    selector: 'tooltip',
+    imports: [CommonModule],
+    templateUrl: './tooltip.component.html',
+    styleUrl: './tooltip.component.css'
 })
   export class TooltipComponent {
   @Input() tooltip_id: string = "";

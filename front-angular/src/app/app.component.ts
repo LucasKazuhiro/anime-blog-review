@@ -5,12 +5,12 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AnimeService } from './services/anime.service';
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, UserMenuComponent, NavMenuComponent],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
+  selector: 'app-root',
+  imports: [RouterOutlet, UserMenuComponent, NavMenuComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(private animeService: AnimeService) { }
 

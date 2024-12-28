@@ -27,9 +27,9 @@ export class ReviewsComponent {
     })
   }
 
-  navigateTo(animeId: String): void {
+  navigateTo(reviewId: String): void {
     // Navigate to review page and send the animeId
-    this.router.navigate([`/review/${animeId}`]);
+      this.router.navigate([`/review/${reviewId}`]);
   }
 
   showMore() {

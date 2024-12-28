@@ -6,4 +6,8 @@
   * {
     @apply font-lexend text-neutral-400;
   }
+
+  ::selection {
+    @apply text-[#e4e4e4] bg-[#b96f00];
+}
 }

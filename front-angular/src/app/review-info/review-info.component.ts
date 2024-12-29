@@ -13,9 +13,9 @@ export class ReviewInfoComponent implements OnInit {
 
   public reviewInfo: Review = new Review;
 
-  constructor(private animeService:AnimeService){}
+  constructor(private animeService: AnimeService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     // Get the saved review to display its data on the website
     this.animeService.reviewSelected$.subscribe(reviewInfo => {
       if (reviewInfo.id != '') {

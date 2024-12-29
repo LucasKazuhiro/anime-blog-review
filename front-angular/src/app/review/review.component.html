@@ -1,6 +1,10 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="flex w-full flex-col gap-12">
-    <div *ngIf="reviewText != null" [innerHTML]="reviewText" class="flex flex-col gap-12"></div>
+    <div
+      *ngIf="reviewText != null"
+      [innerHTML]="reviewText"
+      class="flex flex-col gap-12"
+    ></div>
   </div>
   <div class="w-full md:max-w-80 xl:max-w-96">
     <review-info></review-info>

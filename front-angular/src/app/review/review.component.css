@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  :host ::ng-deep h1 {
+    @apply text-2xl font-bold pb-2 text-[#bebebe];
+  }
+
+  :host ::ng-deep p {
+    @apply font-light leading-8 text-[#bbbbbb] pb-3;
+  }
+}

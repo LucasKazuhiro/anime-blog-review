@@ -4,7 +4,7 @@
 
 @layer components {
   .box {
-    @apply flex w-full flex-col gap-6 md:min-w-72 lg:max-w-96;
+    @apply flex w-full flex-col gap-6;
   }
 
   /* Link Box */
@@ -22,7 +22,7 @@
   }
 
   .title-box h3 {
-    @apply text-lg font-bold text-neutral-500 z-[15];
+    @apply z-[15] text-lg font-bold text-neutral-500;
   }
 
   .link-svg {
@@ -40,7 +40,7 @@
   }
 
   .link-img {
-    @apply h-fit w-[46px] rounded-full select-none;
+    @apply h-fit w-[46px] select-none rounded-full;
   }
 
   .info {

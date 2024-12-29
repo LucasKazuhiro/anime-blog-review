@@ -1,8 +1,17 @@
-<div class="flex flex-col gap-14 md:flex-row md:gap-6 lg:gap-14">
+<div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div
-    class="flex w-full flex-col gap-12 lg:max-w-lg 2xl:min-w-[576px] 2xl:max-w-xl"
+    class="flex w-full flex-col gap-12 2xl:max-w-2xl"
+    [ngClass]="{
+      'md:flex-grow': reviewInfo === null,
+      'lg:min-w-[512px]': reviewInfo === null,
+    }"
   >
-    <markdown [src]="'/reviews_md/ao-ashi'"></markdown>
+    <div *ngIf="reviewInfo != null">
+      <h1>{{ reviewInfo.name }}</h1>
+      <markdown [src]="'/reviews_md/' + reviewId + '.md'"></markdown>
+    </div>
   </div>
-  <link-menu></link-menu>
+  <div class="xg:max-w-96 w-full md:max-w-80">
+    <link-menu></link-menu>
+  </div>
 </div>

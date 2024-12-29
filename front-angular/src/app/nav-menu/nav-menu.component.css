@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+
   /* Menu items style */
   .button-menu {
     @apply relative px-4 py-2 text-sm text-neutral-300 hover:text-main focus:text-main;

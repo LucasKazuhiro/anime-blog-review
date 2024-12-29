@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 
 @Component({
-  selector: 'app-reviews',
-  standalone: true,
-  imports: [CommonModule, LinkMenuComponent],
-  templateUrl: './reviews.component.html',
-  styleUrl: './reviews.component.css'
+    selector: 'app-reviews',
+    imports: [CommonModule, LinkMenuComponent],
+    templateUrl: './reviews.component.html',
+    styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent {
   public reviewsBanner: Review[] = [];
@@ -28,9 +27,9 @@ export class ReviewsComponent {
     })
   }
 
-  navigateTo(animeId: String): void {
+  navigateTo(reviewId: String): void {
     // Navigate to review page and send the animeId
-    this.router.navigate([`/review/${animeId}`]);
+      this.router.navigate([`/review/${reviewId}`]);
   }
 
   showMore() {

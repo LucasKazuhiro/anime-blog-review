@@ -1,11 +1,5 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
-  <div
-    class="flex w-full flex-col gap-12 2xl:max-w-2xl"
-    [ngClass]="{
-      'md:flex-grow': reviewInfo === null,
-      'lg:min-w-[512px]': reviewInfo === null,
-    }"
-  >
+  <div class="flex w-full flex-col gap-12">
     <div *ngIf="reviewInfo != null">
       <h1>{{ reviewInfo.name }}</h1>
       <markdown [src]="'/reviews_md/' + reviewId + '.md'"></markdown>

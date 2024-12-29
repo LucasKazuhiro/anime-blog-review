@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  tr {
+    @apply flex items-start;
+  }
+
+  th {
+    @apply font-light text-neutral-500 w-2/5
+  }
+
+  td {
+    @apply text-neutral-300 w-3/5 flex;
+  }
+}

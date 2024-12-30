@@ -4,41 +4,33 @@ import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
+import { map, Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-reviews',
-    imports: [CommonModule, LinkMenuComponent],
-    templateUrl: './reviews.component.html',
-    styleUrl: './reviews.component.css'
+  selector: 'app-reviews',
+  imports: [CommonModule, LinkMenuComponent],
+  templateUrl: './reviews.component.html',
+  styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent {
-  public reviewsBanner: Review[] = [];
-  public reviewsBannerDisplay: Review[] = [];
-  public startLimitReviewsBanner = 3;
+  reviewsBanner$: Observable<Review[]>;
+  reviewsTotalCount$: Observable<number>;
+
+  public LimitReviewsBanner = 3;
   public addMoreReviewsBanner = 5;
 
   constructor(private router: Router, private animeService: AnimeService) {
-    // Get the array of all animes reviews info
-    this.animeService.reviewsBanner$.subscribe(reviewsBanner => {
-      this.reviewsBanner = reviewsBanner;
-
-      // Load just some animes reviews info
-      this.reviewsBannerDisplay = this.reviewsBanner.length >= this.startLimitReviewsBanner ? this.reviewsBanner.slice(0, this.startLimitReviewsBanner) : this.reviewsBanner;
-    })
+    this.reviewsBanner$ = this.animeService.reviewsBanner$;
+    this.reviewsTotalCount$ = this.reviewsBanner$.pipe(map(reviews => reviews.length));
   }
 
   navigateTo(reviewId: String): void {
     // Navigate to review page and send the animeId
-      this.router.navigate([`/review/${reviewId}`]);
+    this.router.navigate([`/review/${reviewId}`]);
   }
 
   showMore() {
-    // Increases de number of itens to show
-    let newLenght = this.reviewsBannerDisplay.length + this.addMoreReviewsBanner;
-    if (newLenght > this.reviewsBanner.length) {
-      newLenght = this.reviewsBanner.length;
-    }
-    // Insert the new itens into the display array
-    this.reviewsBannerDisplay = this.reviewsBanner.slice(0, newLenght);
+    // // Increases de number of itens to show
+    this.LimitReviewsBanner += this.addMoreReviewsBanner;
   }
 }

@@ -1,7 +1,7 @@
-<div *ngIf="reviewInfo.id != ''" class="w-full sticky top-28">
+<div *ngIf="reviewInfo.id != ''" class="sticky top-28 w-full">
   <p class="pb-1 text-sm text-neutral-700">{{ reviewInfo.reviewDate }}</p>
   <h2 class="mb-4 text-2xl text-neutral-300">{{ reviewInfo.name }}</h2>
-  <table class="flex w-full flex-col gap-4 text-left">
+  <table class="mb-8 flex w-full flex-col gap-4 text-left">
     <tr class="items-center">
       <th>Rate ({{ reviewInfo.rate }}):</th>
       <td>
@@ -67,4 +67,15 @@
       <td>{{ reviewInfo.endDate }}</td>
     </tr>
   </table>
+  <div class="flex w-full flex-wrap gap-3">
+    <a
+      href="{{ genresMap[genre].url }}"
+      target="_blank"
+      *ngFor="let genre of reviewInfo.genres"
+      [ngClass]="genre"
+      class="genre-box"
+    >
+      {{ genresMap[genre].name }}
+    </a>
+  </div>
 </div>

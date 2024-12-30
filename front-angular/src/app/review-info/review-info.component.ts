@@ -13,6 +13,30 @@ export class ReviewInfoComponent implements OnInit {
 
   public reviewInfo: Review = new Review;
 
+  public genresMap: { [key: string]: { name: string; url: string } } = {
+    action: { name: "Action", url: "https://myanimelist.net/anime/genre/1/Action" },
+    adventure: { name: "Adventure", url: "https://myanimelist.net/anime/genre/2/Adventure" },
+    avantGarde: { name: "Avant-Garde", url: "https://myanimelist.net/anime/genre/5/Avant_Garde" },
+    awardWinning: { name: "Award Winning", url: "https://myanimelist.net/anime/genre/46/Award_Winning" },
+    boysLove: { name: "Boys Love", url: "https://myanimelist.net/anime/genre/28/Boys_Love" },
+    comedy: { name: "Comedy", url: "https://myanimelist.net/anime/genre/4/Comedy" },
+    drama: { name: "Drama", url: "https://myanimelist.net/anime/genre/8/Drama" },
+    fantasy: { name: "Fantasy", url: "https://myanimelist.net/anime/genre/10/Fantasy" },
+    girlsLove: { name: "Girls Love", url: "https://myanimelist.net/anime/genre/26/Girls_Love" },
+    gourmet: { name: "Gourmet", url: "https://myanimelist.net/anime/genre/47/Gourmet" },
+    horror: { name: "Horror", url: "https://myanimelist.net/anime/genre/14/Horror" },
+    mystery: { name: "Mystery", url: "https://myanimelist.net/anime/genre/7/Mystery" },
+    romance: { name: "Romance", url: "https://myanimelist.net/anime/genre/22/Romance" },
+    sciFi: { name: "Sci-Fi", url: "https://myanimelist.net/anime/genre/24/Sci-Fi" },
+    slifeOfLife: { name: "Slife of Life", url: "https://myanimelist.net/anime/genre/36/Slice_of_Life" },
+    sports: { name: "Sports", url: "https://myanimelist.net/anime/genre/30/Sports" },
+    supernatural: { name: "Supernatural", url: "https://myanimelist.net/anime/genre/37/Supernatural" },
+    suspense: { name: "Suspense", url: "https://myanimelist.net/anime/genre/41/Suspense" },
+  };
+
+
+  teste = Object.keys(this.genresMap);
+
   constructor(private animeService: AnimeService) { }
 
   ngOnInit() {

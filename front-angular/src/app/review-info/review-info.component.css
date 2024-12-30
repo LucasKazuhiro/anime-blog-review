@@ -15,3 +15,163 @@
     @apply text-neutral-300 w-3/5 flex;
   }
 }
+
+@layer components {
+
+  /* Rates */
+  .rate-box {
+    @apply select-none;
+  }
+
+  .masterPiece {
+    @apply text-[#d3862f];
+  }
+
+  .epicRate {
+    @apply text-[#cc5797];
+  }
+
+  .goodRate {
+    @apply text-[#42a31b];
+  }
+
+  .regularRate {
+    @apply text-[#beaf22];
+  }
+
+  .badRate {
+    @apply text-[#ca4545];
+  }
+
+  /* Seasons */
+  .winter {
+    @apply text-[#68c9f0];
+  }
+
+  .spring {
+    @apply text-[#ff8bdc];
+  }
+
+  .summer {
+    @apply text-[#81d83a];
+  }
+
+  .fall {
+    @apply text-[#f0a33f];
+  }
+
+  /* Star Animation */
+  @keyframes star-move {
+    0% {
+      transform: translateY(0);
+    }
+
+    3% {
+      transform: translateY(-16px);
+    }
+
+    6% {
+      transform: translateY(0)
+    }
+
+    50% {}
+
+    100% {}
+  }
+
+  .stars {
+    animation: star-move 60s infinite;
+  }
+
+
+
+  /* Genres */
+  .genre-box {
+    @apply py-2 px-4 rounded-md w-fit border font-light opacity-0;
+    animation: genre-fade-in 1s ease-out forwards;
+  }
+
+  @keyframes genre-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0)
+    }
+  }
+
+  .action {
+    @apply border-[#6f9dff] text-[#6f9dff];
+  }
+
+  .adventure {
+    @apply border-[#8aff66] text-[#8aff66];
+  }
+
+  .avantGarde {
+    @apply border-[#ceff49] text-[#ceff49];
+  }
+
+  .awardWinning {
+    @apply border-[#ffd000] text-[#ffd000];
+  }
+
+  .boysLove {
+    @apply border-[#539dff] text-[#539dff];
+  }
+
+  .comedy {
+    @apply border-[#ff9d1c] text-[#ff9d1c];
+  }
+
+  .drama {
+    @apply border-[#ff7272] text-[#ff7272];
+  }
+
+  .fantasy {
+    @apply border-[#dbdbdb] text-[#dbdbdb];
+  }
+
+  .girlsLove {
+    @apply border-[#ff72e8] text-[#ff72e8];
+  }
+
+  .gourmet {
+    @apply border-[#ffa16b] text-[#ffa16b]
+  }
+
+  .horror {
+    @apply border-[#ff5a5a] text-[#ff5a5a];
+  }
+
+  .mystery {
+    @apply text-[#a659ff] border-[#a659ff];
+  }
+
+  .romance {
+    @apply border-[#ff6297] text-[#ff6297];
+  }
+
+  .sciFi {
+    @apply border-[#d6b2ff] text-[#d6b2ff]
+  }
+
+  .slifeOfLife {
+    @apply border-[#07c500] text-[#07c500];
+  }
+
+  .sports {
+    @apply border-[#4bdfb2] text-[#4bdfb2];
+  }
+
+  .supernatural {
+    @apply border-[#b07eff] text-[#b07eff];
+  }
+
+  .suspense {
+    @apply border-[#ff684d] text-[#ff684d];
+  }
+}

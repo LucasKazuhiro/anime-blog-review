@@ -53,15 +53,20 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
+    this.startAnimation(0.5, this.reviewInfo.rate, "star_");
+    this.startAnimation(0.6, this.reviewInfo.genres.length, "genre_");
+  }
+
+  startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
     let delay = 0;
-    for (let num_star = 1; num_star <= this.reviewInfo.rate; num_star++) {
+    for (let i = 1; i <= loopLimit; i++) {
       // Calculates the delay value
-      delay += 0.5;
+      delay += delayIncrease;
       // Find a specific star element
-      const star = document.getElementById('star_' + num_star)
-      if (star) {
+      const element = document.getElementById(idPrefix + i)
+      if (element) {
         // Defines the delay for the star animation
-        star.style.animationDelay = delay.toString() + 's';
+        element.style.animationDelay = delay.toString() + 's';
       }
     }
   }

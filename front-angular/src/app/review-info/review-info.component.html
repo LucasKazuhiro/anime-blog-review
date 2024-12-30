@@ -96,7 +96,8 @@
     <a
       href="{{ genresMap[genre].url }}"
       target="_blank"
-      *ngFor="let genre of reviewInfo.genres"
+      *ngFor="let genre of reviewInfo.genres; let j = index"
+      [attr.id]="'genre_' + (j + 1)"
       [ngClass]="genre"
       class="genre-box"
     >

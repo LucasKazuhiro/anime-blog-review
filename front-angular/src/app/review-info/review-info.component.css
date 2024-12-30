@@ -87,7 +87,20 @@
 
   /* Genres */
   .genre-box {
-    @apply py-2 px-4 rounded-md w-fit border font-light;
+    @apply py-2 px-4 rounded-md w-fit border font-light opacity-0;
+    animation: genre-fade-in 1s ease-out forwards;
+  }
+
+  @keyframes genre-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0)
+    }
   }
 
   .action {

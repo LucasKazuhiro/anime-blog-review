@@ -10,4 +10,21 @@
   :host ::ng-deep p {
     @apply font-light leading-8 text-[#bbbbbb] pb-3;
   }
+
+  :host ::ng-deep em{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+
+  :host ::ng-deep img{
+    width: 30px;
+  }
+
+  :host ::ng-deep h6{
+    width: 30%;
+    height: 1px;
+    background-color: #212121;
+  }
 }

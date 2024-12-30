@@ -10,9 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './review-info.component.css'
 })
 export class ReviewInfoComponent implements OnInit {
-
+  // Store the review to be displayed
   public reviewInfo: Review = new Review;
 
+  // Map with genres key, genres name and url
   public genresMap: { [key: string]: { name: string; url: string } } = {
     action: { name: "Action", url: "https://myanimelist.net/anime/genre/1/Action" },
     adventure: { name: "Adventure", url: "https://myanimelist.net/anime/genre/2/Adventure" },
@@ -34,8 +35,8 @@ export class ReviewInfoComponent implements OnInit {
     suspense: { name: "Suspense", url: "https://myanimelist.net/anime/genre/41/Suspense" },
   };
 
-
-  teste = Object.keys(this.genresMap);
+  // Variable to trigger all genres (for test purposes)
+  allGenres = Object.keys(this.genresMap);
 
   constructor(private animeService: AnimeService) { }
 

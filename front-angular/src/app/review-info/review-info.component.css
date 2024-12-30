@@ -17,6 +17,50 @@
 }
 
 @layer components {
+
+  /* Rates */
+  .rate-box {
+    @apply select-none;
+  }
+
+  .masterPiece {
+    @apply text-[#d3862f];
+  }
+
+  .epicRate {
+    @apply text-[#cc5797];
+  }
+
+  .goodRate {
+    @apply text-[#42a31b];
+  }
+
+  .regularRate {
+    @apply text-[#beaf22];
+  }
+
+  .badRate {
+    @apply text-[#ca4545];
+  }
+
+  /* Seasons */
+  .winter {
+    @apply text-[#68c9f0];
+  }
+
+  .spring {
+    @apply text-[#ff8bdc];
+  }
+
+  .summer {
+    @apply text-[#81d83a];
+  }
+
+  .fall {
+    @apply text-[#f0a33f];
+  }
+
+  /* Genres */
   .genre-box {
     @apply py-2 px-4 rounded-md w-fit border font-light;
   }

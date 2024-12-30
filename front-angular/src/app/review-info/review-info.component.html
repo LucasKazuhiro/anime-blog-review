@@ -3,7 +3,22 @@
   <h2 class="mb-4 text-2xl text-neutral-300">{{ reviewInfo.name }}</h2>
   <table class="mb-8 flex w-full flex-col gap-4 text-left">
     <tr class="items-center">
-      <th>Rate ({{ reviewInfo.rate }}):</th>
+      <th>
+        Rate
+        <span
+          [ngClass]="{
+            masterPiece: reviewInfo.rate >= 9,
+            epicRate: reviewInfo.rate === 7 || reviewInfo.rate === 8,
+            goodRate: reviewInfo.rate === 5 || reviewInfo.rate === 6,
+            regularRate: reviewInfo.rate === 4,
+            badRate: reviewInfo.rate <= 3,
+          }"
+          class="rate-box"
+        >
+          ({{ reviewInfo.rate }})
+        </span>
+        :
+      </th>
       <td>
         <div class="flex gap-1">
           <div *ngFor="let x of [].constructor(reviewInfo.rate)">
@@ -56,7 +71,16 @@
     </tr>
     <tr>
       <th>Season:</th>
-      <td>{{ reviewInfo.season }}</td>
+      <td
+        [ngClass]="{
+          winter: reviewInfo.season === 'Winter',
+          spring: reviewInfo.season === 'Spring',
+          summer: reviewInfo.season === 'Summer',
+          fall: reviewInfo.season === 'Fall',
+        }"
+      >
+        {{ reviewInfo.season }}
+      </td>
     </tr>
     <tr>
       <th>Start Date:</th>

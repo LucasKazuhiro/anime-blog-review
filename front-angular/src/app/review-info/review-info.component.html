@@ -21,9 +21,10 @@
       </th>
       <td>
         <div class="flex gap-1">
-          <div *ngFor="let x of [].constructor(reviewInfo.rate)">
+          <div *ngFor="let x of [].constructor(reviewInfo.rate); let i = index">
             <svg
-              class="w-3.5 sm:w-4"
+              [attr.id]="'star_' + (i + 1)"
+              class="stars w-3.5 sm:w-4"
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"

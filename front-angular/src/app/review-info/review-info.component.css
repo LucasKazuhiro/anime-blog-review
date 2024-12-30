@@ -60,6 +60,31 @@
     @apply text-[#f0a33f];
   }
 
+  /* Star Animation */
+  @keyframes star-move {
+    0% {
+      transform: translateY(0);
+    }
+
+    3% {
+      transform: translateY(-16px);
+    }
+
+    6% {
+      transform: translateY(0)
+    }
+
+    50% {}
+
+    100% {}
+  }
+
+  .stars {
+    animation: star-move 60s infinite;
+  }
+
+
+
   /* Genres */
   .genre-box {
     @apply py-2 px-4 rounded-md w-fit border font-light;

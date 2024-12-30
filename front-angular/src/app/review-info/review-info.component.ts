@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './review-info.component.html',
   styleUrl: './review-info.component.css'
 })
-export class ReviewInfoComponent implements OnInit {
+export class ReviewInfoComponent implements OnInit, AfterViewChecked {
   // Store the review to be displayed
   public reviewInfo: Review = new Review;
 
@@ -50,5 +50,19 @@ export class ReviewInfoComponent implements OnInit {
         this.reviewInfo = new Review;
       }
     })
+  }
+
+  ngAfterViewChecked() {
+    let delay = 0;
+    for (let num_star = 1; num_star <= this.reviewInfo.rate; num_star++) {
+      // Calculates the delay value
+      delay += 0.5;
+      // Find a specific star element
+      const star = document.getElementById('star_' + num_star)
+      if (star) {
+        // Defines the delay for the star animation
+        star.style.animationDelay = delay.toString() + 's';
+      }
+    }
   }
 }

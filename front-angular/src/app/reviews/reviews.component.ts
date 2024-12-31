@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -12,8 +12,8 @@ import { map, Observable } from 'rxjs';
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
-export class ReviewsComponent {
-  reviewsBanner$: Observable<Review[]>;
+export class ReviewsComponent implements AfterViewChecked {
+  reviewsBanner$: Observable<Review[] | null>;
   reviewsTotalCount$: Observable<number>;
 
   public LimitReviewsBanner = 3;
@@ -21,7 +21,26 @@ export class ReviewsComponent {
 
   constructor(private router: Router, private animeService: AnimeService) {
     this.reviewsBanner$ = this.animeService.reviewsBanner$;
-    this.reviewsTotalCount$ = this.reviewsBanner$.pipe(map(reviews => reviews.length));
+    this.reviewsTotalCount$ = this.reviewsBanner$.pipe(map(reviews => reviews?.length || 0));
+  }
+
+  ngAfterViewChecked() {
+    this.startAnimation(0.05, 10, "loading_");
+  }
+
+  startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
+    let delay = 0;
+    for (let i = 1; i <= loopLimit; i++) {
+      console.log("a")
+      // Calculates the delay value
+      delay += delayIncrease;
+      // Find a specific star element
+      const element = document.getElementById(idPrefix + i)
+      if (element) {
+        // Defines the delay for the star animation
+        element.style.animationDelay = delay.toString() + 's';
+      }
+    }
   }
 
   navigateTo(reviewId: String): void {

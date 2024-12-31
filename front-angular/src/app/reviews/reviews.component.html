@@ -1,9 +1,6 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="flex w-full flex-col gap-12">
-    <div
-      *ngIf="reviewsBanner$ | async as reviewsBanner"
-      class="flex flex-col gap-12"
-    >
+    <div *ngIf="reviewsBanner$ | async as reviewsBanner else loadingScreen" class="flex flex-col gap-12">
       <div
         *ngFor="
           let review of reviewsBanner | slice: 0 : LimitReviewsBanner;
@@ -38,6 +35,27 @@
         </p>
       </div>
     </div>
+
+    <ng-template #loadingScreen>
+      <div class="mt-16 flex w-full items-center justify-center gap-3">
+        <div
+          class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
+        ></div>
+        <div class="flex select-none gap-[1px]" aria-hidden="true">
+          <p id="loading_1" class="loading">L</p>
+          <p id="loading_2" class="loading">o</p>
+          <p id="loading_3" class="loading">a</p>
+          <p id="loading_4" class="loading">d</p>
+          <p id="loading_5" class="loading">i</p>
+          <p id="loading_6" class="loading">n</p>
+          <p id="loading_7" class="loading">g</p>
+          <p id="loading_8" class="loading">.</p>
+          <p id="loading_9" class="loading">.</p>
+          <p id="loading_10" class="loading">.</p>
+        </div>
+        <span class="sr-only">Loading content...</span>
+      </div>
+    </ng-template>
 
     <button
       *ngIf="LimitReviewsBanner < ((reviewsTotalCount$ | async) || 0)"

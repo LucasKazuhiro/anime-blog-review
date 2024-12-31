@@ -9,7 +9,8 @@ module.exports = {
         'main': '#0F0F0F'
       },
       fontFamily: {
-        'lexend': ['Lexend', 'sans-serif']
+        'lexend': ['Lexend', 'sans-serif'],
+        'staatliches': ['Staatliches', 'sans-serif']
       }
     },
   },

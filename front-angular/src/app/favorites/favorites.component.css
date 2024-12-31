@@ -4,7 +4,7 @@
 
 @layer components {
   .fav-box {
-    @apply flex flex-col gap-3
+    @apply flex flex-col gap-3;
   }
 
   .title-box {
@@ -12,14 +12,14 @@
   }
 
   .title {
-    @apply text-3xl w-fit font-staatliches tracking-[2.5px];
+    @apply w-fit font-staatliches text-3xl tracking-[2.5px];
   }
 
   .line {
-    @apply h-[1px] bg-neutral-800 flex-grow;
+    @apply h-[1px] flex-grow bg-neutral-800;
   }
 
-  .img-box{
-    @apply grid grid-cols-5 gap-3;
+  .img-box {
+    @apply grid grid-cols-3 gap-3 min-[530px]:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-3 2xl:grid-cols-5;
   }
 }

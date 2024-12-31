@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @layer components {
-  .loading {
+  :host ::ng-deep p{
     @apply p-0 text-2xl font-extralight;
     animation: loading-text 2s infinite;
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
 
   @keyframes loading-text {

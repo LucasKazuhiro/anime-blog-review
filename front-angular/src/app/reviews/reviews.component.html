@@ -1,7 +1,8 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="flex w-full flex-col gap-12">
-    <div *ngIf="reviewsBanner$ | async as reviewsBanner else loadingScreen" class="flex flex-col gap-12">
-      <div
+    <!-- <div *ngIf="reviewsBanner$ | async as reviewsBanner else loadingScreen" class="flex flex-col gap-12"> -->
+    <div *ngIf="0 else loadingScreen" class="flex flex-col gap-12">
+      <!-- <div
         *ngFor="
           let review of reviewsBanner | slice: 0 : LimitReviewsBanner;
           let isFirst = first
@@ -33,7 +34,7 @@
         <p class="font-extralight leading-7 text-neutral-400">
           {{ review.intro }}
         </p>
-      </div>
+      </div> -->
     </div>
 
     <ng-template #loadingScreen>
@@ -48,10 +49,17 @@
           <p id="loading_4" class="loading">d</p>
           <p id="loading_5" class="loading">i</p>
           <p id="loading_6" class="loading">n</p>
-          <p id="loading_7" class="loading">g</p>
-          <p id="loading_8" class="loading">.</p>
-          <p id="loading_9" class="loading">.</p>
-          <p id="loading_10" class="loading">.</p>
+          <p id="loading_7" class="loading">g&nbsp;</p>
+          <p id="loading_8" class="loading">c</p>
+          <p id="loading_9" class="loading">o</p>
+          <p id="loading_10" class="loading">n</p>
+          <p id="loading_11" class="loading">t</p>
+          <p id="loading_12" class="loading">e</p>
+          <p id="loading_13" class="loading">n</p>
+          <p id="loading_14" class="loading">t</p>
+          <p id="loading_15" class="loading">.</p>
+          <p id="loading_16" class="loading">.</p>
+          <p id="loading_17" class="loading">.</p>
         </div>
         <span class="sr-only">Loading content...</span>
       </div>

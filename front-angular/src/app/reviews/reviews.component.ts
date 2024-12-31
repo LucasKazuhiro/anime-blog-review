@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { map, Observable } from 'rxjs';
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
-export class ReviewsComponent implements AfterViewChecked {
+export class ReviewsComponent implements AfterViewInit {
   reviewsBanner$: Observable<Review[] | null>;
   reviewsTotalCount$: Observable<number>;
 
@@ -24,14 +24,13 @@ export class ReviewsComponent implements AfterViewChecked {
     this.reviewsTotalCount$ = this.reviewsBanner$.pipe(map(reviews => reviews?.length || 0));
   }
 
-  ngAfterViewChecked() {
-    this.startAnimation(0.05, 10, "loading_");
+  ngAfterViewInit() {
+    this.startAnimation(0.05, 17, "loading_");
   }
 
   startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
     let delay = 0;
     for (let i = 1; i <= loopLimit; i++) {
-      console.log("a")
       // Calculates the delay value
       delay += delayIncrease;
       // Find a specific star element

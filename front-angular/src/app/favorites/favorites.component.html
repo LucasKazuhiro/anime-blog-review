@@ -1,0 +1,156 @@
+<div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
+  <div class="flex w-full flex-col gap-24">
+    <div class="fav-box">
+      <div class="title-box">
+        <h6 class="line"></h6>
+        <h1 class="title text-[#d13159]">ANIME SERIES</h1>
+        <h6 class="line"></h6>
+      </div>
+      <div *ngIf="favoriteTvs$ | async as favoriteTvs" class="img-box">
+        <div *ngFor="let favTv of favoriteTvs">
+          <a href="{{ favTv.url }}" target="_blank">
+            <img
+              src="/fav_card/tvs/{{ favTv.id }}.jpg"
+              alt="{{ favTv.id }}"
+              class="h-full rounded-md object-cover"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fav-box">
+      <div class="title-box">
+        <h6 class="line"></h6>
+        <h1 class="title text-[#e49835]">FILMS</h1>
+        <h6 class="line"></h6>
+      </div>
+      <div *ngIf="favoriteFilms$ | async as favoriteFilms" class="img-box">
+        <div *ngFor="let favTv of favoriteFilms">
+          <a href="{{ favTv.url }}" target="_blank">
+            <img
+              src="/fav_card/films/{{ favTv.id }}.jpg"
+              alt="{{ favTv.id }}"
+              class="h-full rounded-md object-cover"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fav-box">
+      <div class="title-box">
+        <h6 class="line"></h6>
+        <h1 class="title text-[#34e0ad]">CHARACTERS</h1>
+        <h6 class="line"></h6>
+      </div>
+      <div class="flex flex-col gap-8">
+        <div
+          *ngIf="favoriteCharsMale$ | async as favoriteCharsMale"
+          class="img-box"
+        >
+          <div *ngFor="let favTv of favoriteCharsMale">
+            <a href="{{ favTv.url }}" target="_blank">
+              <img
+                src="/fav_card/chars_male/{{ favTv.id }}.jpg"
+                alt="{{ favTv.id }}"
+                class="h-full rounded-md object-cover"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div
+          *ngIf="favoriteCharsFemale$ | async as favoriteCharsFemale"
+          class="img-box"
+        >
+          <div *ngFor="let favTv of favoriteCharsFemale">
+            <a href="{{ favTv.url }}" target="_blank">
+              <img
+                src="/fav_card/chars_female/{{ favTv.id }}.jpg"
+                alt="{{ favTv.id }}"
+                class="h-full rounded-md object-cover"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div
+          *ngIf="favoriteCharsNoIdea$ | async as favoriteCharsNoIdea"
+          class="img-box"
+        >
+          <div *ngFor="let favTv of favoriteCharsNoIdea">
+            <a href="{{ favTv.url }}" target="_blank">
+              <img
+                src="/fav_card/chars_no_idea/{{ favTv.id }}.jpg"
+                alt="{{ favTv.id }}"
+                class="h-full rounded-md object-cover"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fav-box">
+      <div class="title-box">
+        <h6 class="line"></h6>
+        <h1 class="title text-[#a75aff]">SEIYUUS</h1>
+        <h6 class="line"></h6>
+      </div>
+      <div class="flex flex-col gap-8">
+        <div
+          *ngIf="favoriteSeiyuusMale$ | async as favoriteSeiyuusMale"
+          class="img-box"
+        >
+          <div *ngFor="let favTv of favoriteSeiyuusMale">
+            <a href="{{ favTv.url }}" target="_blank">
+              <img
+                src="/fav_card/seiyuus_male/{{ favTv.id }}.jpg"
+                alt="{{ favTv.id }}"
+                class="h-full rounded-md object-cover"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div
+          *ngIf="favoriteSeiyuusFemale$ | async as favoriteSeiyuusFemale"
+          class="img-box"
+        >
+          <div *ngFor="let favTv of favoriteSeiyuusFemale">
+            <a href="{{ favTv.url }}" target="_blank">
+              <img
+                src="/fav_card/seiyuus_female/{{ favTv.id }}.jpg"
+                alt="{{ favTv.id }}"
+                class="h-full rounded-md object-cover"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fav-box">
+      <div class="title-box">
+        <h6 class="line"></h6>
+        <h1 class="title text-[#27b62e]">STUDIOS</h1>
+        <h6 class="line"></h6>
+      </div>
+      <div *ngIf="favoriteStudios$ | async as favoriteStudios" class="img-box">
+        <div *ngFor="let favTv of favoriteStudios">
+          <a href="{{ favTv.url }}" target="_blank">
+            <img
+              src="/fav_card/studios/{{ favTv.id }}.jpg"
+              alt="{{ favTv.id }}"
+              class="h-full rounded-md object-cover"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full md:max-w-80 xl:max-w-96">
+    <link-menu></link-menu>
+  </div>
+</div>

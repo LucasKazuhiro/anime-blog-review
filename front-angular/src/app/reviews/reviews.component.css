@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  :host ::ng-deep p{
+  .loading {
     @apply p-0 text-2xl font-extralight;
     animation: loading-text 2s infinite;
     transform: translateY(-5px);

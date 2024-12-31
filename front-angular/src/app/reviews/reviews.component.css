@@ -3,15 +3,35 @@
 @tailwind utilities;
 
 @layer components {
-  .box:hover div > p{
-    @apply text-neutral-500
+  .loading {
+    @apply p-0 text-2xl font-extralight;
+    animation: loading-text 2s infinite;
+    transform: translateY(-10px);
   }
 
-  .box:hover h1{
-    @apply text-orange-400;
-  };
+  @keyframes loading-text {
+    0% {
+      transform: translateY(-5px);
+    }
 
-  .box:hover span{
+    50% {
+      transform: translateY(5px);
+    }
+
+    100% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .box:hover div > p {
+    @apply text-neutral-500;
+  }
+
+  .box:hover h1 {
+    @apply text-orange-400;
+  }
+
+  .box:hover span {
     @apply bg-rose-500 bg-opacity-20 text-rose-600;
   }
 
@@ -19,7 +39,7 @@
     @apply scale-100;
   }
 
-  .box:hover > p{
+  .box:hover > p {
     @apply text-neutral-100;
   }
 }

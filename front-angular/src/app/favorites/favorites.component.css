@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .fav-box {
+    @apply flex flex-col gap-3
+  }
+
+  .title-box {
+    @apply flex flex-row items-center gap-8;
+  }
+
+  .title {
+    @apply text-3xl w-fit font-staatliches tracking-[2.5px];
+  }
+
+  .line {
+    @apply h-[1px] bg-neutral-800 flex-grow;
+  }
+
+  .img-box{
+    @apply grid grid-cols-5 gap-3;
+  }
+}

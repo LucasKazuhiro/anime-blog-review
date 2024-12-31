@@ -1,0 +1,29 @@
+<div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
+  <div class="flex w-full flex-col gap-12">
+    <div class="music-box">
+      <div class="title-box">
+        <h1 class="title">Openings</h1>
+        <h6 class="line"></h6>
+      </div>
+      <div>
+        <div *ngIf="musicOps$ | async as musicOps">
+          <div
+            *ngFor="let music of musicOps"
+            (click)="navigateToMusicPage(music.name)"
+            class="music"
+          >
+            <div class="name-anime-box">
+              <h1 class="name">{{ music.name }}</h1>
+              <h3 class="anime">({{ music.anime }})</h3>
+            </div>
+            <h2 class="author">by {{ music.author.toUpperCase() }}</h2>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full md:max-w-80 xl:max-w-96">
+    <link-menu></link-menu>
+  </div>
+</div>

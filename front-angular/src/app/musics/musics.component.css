@@ -20,7 +20,7 @@
   }
 
   .music {
-    @apply px-5 py-4 first:rounded-t-lg odd:bg-[#161616] even:bg-[#1A1A1A] hover:bg-neutral-800;
+    @apply cursor-pointer px-5 py-4 first:rounded-t-lg last:rounded-b-lg odd:bg-[#161616] even:bg-[#1A1A1A] hover:bg-neutral-800;
   }
 
   .name-anime-box {
@@ -37,5 +37,13 @@
 
   .author {
     @apply font-light text-neutral-500;
+  }
+
+  .btn-show-more {
+    @apply flex w-full items-center justify-end gap-2 rounded-b-lg bg-[#1d1d1d] px-5 py-2 text-sm;
+  }
+
+  .arrow-down {
+    @apply w-7 fill-neutral-600;
   }
 }

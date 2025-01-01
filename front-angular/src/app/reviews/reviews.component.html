@@ -1,46 +1,70 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
+  <!-- REVIEWS -->
   <div class="flex w-full flex-col gap-12">
-    <div *ngIf="reviewsBanner$ | async as reviewsBanner else loadingScreen" class="flex flex-col gap-12">
+    <div
+      *ngIf="reviewsBanner$ | async as reviewsBanner; else loadingScreen"
+      class="flex flex-col gap-12"
+    >
+      <!-- LOOP TO DISPLAY REVIEWS BANNER -->
       <div
         *ngFor="
           let review of reviewsBanner | slice: 0 : LimitReviewsBanner;
           let isFirst = first
         "
-        class="box flex cursor-pointer flex-col gap-4"
+        class="box group flex cursor-pointer flex-col gap-4"
         (click)="navigateTo(review.id)"
       >
+        <!-- REVIEW HEADER -->
         <div>
-          <p class="text-sm text-neutral-700">{{ review.reviewDate }}</p>
+          <!-- REVIEW DATE -->
+          <p class="text-sm text-neutral-600 group-hover:text-neutral-500">
+            {{ review.reviewDate }}
+          </p>
+
           <div class="flex items-end gap-4">
-            <h1 class="text-2xl font-bold text-neutral-200">
+            <!-- REVIEW TITLE -->
+            <h1
+              class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
+            >
               {{ review.name }}
             </h1>
+
+            <!-- REVIEW TAG -->
             <span
               *ngIf="isFirst"
-              class="block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500"
+              class="group-hover:text-rose-600; block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500 group-hover:bg-rose-500 group-hover:bg-opacity-20"
             >
               NEW REVIEW
             </span>
           </div>
         </div>
+
+        <!-- REVIEW IMG -->
         <div class="overflow-hidden rounded-xl">
           <img
             src="/review_banner/{{ review.id }}-banner.jpg"
             alt="Image of {{ review.name }}"
-            class="w-full scale-125 transition-transform duration-500"
+            class="w-full scale-125 transition-transform duration-500 group-hover:scale-100"
           />
         </div>
-        <p class="font-extralight leading-7 text-neutral-400">
+
+        <!-- REVIEW INTRO -->
+        <p
+          class="font-extralight leading-7 text-neutral-300 group-hover:text-neutral-100"
+        >
           {{ review.intro }}
         </p>
       </div>
     </div>
 
+    <!-- LOADING TEMPLATE -->
     <ng-template #loadingScreen>
       <div class="mt-16 flex w-full items-center justify-center gap-3">
+        <!-- LOADING ICON -->
         <div
           class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
         ></div>
+        <!-- ANIMATION LOADING TEXT -->
         <div class="flex select-none gap-[1px]" aria-hidden="true">
           <p id="loading_1" class="loading">L</p>
           <p id="loading_2" class="loading">o</p>
@@ -48,11 +72,19 @@
           <p id="loading_4" class="loading">d</p>
           <p id="loading_5" class="loading">i</p>
           <p id="loading_6" class="loading">n</p>
-          <p id="loading_7" class="loading">g</p>
-          <p id="loading_8" class="loading">.</p>
-          <p id="loading_9" class="loading">.</p>
-          <p id="loading_10" class="loading">.</p>
+          <p id="loading_7" class="loading">g&nbsp;</p>
+          <p id="loading_8" class="loading">c</p>
+          <p id="loading_9" class="loading">o</p>
+          <p id="loading_10" class="loading">n</p>
+          <p id="loading_11" class="loading">t</p>
+          <p id="loading_12" class="loading">e</p>
+          <p id="loading_13" class="loading">n</p>
+          <p id="loading_14" class="loading">t</p>
+          <p id="loading_15" class="loading">.</p>
+          <p id="loading_16" class="loading">.</p>
+          <p id="loading_17" class="loading">.</p>
         </div>
+        <!-- LOADING MESSAGE FOR SCREEN READER -->
         <span class="sr-only">Loading content...</span>
       </div>
     </ng-template>
@@ -78,6 +110,8 @@
       </span>
     </button>
   </div>
+
+  <!-- LINK MENU -->
   <div class="w-full md:max-w-80 xl:max-w-96">
     <link-menu></link-menu>
   </div>

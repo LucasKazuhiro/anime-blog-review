@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 @layer components {
+  /* LOADING TEXT */
   .loading {
     @apply p-0 text-2xl font-extralight;
     animation: loading-text 2s infinite;
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
-
+  
+  /* LOADING ANIMATION */
   @keyframes loading-text {
     0% {
       transform: translateY(-5px);
@@ -21,25 +23,5 @@
     100% {
       transform: translateY(-5px);
     }
-  }
-
-  .box:hover div > p {
-    @apply text-neutral-500;
-  }
-
-  .box:hover h1 {
-    @apply text-orange-400;
-  }
-
-  .box:hover span {
-    @apply bg-rose-500 bg-opacity-20 text-rose-600;
-  }
-
-  .box:hover img {
-    @apply scale-100;
-  }
-
-  .box:hover > p {
-    @apply text-neutral-100;
   }
 }

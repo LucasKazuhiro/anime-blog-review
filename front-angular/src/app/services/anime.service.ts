@@ -3,6 +3,7 @@ import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 import { Review } from '../models/review.model';
 import { HttpClient } from '@angular/common/http';
 import { Favorite } from '../models/favorite.model';
+import { Music } from '../models/music.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,17 @@ export class AnimeService {
 
   private favoriteStudios = new BehaviorSubject<Favorite[]>([]);
   favoriteStudios$ = this.favoriteStudios.asObservable();
+
+
+  // Musics
+  private musicOps = new BehaviorSubject<Music[]>([]);
+  musicOps$ = this.musicOps.asObservable();
+
+  private musicEds = new BehaviorSubject<Music[]>([]);
+  musicEds$ = this.musicEds.asObservable();
+
+  private musicOsts = new BehaviorSubject<Music[]>([]);
+  musicOsts$ = this.musicOsts.asObservable();
 
 
   getAllReviews() {
@@ -129,6 +141,32 @@ export class AnimeService {
       },
       error: (err) => {
         console.error(`Error on getFavoritesByType ${type}: `, err); // Error message
+      }
+    })
+  }
+
+  getMusicsByType(type: string) {
+    this.http.get<Music[]>(`https://${this.backend_domain}/musics/${type}`).subscribe({
+      next: (data) => {
+        switch (type) {
+          case 'op':
+            this.musicOps.next(data);
+            break;
+
+          case 'ed':
+            this.musicEds.next(data);
+            break;
+
+          case 'ost':
+            this.musicOsts.next(data);
+            break;
+
+          default:
+            console.warn(`Unknown type: ${type}`);
+        }
+      },
+      error: (err) => {
+        console.error(`Error on getMusicsByType ${type}: `, err); // Error message
       }
     })
   }

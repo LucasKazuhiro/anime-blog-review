@@ -9,7 +9,7 @@
 
   /* Link Box */
   .link-box {
-    @apply flex w-full flex-col rounded-xl bg-neutral-950 pb-3 pt-4;
+    @apply flex w-full flex-col rounded-xl bg-[#181818] pb-3 pt-4;
   }
 
   /* Title box */
@@ -22,21 +22,21 @@
   }
 
   .title-box h3 {
-    @apply z-[15] text-lg font-bold text-neutral-500;
+    @apply z-[15] text-lg font-bold text-neutral-400;
   }
 
   .link-svg {
-    @apply h-fit w-7 fill-neutral-900;
+    @apply h-fit w-7 fill-neutral-700;
   }
 
   /* Link Line */
   .link-line {
-    @apply h-0.5 w-full bg-[#141414];
+    @apply h-0.5 w-full bg-[#242424];
   }
 
   /* Info Box */
   .info-box {
-    @apply flex flex-row gap-3 px-6 pb-4 pt-4 hover:bg-neutral-900;
+    @apply flex flex-row gap-3 px-6 pb-4 pt-4 hover:bg-neutral-800;
   }
 
   .link-img {
@@ -55,6 +55,6 @@
     @apply inline-block h-fit w-4 fill-gray-600;
   }
   .info h5 {
-    @apply flex items-center gap-[2px] text-sm font-normal text-gray-600;
+    @apply flex items-center gap-[2px] text-sm font-normal text-gray-500;
   }
 }

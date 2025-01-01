@@ -1,4 +1,4 @@
-<div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
+<div class="flex w-full flex-col-reverse gap-14 lg:flex-row">
   <div class="flex w-full flex-col gap-12">
     <div
       *ngIf="reviewText != null"
@@ -6,7 +6,7 @@
       class="flex flex-col gap-12"
     ></div>
   </div>
-  <div class="w-full md:max-w-80 xl:max-w-96">
+  <div class="m-auto w-full max-w-xs md:max-w-2xl lg:m-0 lg:block lg:max-w-sm">
     <review-info></review-info>
   </div>
 </div>

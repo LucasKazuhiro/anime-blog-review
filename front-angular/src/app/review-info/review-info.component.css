@@ -8,7 +8,7 @@
   }
 
   th {
-    @apply font-light text-neutral-500 w-2/5
+    @apply font-light w-2/5
   }
 
   td {

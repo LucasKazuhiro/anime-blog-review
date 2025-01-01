@@ -10,7 +10,7 @@
           <div
             *ngFor="let music of musicOps | slice: 0 : musicsOpsLoaded"
             (click)="navigateToMusicPage(music.name, music.author)"
-            class="music"
+            class="music group"
           >
             <div class="name-anime-box">
               <h1 class="name">{{ music.name }}</h1>
@@ -58,7 +58,7 @@
           <div
             *ngFor="let music of musicEds | slice: 0 : musicsEdsLoaded"
             (click)="navigateToMusicPage(music.name, music.author)"
-            class="music"
+            class="music group"
           >
             <div class="name-anime-box">
               <h1 class="name">{{ music.name }}</h1>
@@ -106,7 +106,7 @@
           <div
             *ngFor="let music of musicOsts | slice: 0 : musicsOstsLoaded"
             (click)="navigateToMusicPage(music.name, music.author)"
-            class="music"
+            class="music group"
           >
             <div class="name-anime-box">
               <h1 class="name">{{ music.name }}</h1>

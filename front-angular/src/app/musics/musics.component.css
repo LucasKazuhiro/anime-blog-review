@@ -12,7 +12,7 @@
   }
 
   .title {
-    @apply text-2xl text-neutral-300;
+    @apply text-2xl text-neutral-200;
   }
 
   .line {
@@ -20,7 +20,18 @@
   }
 
   .music {
-    @apply cursor-pointer px-5 py-4 first:rounded-t-lg last:rounded-b-lg odd:bg-[#161616] even:bg-[#1A1A1A] hover:bg-neutral-800;
+    @apply cursor-pointer px-5 py-4 duration-100 first:rounded-t-lg last:rounded-b-lg odd:bg-[#242424] even:bg-[#2e2e2e] hover:bg-neutral-900;
+    animation: genre-fade-in 2s forwards;
+  }
+
+  @keyframes genre-fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
   .name-anime-box {
@@ -28,19 +39,20 @@
   }
 
   .name {
-    @apply text-lg text-neutral-300;
+    @apply text-lg text-neutral-300 group-hover:text-orange-400;
   }
 
   .anime {
-    @apply font-light text-stone-600;
+    @apply font-light text-stone-500 group-hover:text-gray-500;
   }
 
   .author {
-    @apply font-light text-neutral-500;
+    @apply font-light text-neutral-500 group-hover:text-gray-400;
   }
 
   .btn-show-more {
     @apply flex w-full items-center justify-end gap-2 rounded-b-lg bg-[#1d1d1d] px-5 py-2 text-sm;
+    animation: genre-fade-in 2s forwards;
   }
 
   .arrow-down {

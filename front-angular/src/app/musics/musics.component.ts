@@ -18,7 +18,7 @@ export class MusicsComponent {
 
   fav_types: string[] = ['op', 'ed', 'ost']
 
-  musicsOpsLoaded = 5;
+  musicsOpsLoaded = 2;
   musicsEdsLoaded = 5;
   musicsOstsLoaded = 3;
 

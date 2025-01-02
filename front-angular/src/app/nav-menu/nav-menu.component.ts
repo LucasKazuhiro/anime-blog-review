@@ -1,12 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'nav-menu',
-    imports: [],
-    templateUrl: './nav-menu.component.html',
-    styleUrl: './nav-menu.component.css'
+  selector: 'nav-menu',
+  imports: [RouterLink, RouterLinkActive],
+  templateUrl: './nav-menu.component.html',
+  styleUrl: './nav-menu.component.css'
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit, OnDestroy {
+
+  private routerSubscription!: Subscription;
+  activeColor: string = ""
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    // If the page change occurred without problems, update menu button color
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateActivePageColor()
+      }
+    })
+  };
+
+  ngOnDestroy(): void {
+    // Destroy routerSubscription
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe;
+    }
+  }
+
+  // Calculates the position of the dot (on hover)
   calcCenterDot(btn_menu: EventTarget | null) {
     // Check if EventTarget item is a HTMLElement
     if (btn_menu instanceof HTMLElement) {
@@ -20,6 +45,25 @@ export class NavMenuComponent {
       if (btn_menu_id) {
         btn_menu_id.setProperty('--var-move-dot', `translateX(${center_value}px)`)
       }
+    }
+  }
+
+  // Change menu button color dynamically
+  updateActivePageColor() {
+    const currentPage = this.router.url;
+
+    switch (currentPage) {
+      case "/reviews":
+        this.activeColor = "#cf3d6e"
+        break
+
+      case "/favorites":
+        this.activeColor = '#e4a42d'
+        break
+
+      case "/musics":
+        this.activeColor = '#14afc4'
+        break
     }
   }
 }

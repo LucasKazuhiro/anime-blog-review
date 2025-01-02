@@ -1,11 +1,14 @@
 <div>
-  <nav class="relative flex gap-0 md:gap-6">
+  <nav class="menu-box relative flex gap-0 md:gap-6">
     <!-- REVIEWS -->
     <button
       data-title="REVIEWS"
       class="button-menu"
       id="button-menu-reviews"
       (mouseenter)="calcCenterDot($event.target)"
+      [routerLink]="['/reviews']"
+      [routerLinkActive]="['active-page']"
+      [style.--active-menu-bg-color]="activeColor"
     >
       REVIEWS
     </button>
@@ -16,6 +19,9 @@
       class="button-menu"
       id="button-menu-favorites"
       (mouseenter)="calcCenterDot($event.target)"
+      [routerLink]="['/favorites']"
+      [routerLinkActive]="['active-page']"
+      [style.--active-menu-bg-color]="activeColor"
     >
       FAVORITES
     </button>
@@ -26,6 +32,9 @@
       class="button-menu"
       id="button-menu-musics"
       (mouseenter)="calcCenterDot($event.target)"
+      [routerLink]="['/musics']"
+      [routerLinkActive]="['active-page']"
+      [style.--active-menu-bg-color]="activeColor"
     >
       MUSICS
     </button>

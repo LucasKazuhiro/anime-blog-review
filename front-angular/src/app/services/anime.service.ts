@@ -20,7 +20,7 @@ export class AnimeService {
   // Create an Observable for reviewsBanner (read only)
   reviewsBanner$ = this.reviewsBanner.asObservable();
 
-  private reviewSelected = new BehaviorSubject<Review>(new Review);
+  private reviewSelected = new BehaviorSubject<Review | null>(new Review);
   reviewSelected$ = this.reviewSelected.asObservable();
 
 
@@ -97,6 +97,10 @@ export class AnimeService {
       // Saves the found review
       this.reviewSelected.next(review);
     });
+  }
+
+  removeReviewSelected() {
+    this.reviewSelected.next(null);
   }
 
   getFavoritesByType(type: string) {

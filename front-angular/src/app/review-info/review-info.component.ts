@@ -43,7 +43,7 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     // Get the saved review to display its data on the website
     this.animeService.reviewSelected$.subscribe(reviewInfo => {
-      if (reviewInfo.id != '') {
+      if (reviewInfo && reviewInfo.id != '') {
         this.reviewInfo = reviewInfo;
       }
       else {

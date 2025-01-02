@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Review } from '../models/review.model';
+import { AnimeService } from '../services/anime.service';
 
 @Component({
   selector: 'nav-menu',
@@ -12,9 +14,17 @@ import { Subscription } from 'rxjs';
 export class NavMenuComponent implements OnInit, OnDestroy {
 
   private routerSubscription!: Subscription;
+  private reviewSelectedSubscription!: Subscription;
+
+  reviewSelected!: Review | null;
   activeColor: string = ""
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private animeService: AnimeService) {
+    // Saves the selected review
+    this.reviewSelectedSubscription = this.animeService.reviewSelected$.subscribe((review) => {
+      this.reviewSelected = review;
+    })
+  }
 
   ngOnInit() {
     // If the page change occurred without problems, update menu button color
@@ -29,6 +39,11 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     // Destroy routerSubscription
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe;
+    }
+
+    // Destroy reviewSelectedSubscription
+    if (this.reviewSelectedSubscription) {
+      this.reviewSelectedSubscription.unsubscribe;
     }
   }
 
@@ -54,8 +69,8 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     const currentPage = this.router.url;
 
     switch (currentPage) {
-      case "/reviews":
       case "/":
+      case "/reviews":
         this.activeColor = "#cf3d6e"
         break
 
@@ -66,6 +81,10 @@ export class NavMenuComponent implements OnInit, OnDestroy {
       case "/musics":
         this.activeColor = '#14afc4'
         break
+    }
+
+    if (currentPage.includes('/review/')) {
+      this.activeColor = "#cf3d6e"
     }
   }
 
@@ -80,5 +99,16 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     }
 
     return false;
+  }
+
+  goToReviewsPage() {
+    if (this.router.url.includes('/review/') || this.reviewSelected === null) {
+      this.animeService.removeReviewSelected();
+      this.router.navigate(['/'])
+    }
+
+    if (this.reviewSelected != null) {
+      this.router.navigate([`/review/${this.reviewSelected.id}`])
+    }
   }
 }

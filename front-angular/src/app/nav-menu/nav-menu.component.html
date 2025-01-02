@@ -9,7 +9,7 @@
       }"
       id="button-menu-reviews"
       (mouseenter)="calcCenterDot($event.target)"
-      [routerLink]="['/reviews']"
+      (click)="goToReviewsPage()"
       [routerLinkActive]="['active-page']"
       [style.--active-menu-bg-color]="activeColor"
     >

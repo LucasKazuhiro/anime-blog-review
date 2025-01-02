@@ -29,13 +29,19 @@
     background-color: #008697;
   }
 
-  /* Color of rectangle on focus */
+  /* Color of rectangle when clicked/enabled */
   .menu-box .active-page::after{
     background-color: var(--active-menu-bg-color);
     transform: rotateX(0deg);
     @apply top-0
   }
 
+  /* Triggers reviews button in root & review pages */
+  .menu-box .active-page-root-review::after{
+    background-color: var(--active-menu-bg-color);
+    transform: rotateX(0deg);
+    @apply top-0
+  }
 
   /* Show rectangle on Hover/Focus */
   .button-menu:hover::after,

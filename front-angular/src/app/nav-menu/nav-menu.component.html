@@ -4,6 +4,9 @@
     <button
       data-title="REVIEWS"
       class="button-menu"
+      [ngClass]="{
+        'active-page-root-review': isRouteActive() || isRouteActive(),
+      }"
       id="button-menu-reviews"
       (mouseenter)="calcCenterDot($event.target)"
       [routerLink]="['/reviews']"

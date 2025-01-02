@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'nav-menu',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './nav-menu.component.html',
   styleUrl: './nav-menu.component.css'
 })
@@ -54,6 +55,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
     switch (currentPage) {
       case "/reviews":
+      case "/":
         this.activeColor = "#cf3d6e"
         break
 
@@ -65,5 +67,18 @@ export class NavMenuComponent implements OnInit, OnDestroy {
         this.activeColor = '#14afc4'
         break
     }
+  }
+
+  // Checks if the route is active (for '/' and '/review')
+  isRouteActive(): boolean {
+    if (this.router.url === '/') {
+      return true
+    }
+
+    if (this.router.url.includes('/review/')) {
+      return true;
+    }
+
+    return false;
   }
 }

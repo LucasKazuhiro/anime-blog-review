@@ -32,20 +32,10 @@
   }
 
   /* Radial Gradient light (triggered on hover) */
-  .content-box::before,
   .content-box::after {
     @apply absolute left-0 top-0 h-full w-full rounded-md opacity-0 transition-opacity duration-300;
     content: '';
   }
-
-  /* .content-box::before {
-    @apply z-[3];
-    background: radial-gradient(
-      400px circle at var(--mouse-x) var(--mouse-y),
-      rgb(0, 0, 0, 0),
-      transparent 40%
-    );
-  } */
 
   .content-box::after {
     @apply z-[1];
@@ -55,8 +45,7 @@
   }
 
   /* Trigger 'after' (radial gradient) */
-  .fav-box:hover .content-box::before,
-  .fav-box:hover .content-box::after {
+  .fav-item:hover .content-box::after {
     @apply opacity-100;
   }
 

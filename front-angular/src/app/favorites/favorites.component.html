@@ -11,8 +11,9 @@
       <!-- IMGS -->
       <div
         *ngIf="favoriteTvs$ | async as favoriteTvs"
+        id="tvs-fav-item-box"
         class="fav-item"
-        (mousemove)="onMouseMove($event)"
+        (mousemove)="onMouseMove($event, 'tvs-fav-item-box')"
       >
         <!-- LOOP TO DISPLAY THE IMAGES -->
         <div
@@ -43,8 +44,9 @@
       <!-- IMGS -->
       <div
         *ngIf="favoriteFilms$ | async as favoriteFilms"
+        id="films-fav-item-box"
         class="fav-item"
-        (mousemove)="onMouseMove($event)"
+        (mousemove)="onMouseMove($event, 'films-fav-item-box')"
       >
         <!-- LOOP TO DISPLAY THE IMAGES -->
         <div
@@ -76,8 +78,9 @@
         <!-- IMGS -->
         <div
           *ngIf="favoriteCharsMale$ | async as favoriteCharsMale"
+          id="chars-male-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'chars-male-fav-item-box')"
         >
           <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
@@ -99,8 +102,9 @@
         <!-- IMGS -->
         <div
           *ngIf="favoriteCharsFemale$ | async as favoriteCharsFemale"
+          id="char-female-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'char-female-fav-item-box')"
         >
           <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
@@ -122,8 +126,9 @@
         <!-- IMGS -->
         <div
           *ngIf="favoriteCharsNoIdea$ | async as favoriteCharsNoIdea"
+          id="chars-no-idea-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'chars-no-idea-fav-item-box')"
         >
           <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
@@ -156,8 +161,9 @@
         <!-- IMGS -->
         <div
           *ngIf="favoriteSeiyuusFemale$ | async as favoriteSeiyuusFemale"
+          id="seiyuus-female-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'seiyuus-female-fav-item-box')"
         >
           <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
@@ -181,8 +187,9 @@
         <!-- IMGS -->
         <div
           *ngIf="favoriteSeiyuusMale$ | async as favoriteSeiyuusMale"
+          id="seiyuus-male-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'seiyuus-male-fav-item-box')"
         >
           <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
@@ -216,8 +223,9 @@
       <!-- IMGS -->
       <div
         *ngIf="favoriteStudios$ | async as favoriteStudios"
+        id="studios-fav-item-box"
         class="fav-item"
-        (mousemove)="onMouseMove($event)"
+        (mousemove)="onMouseMove($event, 'studios-fav-item-box')"
       >
         <!-- LOOP TO DISPLAY THE IMAGES -->
         <div

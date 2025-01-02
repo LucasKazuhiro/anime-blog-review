@@ -57,20 +57,25 @@ export class FavoritesComponent {
 
 
   // Calculates the position of the mouse for border hover effect
-  onMouseMove(event: MouseEvent) {
-    // Get all anime card image
-    const allContentBox = document.querySelectorAll<HTMLElement>(".content-box");
+  onMouseMove(event: MouseEvent, favItemBoxId: string) {
+    // Get the specific fav item
+    const favItemBox = document.querySelector<HTMLElement>(`#${favItemBoxId}`)
 
-    allContentBox.forEach(contentBox => {
-      // Calculates the position of the mouse in relation to the image
-      const rect = contentBox.getBoundingClientRect();
-      let x = event.clientX - rect.left;
-      let y = event.clientY - rect.top;
+    if (favItemBox) {
+      // Get all anime card image
+      const allContentBox = favItemBox.querySelectorAll<HTMLElement>(".content-box");
 
-      // Saves the 'x' and 'y' values as css variables
-      contentBox.style.setProperty('--mouse-x', `${x}px`);
-      contentBox.style.setProperty('--mouse-y', `${y}px`);
-    });
+      allContentBox.forEach(contentBox => {
+        // Calculates the position of the mouse in relation to the image
+        const rect = contentBox.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+
+        // Saves the 'x' and 'y' values as css variables
+        contentBox.style.setProperty('--mouse-x', `${x}px`);
+        contentBox.style.setProperty('--mouse-y', `${y}px`);
+      });
+    }
   }
 
   // Function to send the user to an external website

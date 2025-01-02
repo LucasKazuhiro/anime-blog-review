@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  /* Table style */
   tr {
     @apply flex items-start;
   }
@@ -18,7 +19,7 @@
 
 @layer components {
 
-  /* Rates */
+  /* Rates metrics */
   .rate-box {
     @apply select-none;
   }
@@ -43,7 +44,7 @@
     @apply text-[#ca4545];
   }
 
-  /* Seasons */
+  /* Seasons metrics */
   .winter {
     @apply text-[#68c9f0];
   }

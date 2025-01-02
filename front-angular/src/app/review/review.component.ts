@@ -20,6 +20,7 @@ export class ReviewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient, private animeService: AnimeService, private mdService: MarkdownService) { }
 
   async ngOnInit() {
+    // Get the review id (formatted anime name) from URL
     const reviewId = this.route.snapshot.paramMap.get('id');
 
     if (reviewId) {

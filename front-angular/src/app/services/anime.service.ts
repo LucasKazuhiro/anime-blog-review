@@ -62,9 +62,10 @@ export class AnimeService {
 
 
   getAllReviews() {
-    // Subscribe to the Observable returned by http.get()
+    // Get all reviews
     this.http.get<Review[]>(`https://${this.backend_domain}/reviews`).subscribe({
       next: (data) => {
+        // Create date formatting
         const formatter = new Intl.DateTimeFormat('en-us', {
           month: 'long',
           day: '2-digit',
@@ -72,7 +73,7 @@ export class AnimeService {
         })
 
         const updatedData = data.map(review => {
-          // Change date format
+          // Change date formatting
           review.reviewDate = formatter.format(new Date(review.reviewDate)).toUpperCase();
           review.startDate = formatter.format(new Date(review.startDate)).toUpperCase();
           review.endDate = formatter.format(new Date(review.endDate)).toUpperCase();
@@ -99,7 +100,9 @@ export class AnimeService {
   }
 
   getFavoritesByType(type: string) {
+    // Get reviews by type
     this.http.get<Favorite[]>(`https://${this.backend_domain}/favorites/${type}`).subscribe({
+      // Save the reviews according to its type
       next: (data) => {
         switch (type) {
           case 'tvs':
@@ -146,7 +149,9 @@ export class AnimeService {
   }
 
   getMusicsByType(type: string) {
+    // Get musics by type
     this.http.get<Music[]>(`https://${this.backend_domain}/musics/${type}`).subscribe({
+      // Save the musics according to its type
       next: (data) => {
         switch (type) {
           case 'op':

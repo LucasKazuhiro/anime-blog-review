@@ -1,13 +1,19 @@
 <div *ngIf="reviewInfo.id != ''" class="sticky top-28 w-full">
+  <!-- ANIME NAME -->
   <p class="pb-1 text-sm text-neutral-700">{{ reviewInfo.reviewDate }}</p>
   <h2 class="mb-4 text-2xl text-neutral-300">{{ reviewInfo.name }}</h2>
+
+  <!-- ANIME GENERAL INFO -->
   <table
     class="mb-8 flex w-full flex-col gap-4 text-left md:flex-row lg:flex-col"
   >
+    <!-- FIRST TABLE HALF -->
     <div class="flex w-full flex-col gap-4">
+      <!-- RATE -->
       <tr class="items-center">
         <th>
           Rate
+          <!-- RATE COLOR -->
           <span
             [ngClass]="{
               masterPiece: reviewInfo.rate >= 9,
@@ -22,6 +28,8 @@
           </span>
           :
         </th>
+
+        <!-- STARS -->
         <td>
           <div class="flex gap-1">
             <div
@@ -55,30 +63,44 @@
           </div>
         </td>
       </tr>
+
+      <!-- TYPE -->
       <tr>
         <th>Type:</th>
         <td>{{ reviewInfo.type }}</td>
       </tr>
+
+      <!-- EPISODES -->
       <tr>
         <th>Episodes:</th>
         <td>{{ reviewInfo.episodes }}</td>
       </tr>
+
+      <!-- STUDIO -->
       <tr>
         <th>Studio:</th>
         <td>{{ reviewInfo.studio }}</td>
       </tr>
+
+      <!-- SOURCE -->
       <tr>
         <th>Source:</th>
         <td>{{ reviewInfo.source }}</td>
       </tr>
     </div>
+
+    <!-- SECOND TABLE HALF -->
     <div class="flex w-full flex-col gap-4">
+      <!-- DEMOGRAPHIC -->
       <tr>
         <th>Demographic:</th>
         <td>{{ reviewInfo.demographic }}</td>
       </tr>
+
+      <!-- SEASON -->
       <tr>
         <th>Season:</th>
+        <!-- SEASON COLOR -->
         <td
           [ngClass]="{
             winter: reviewInfo.season === 'Winter',
@@ -90,16 +112,22 @@
           {{ reviewInfo.season }}
         </td>
       </tr>
+
+      <!-- START DATE -->
       <tr>
         <th>Start Date:</th>
         <td>{{ reviewInfo.startDate }}</td>
       </tr>
+
+      <!-- END DATE -->
       <tr>
         <th>End Data:</th>
         <td>{{ reviewInfo.endDate }}</td>
       </tr>
     </div>
   </table>
+
+  <!-- ANIME GENRES -->
   <div class="flex w-full flex-wrap gap-3">
     <a
       href="{{ genresMap[genre].url }}"

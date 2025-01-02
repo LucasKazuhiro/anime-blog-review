@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './favorites.component.css'
 })
 export class FavoritesComponent {
+  // Variables to store the favorites arrays
   favoriteTvs$: Observable<Favorite[] | null>;
   favoriteFilms$: Observable<Favorite[] | null>;
   favoriteCharsMale$: Observable<Favorite[] | null>;
@@ -21,8 +22,10 @@ export class FavoritesComponent {
   favoriteSeiyuusFemale$: Observable<Favorite[] | null>;
   favoriteStudios$: Observable<Favorite[] | null>;
 
+  // All favorites type
   fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
 
+  // Pre-defined color for title and border hover effect
   borderLightColor: string[] = [
     'rgba(209, 49, 89, 1)',    // Tv Series    (0)
     'rgba(228, 152, 53, 1)',   // Films        (1)
@@ -36,10 +39,12 @@ export class FavoritesComponent {
 
 
   constructor(private animeService: AnimeService) {
+    // Loop to get all favorites of each type
     this.fav_types.forEach(type => {
       animeService.getFavoritesByType(type);
     })
 
+    // Saving the values in the variables
     this.favoriteTvs$ = this.animeService.favoriteTvs$;
     this.favoriteFilms$ = this.animeService.favoriteFilms$;
     this.favoriteCharsMale$ = this.animeService.favoriteCharsMale$;
@@ -51,19 +56,24 @@ export class FavoritesComponent {
   }
 
 
+  // Calculates the position of the mouse for border hover effect
   onMouseMove(event: MouseEvent) {
+    // Get all anime card image
     const allContentBox = document.querySelectorAll<HTMLElement>(".content-box");
 
     allContentBox.forEach(contentBox => {
+      // Calculates the position of the mouse in relation to the image
       const rect = contentBox.getBoundingClientRect();
       let x = event.clientX - rect.left;
       let y = event.clientY - rect.top;
 
+      // Saves the 'x' and 'y' values as css variables
       contentBox.style.setProperty('--mouse-x', `${x}px`);
       contentBox.style.setProperty('--mouse-y', `${y}px`);
     });
   }
 
+  // Function to send the user to an external website
   navigateToAnimePage(url: string) {
     window.open(url, '_blank');
   }

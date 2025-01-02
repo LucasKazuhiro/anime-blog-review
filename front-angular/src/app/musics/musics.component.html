@@ -1,23 +1,29 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="flex w-full flex-col gap-24">
+    <!-- OPENINGS -->
     <div class="music-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h1 class="title">Openings</h1>
         <h6 class="line"></h6>
       </div>
       <div>
         <div *ngIf="musicOps$ | async as musicOps">
+          <!-- LOOP TO DISPLAY MUSICS -->
           <div
             *ngFor="let music of musicOps | slice: 0 : musicsOpsLoaded"
             (click)="navigateToMusicPage(music.name, music.author)"
             class="music group"
           >
+            <!-- MUSICS INFO -->
             <div class="name-anime-box">
               <h1 class="name">{{ music.name }}</h1>
               <h3 class="anime">({{ music.anime }})</h3>
             </div>
             <h2 class="author">by {{ music.author }}</h2>
           </div>
+
+          <!-- SHOW MORE BUTTON -->
           <button
             *ngIf="musicsOpsLoaded < ((musicsOpsTotal$ | async) || 0)"
             (click)="showMore('op')"
@@ -48,24 +54,30 @@
       </div>
     </div>
 
+    <!-- ENDINGS -->
     <div class="music-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h1 class="title">Endings</h1>
         <h6 class="line"></h6>
       </div>
       <div>
         <div *ngIf="musicEds$ | async as musicEds">
+          <!-- LOOP TO DISPLAY MUSICS -->
           <div
             *ngFor="let music of musicEds | slice: 0 : musicsEdsLoaded"
             (click)="navigateToMusicPage(music.name, music.author)"
             class="music group"
           >
+            <!-- MUSICS INFO -->
             <div class="name-anime-box">
               <h1 class="name">{{ music.name }}</h1>
               <h3 class="anime">({{ music.anime }})</h3>
             </div>
             <h2 class="author">by {{ music.author }}</h2>
           </div>
+
+          <!-- SHOW MORE BUTTON -->
           <button
             *ngIf="musicsEdsLoaded < ((musicsEdsTotal$ | async) || 0)"
             (click)="showMore('ed')"
@@ -96,24 +108,30 @@
       </div>
     </div>
 
+    <!-- ORIGINAL SOUNDTRACKS (OST) -->
     <div class="music-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h1 class="title">Original Soundtracks</h1>
         <h6 class="line"></h6>
       </div>
       <div>
         <div *ngIf="musicOsts$ | async as musicOsts">
+          <!-- LOOP TO DISPLAY MUSICS -->
           <div
             *ngFor="let music of musicOsts | slice: 0 : musicsOstsLoaded"
             (click)="navigateToMusicPage(music.name, music.author)"
             class="music group"
           >
+            <!-- MUSICS INFO -->
             <div class="name-anime-box">
               <h1 class="name">{{ music.name }}</h1>
               <h3 class="anime">({{ music.anime }})</h3>
             </div>
             <h2 class="author">by {{ music.author }}</h2>
           </div>
+
+          <!-- SHOW MORE BUTTON -->
           <button
             *ngIf="musicsOstsLoaded < ((musicsOstsTotal$ | async) || 0)"
             (click)="showMore('ost')"
@@ -144,6 +162,8 @@
       </div>
     </div>
   </div>
+
+  <!-- LINK MENU -->
   <div class="w-full md:max-w-80 xl:max-w-96">
     <link-menu></link-menu>
   </div>

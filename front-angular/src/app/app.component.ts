@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private animeService: AnimeService) { }
 
   ngOnInit() {
+    // Get all reviews
     this.animeService.getAllReviews();
   }
 }

@@ -7,6 +7,7 @@
     @apply flex flex-col gap-3;
   }
 
+  /* Title */
   .title-box {
     @apply flex flex-row items-center gap-8;
   }
@@ -15,10 +16,13 @@
     @apply w-fit font-staatliches text-3xl tracking-[2.5px];
   }
 
+
+  /* Line */
   .line {
     @apply h-[1px] flex-grow bg-neutral-800;
   }
 
+  /* Favorite Item */
   .fav-item {
     @apply grid grid-cols-3 gap-1 min-[530px]:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-3 2xl:grid-cols-5;
   }
@@ -27,6 +31,7 @@
     @apply relative cursor-pointer rounded-md bg-transparent p-[2px];
   }
 
+  /* Radial Gradient light (triggered on hover) */
   .content-box::before,
   .content-box::after {
     @apply absolute left-0 top-0 h-full w-full rounded-md opacity-0 transition-opacity duration-300;
@@ -44,18 +49,18 @@
 
   .content-box::after {
     @apply z-[1];
-    background: radial-gradient(
-      500px circle at var(--mouse-x) var(--mouse-y),
-      var(--border-light-color, rgba(172, 172, 172, 0.6)),
-      transparent 44%
-    );
+    background: radial-gradient(500px circle at var(--mouse-x) var(--mouse-y),
+        var(--border-light-color, rgba(172, 172, 172, 0.6)),
+        transparent 44%);
   }
 
+  /* Trigger 'after' (radial gradient) */
   .fav-box:hover .content-box::before,
   .fav-box:hover .content-box::after {
     @apply opacity-100;
   }
 
+  /* Img */
   .img-box {
     @apply relative z-[2] h-full overflow-hidden rounded-md;
   }

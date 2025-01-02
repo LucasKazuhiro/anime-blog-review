@@ -1,11 +1,14 @@
 <div class="flex w-full flex-col-reverse gap-14 lg:flex-row">
   <div class="flex w-full flex-col gap-12">
+    <!-- REVIEW TEXT (GOT FROM MARKDOWN FILE) -->
     <div
       *ngIf="reviewText != null"
       [innerHTML]="reviewText"
       class="flex flex-col gap-12"
     ></div>
   </div>
+
+  <!-- REVIEW INFO -->
   <div class="m-auto w-full max-w-xs md:max-w-2xl lg:m-0 lg:block lg:max-w-sm">
     <review-info></review-info>
   </div>

@@ -101,13 +101,19 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  // Handle reviews menu button
   goToReviewsPage() {
+    // If the user is in /review or there is no review selected
     if (this.router.url.includes('/review/') || this.reviewSelected === null) {
+      // Clean the reviewSelected
       this.animeService.removeReviewSelected();
+      // Go to home page
       this.router.navigate(['/'])
     }
 
+    // If there is a review selected
     if (this.reviewSelected != null) {
+      // Go to /review page
       this.router.navigate([`/review/${this.reviewSelected.id}`])
     }
   }

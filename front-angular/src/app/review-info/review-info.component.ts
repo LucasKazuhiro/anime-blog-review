@@ -56,6 +56,7 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
     // Executes function to add little delays
     this.startAnimation(0.5, this.reviewInfo.rate, "star_");
     this.startAnimation(0.6, this.reviewInfo.genres.length, "genre_");
+    this.startAnimation(0.8, 3, "links-img_");
   }
 
   // Function to create a little delay between elements (for animation purposes)

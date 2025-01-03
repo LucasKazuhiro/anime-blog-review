@@ -1,6 +1,5 @@
 <div *ngIf="reviewInfo.id != ''" class="sticky top-28 w-full">
   <!-- ANIME NAME -->
-  <p class="pb-1 text-sm text-neutral-700">{{ reviewInfo.reviewDate }}</p>
   <h2 class="mb-4 text-2xl text-neutral-300">{{ reviewInfo.name }}</h2>
 
   <!-- ANIME GENERAL INFO -->
@@ -128,7 +127,7 @@
   </table>
 
   <!-- ANIME GENRES -->
-  <div class="flex w-full flex-wrap gap-3">
+  <div class="mb-6 flex w-full flex-wrap gap-3">
     <a
       href="{{ genresMap[genre].url }}"
       target="_blank"
@@ -139,5 +138,34 @@
     >
       {{ genresMap[genre].name }}
     </a>
+  </div>
+
+  <!-- LINKS ANIME WEBSITES -->
+  <div class="flex gap-2 pb-8">
+    <a href="{{ reviewInfo.malLink }}" target="_blank"
+      ><img
+        src="/logos-pfps/mal.png"
+        alt="mal logo"
+        id="links-img_1"
+        class="links-img"
+    /></a>
+    <a href="{{ reviewInfo.anilistLink }}" target="_blank"
+      ><img
+        src="/logos-pfps/anilist.png"
+        alt="anilist logo"
+        id="links-img_2"
+        class="links-img"
+    /></a>
+    <a href="{{ reviewInfo.kitsuLink }}" target="_blank"
+      ><img
+        src="/logos-pfps/kitsu.png"
+        alt="kitsu logo"
+        id="links-img_3"
+        class="links-img"
+    /></a>
+  </div>
+
+  <div class="h-fit w-fit">
+    <p class="published">Published on {{ reviewInfo.reviewDate }}</p>
   </div>
 </div>

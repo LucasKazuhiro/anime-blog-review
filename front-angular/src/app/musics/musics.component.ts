@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { Music } from '../models/music.model';
-import { map, Observable } from 'rxjs';
+import { delay, map, Observable } from 'rxjs';
 import { AnimeService } from '../services/anime.service';
 import { CommonModule } from '@angular/common';
 
@@ -56,15 +56,27 @@ export class MusicsComponent {
   showMore(type: string) {
     switch (type) {
       case "op":
-        this.musicsOpsLoaded += 5;
+        for (let i = 1; i <= 5; i++) {
+          setTimeout(() => {
+            this.musicsOpsLoaded += 1;
+          }, i * 180)
+        }
         break;
 
       case "ed":
-        this.musicsEdsLoaded += 5;
+        for (let i = 1; i <= 5; i++) {
+          setTimeout(() => {
+            this.musicsEdsLoaded += 1;
+          }, i * 180)
+        }
         break;
 
       case "ost":
-        this.musicsOstsLoaded += 5;
+        for (let i = 1; i <= 5; i++) {
+          setTimeout(() => {
+            this.musicsOstsLoaded += 1;
+          }, i * 180)
+        }
         break;
     }
   }

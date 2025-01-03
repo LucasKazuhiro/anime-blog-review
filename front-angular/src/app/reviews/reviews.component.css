@@ -25,4 +25,20 @@
       transform: translateY(-5px);
     }
   }
+
+  .box{
+    animation: anime-banner-fade-in 1s ease-out forwards;
+  }
+
+  @keyframes anime-banner-fade-in {
+    0% {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
 }

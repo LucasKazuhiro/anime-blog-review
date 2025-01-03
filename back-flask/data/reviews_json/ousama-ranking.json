@@ -1,0 +1,19 @@
+{
+	"id": "ousama-ranking",
+	"name": "Ousama Ranking",
+	"intro": "In porttitor tortor sit amet massa dictum sodales. Aenean at dolor vitae tellus volutpat aliquet. Mauris id finibus libero. Sed id ullamcorper augue, id imperdiet urna. Cras feugiat lorem dui, vitae viverra felis gravida luctus. Nam porttitor ipsum consequat fermentum pellentesque. Etiam tellus risus, lacinia lacinia quam id, convallis venenatis augue.",
+	"rate": 9,
+	"type": "TV",
+	"episodes": 23,
+	"startDate": "2021-10-15",
+	"endDate": "2022-03-25",
+	"season": "Fall",
+	"studio": "Wit Studio",
+	"demographic": "Shounen",
+	"source": "Web manga",
+	"genres": ["adventure", "fantasy"],
+	"reviewDate": "2025-01-03",
+	"malLink": "https://myanimelist.net/anime/40834/Ousama_Ranking",
+	"anilistLink": "https://anilist.co/anime/113717/Ousama-Ranking",
+	"kitsuLink": "https://kitsu.app/anime/ousama-ranking-yuuki-no-takarabako"
+}

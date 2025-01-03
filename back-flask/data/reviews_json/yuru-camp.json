@@ -1,0 +1,19 @@
+{
+  "id": "yuru-camp",
+  "name": "Yuru Camp",
+  "intro": "In porttitor tortor sit amet massa dictum sodales. Aenean at dolor vitae tellus volutpat aliquet. Mauris id finibus libero. Sed id ullamcorper augue, id imperdiet urna. Cras feugiat lorem dui, vitae viverra felis gravida luctus. Nam porttitor ipsum consequat fermentum pellentesque. Etiam tellus risus, lacinia lacinia quam id, convallis venenatis augue.",
+  "rate": 8,
+  "type": "TV",
+  "episodes": 12,
+  "startDate": "2018-01-04",
+  "endDate": "2018-03-22",
+  "season": "Winter",
+  "studio": "C-Station",
+  "demographic": "Seinen",
+  "source": "Manga",
+  "genres": ["slifeOfLife"],
+  "reviewDate": "2025-01-03",
+  "malLink": "https://myanimelist.net/anime/34798/Yuru_Camp%E2%96%B3",
+  "anilistLink": "https://anilist.co/anime/98444/Yuru-Camp",
+  "kitsuLink": "https://kitsu.app/anime/yuru-camp"
+}

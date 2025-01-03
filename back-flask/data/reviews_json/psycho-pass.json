@@ -1,0 +1,19 @@
+{
+  "id": "psycho-pass",
+  "name": "Psycho-Pass",
+  "intro": "Vestibulum ut libero id lacus lobortis varius sed et augue. Nunc feugiat tempor consequat. Mauris orci ligula, iaculis nec justo id, sodales euismod dolor. In ultrices, nulla eu sodales blandit, urna diam vulputate enim, vel tempus erat erat eu mi. Nunc feugiat tincidunt tortor.",
+  "rate": 9,
+  "type": "TV",
+  "episodes": 22,
+  "startDate": "2012-10-12",
+  "endDate": "2013-03-22",
+  "season": "Fall",
+  "studio": "Production I.G",
+  "demographic": "Seinen",
+  "source": "Original",
+  "genres": ["action", "mystery", "sciFi", "suspense"],
+  "reviewDate": "2025-01-03",
+  "malLink": "https://myanimelist.net/anime/13601/Psycho-Pass",
+  "anilistLink": "https://anilist.co/anime/13601/PSYCHOPASS",
+  "kitsuLink": "https://kitsu.app/anime/psycho-pass"
+}

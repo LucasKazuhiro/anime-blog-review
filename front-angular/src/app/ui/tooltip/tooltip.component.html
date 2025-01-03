@@ -1,11 +1,12 @@
 <!-- TOOLTIP -->
 <div
   [ngStyle]="{ 'left.%': x }"
-  [class.opacity-100]="isTooltipActive"
-  [class.opacity-0]="!isTooltipActive"
-  [class.visible]="isTooltipActive"
-  class="absolute bottom-0 duration-200 ease-in-out"
-  [id]="tooltip_id"
+  [ngClass]="{
+    'opacity-100': isTooltipActive,
+    'visible': isTooltipActive,
+    '-translate-y-11': isTooltipActive,
+  }"
+  class="absolute bottom-0 opacity-0 duration-200 ease-in-out"
 >
   <!-- TEXT -->
   <div

@@ -9,7 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TooltipComponent {
   // Get some variables via input
-  @Input() tooltip_id: string = "";
   @Input() x: number = 0;
   @Input() text: string = "";
 
@@ -18,16 +17,5 @@ export class TooltipComponent {
   // Fuction to enable or disable the tooltip box
   showTooltip(isActive: boolean) {
     this.isTooltipActive = isActive;
-    let tooltip = document.getElementById(this.tooltip_id);
-
-    // Animation of the tooltip coming from bottom
-    if (this.isTooltipActive) {
-      tooltip?.classList.add("-translate-y-11")
-      tooltip?.classList.remove("translate-y-0")
-    }
-    else {
-      tooltip?.classList.remove("-translate-y-11")
-      tooltip?.classList.add("translate-y-0")
-    }
   }
 }

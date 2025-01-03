@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit {
 
+  isMenuMobileLocked: boolean = false;
+
   constructor(private animeService: AnimeService) { }
 
   ngOnInit() {
@@ -22,6 +24,15 @@ export class AppComponent implements OnInit {
   }
 
   toggleMobileLinkMenu() {
+    // Prevents the mobile menu from being triggered multiple times when clicked
+    if (this.isMenuMobileLocked) return;
+
+    this.isMenuMobileLocked = true;
+
+    setTimeout(() => {
+      this.isMenuMobileLocked = false;
+    }, 800)
+
     // Get the Mobile menu and its Title
     const linkMenuMobile = document.getElementById('link-menu-mobile')?.classList;
     const linkMenuMobileTitle = document.getElementById('link-menu-mobile-title')?.classList;
@@ -44,23 +55,50 @@ export class AppComponent implements OnInit {
         linkMenuMobile.add('-left-[420px]', 'invisible');
 
         // Black screen
-        blackScreen.remove('opacity-70', 'z-[19]')
-        blackScreen.add('opacity-0', 'z-0')
+        blackScreen.remove('opacity-95')
+        blackScreen.add('opacity-0')
+
+        setTimeout(() => {
+          blackScreen.remove('z-[19]')
+          blackScreen.add('z-0')
+        }, 500)
       }
       // Is INVISIBLE and needs to appear
       else {
-        // Title
-        linkMenuMobileTitle.add('top-[10px]', 'visible');
-        linkMenuMobileTitle.remove('-top-[50px]', 'invisible');
+        if (window.scrollY !== 0) {
+          // Scrolls to the top of the page
+          window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        // Menu mobile
-        linkMenuMobile.add('left-2', 'visible');
-        linkMenuMobile.remove('-left-[420px]', 'invisible');
+          // Wait scroll up
+          setTimeout(() => {
+            // Title
+            linkMenuMobileTitle.add('top-[10px]', 'visible');
+            linkMenuMobileTitle.remove('-top-[50px]', 'invisible');
 
-        // Black screen
-        blackScreen.add('opacity-70', 'z-[19]')
-        blackScreen.remove('opacity-0', 'z-0')
+            // Menu mobile
+            linkMenuMobile.add('left-2', 'visible');
+            linkMenuMobile.remove('-left-[420px]', 'invisible');
+
+            // Black screen
+            blackScreen.add('opacity-95', 'z-[19]');
+            blackScreen.remove('opacity-0', 'z-0');
+          }, 800);
+        } else {
+          // Runs immediately if the user is alreay on top of the page
+          // Title
+          linkMenuMobileTitle.add('top-[10px]', 'visible');
+          linkMenuMobileTitle.remove('-top-[50px]', 'invisible');
+
+          // Menu mobile
+          linkMenuMobile.add('left-2', 'visible');
+          linkMenuMobile.remove('-left-[420px]', 'invisible');
+
+          // Black screen
+          blackScreen.add('opacity-95', 'z-[19]');
+          blackScreen.remove('opacity-0', 'z-0');
+        }
       }
     }
+
   }
 }

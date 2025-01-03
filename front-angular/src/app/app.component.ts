@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
         // Black screen
         blackScreen.remove('opacity-70', 'z-[19]')
-        blackScreen.add('opacity-0', 'z-[0]')
+        blackScreen.add('opacity-0', 'z-0')
       }
       // Is INVISIBLE and needs to appear
       else {
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
 
         // Black screen
         blackScreen.add('opacity-70', 'z-[19]')
-        blackScreen.remove('opacity-0', 'z-[0]')
+        blackScreen.remove('opacity-0', 'z-0')
       }
     }
   }

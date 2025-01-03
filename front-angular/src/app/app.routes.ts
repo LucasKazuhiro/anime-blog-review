@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: 'reviews', component: ReviewsComponent },
   { path: 'review/:id', component: ReviewComponent },
   { path: 'favorites', component: FavoritesComponent },
-  { path: 'musics', component: MusicsComponent},
+  { path: 'musics', component: MusicsComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

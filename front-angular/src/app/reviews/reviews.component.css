@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 @layer components {
+
   /* LOADING TEXT */
   .loading {
     @apply p-0 text-2xl font-extralight;
     animation: loading-text 2s infinite;
     transform: translateY(-5px);
   }
-  
+
   /* LOADING ANIMATION */
   @keyframes loading-text {
     0% {

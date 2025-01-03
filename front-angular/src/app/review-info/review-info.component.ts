@@ -43,7 +43,7 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     // Get the saved review to display its data on the website
     this.animeService.reviewSelected$.subscribe(reviewInfo => {
-      if (reviewInfo.id != '') {
+      if (reviewInfo && reviewInfo.id != '') {
         this.reviewInfo = reviewInfo;
       }
       else {
@@ -53,10 +53,13 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
+    // Executes function to add little delays
     this.startAnimation(0.5, this.reviewInfo.rate, "star_");
     this.startAnimation(0.6, this.reviewInfo.genres.length, "genre_");
+    this.startAnimation(0.8, 3, "links-img_");
   }
 
+  // Function to create a little delay between elements (for animation purposes)
   startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
     let delay = 0;
     for (let i = 1; i <= loopLimit; i++) {

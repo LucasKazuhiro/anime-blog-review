@@ -1,16 +1,21 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="flex w-full flex-col gap-24">
+    <!-- FAVORITES TV SERIES -->
     <div class="fav-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h6 class="line"></h6>
         <h1 class="title" [style.color]="borderLightColor[0]">TV SERIES</h1>
         <h6 class="line"></h6>
       </div>
+      <!-- IMGS -->
       <div
         *ngIf="favoriteTvs$ | async as favoriteTvs"
+        id="tvs-fav-item-box"
         class="fav-item"
-        (mousemove)="onMouseMove($event)"
+        (mousemove)="onMouseMove($event, 'tvs-fav-item-box')"
       >
+        <!-- LOOP TO DISPLAY THE IMAGES -->
         <div
           *ngFor="let favTv of favoriteTvs"
           class="content-box"
@@ -28,17 +33,22 @@
       </div>
     </div>
 
+    <!-- FAVORITES FILMS -->
     <div class="fav-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h6 class="line"></h6>
         <h1 class="title" [style.color]="borderLightColor[1]">FILMS</h1>
         <h6 class="line"></h6>
       </div>
+      <!-- IMGS -->
       <div
         *ngIf="favoriteFilms$ | async as favoriteFilms"
+        id="films-fav-item-box"
         class="fav-item"
-        (mousemove)="onMouseMove($event)"
+        (mousemove)="onMouseMove($event, 'films-fav-item-box')"
       >
+        <!-- LOOP TO DISPLAY THE IMAGES -->
         <div
           *ngFor="let favFilm of favoriteFilms"
           class="content-box"
@@ -56,18 +66,23 @@
       </div>
     </div>
 
+    <!-- FAVORITES CHARACTERS -->
     <div class="fav-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h6 class="line"></h6>
         <h1 class="title text-[rgb(30,135,214)]">CHARACTERS</h1>
         <h6 class="line"></h6>
       </div>
       <div class="flex flex-col gap-6">
+        <!-- IMGS -->
         <div
           *ngIf="favoriteCharsMale$ | async as favoriteCharsMale"
+          id="chars-male-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'chars-male-fav-item-box')"
         >
+          <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
             *ngFor="let favCharMale of favoriteCharsMale"
             class="content-box"
@@ -84,11 +99,14 @@
           </div>
         </div>
 
+        <!-- IMGS -->
         <div
           *ngIf="favoriteCharsFemale$ | async as favoriteCharsFemale"
+          id="char-female-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'char-female-fav-item-box')"
         >
+          <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
             *ngFor="let favCharFemale of favoriteCharsFemale"
             class="content-box"
@@ -105,11 +123,14 @@
           </div>
         </div>
 
+        <!-- IMGS -->
         <div
           *ngIf="favoriteCharsNoIdea$ | async as favoriteCharsNoIdea"
+          id="chars-no-idea-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'chars-no-idea-fav-item-box')"
         >
+          <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
             *ngFor="let favCharNoIdea of favoriteCharsNoIdea"
             class="content-box"
@@ -128,18 +149,23 @@
       </div>
     </div>
 
+    <!-- FAVORITES SEIYUUS -->
     <div class="fav-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h6 class="line"></h6>
         <h1 class="title text-[rgb(167,90,255)]">SEIYUUS</h1>
         <h6 class="line"></h6>
       </div>
       <div class="flex flex-col gap-6">
+        <!-- IMGS -->
         <div
           *ngIf="favoriteSeiyuusFemale$ | async as favoriteSeiyuusFemale"
+          id="seiyuus-female-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'seiyuus-female-fav-item-box')"
         >
+          <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
             *ngFor="let favSeiyuuFemale of favoriteSeiyuusFemale"
             class="content-box"
@@ -158,11 +184,14 @@
           </div>
         </div>
 
+        <!-- IMGS -->
         <div
           *ngIf="favoriteSeiyuusMale$ | async as favoriteSeiyuusMale"
+          id="seiyuus-male-fav-item-box"
           class="fav-item"
-          (mousemove)="onMouseMove($event)"
+          (mousemove)="onMouseMove($event, 'seiyuus-male-fav-item-box')"
         >
+          <!-- LOOP TO DISPLAY THE IMAGES -->
           <div
             *ngFor="let favSeiyuuMale of favoriteSeiyuusMale"
             class="content-box"
@@ -183,17 +212,22 @@
       </div>
     </div>
 
+    <!-- FAVORITES STUDIOS -->
     <div class="fav-box">
+      <!-- TITLE -->
       <div class="title-box">
         <h6 class="line"></h6>
         <h1 class="title text-[rgb(39,182,46)]">STUDIOS</h1>
         <h6 class="line"></h6>
       </div>
+      <!-- IMGS -->
       <div
         *ngIf="favoriteStudios$ | async as favoriteStudios"
+        id="studios-fav-item-box"
         class="fav-item"
-        (mousemove)="onMouseMove($event)"
+        (mousemove)="onMouseMove($event, 'studios-fav-item-box')"
       >
+        <!-- LOOP TO DISPLAY THE IMAGES -->
         <div
           *ngFor="let favStudio of favoriteStudios"
           class="content-box"
@@ -213,6 +247,8 @@
       </div>
     </div>
   </div>
+
+  <!-- LINK MENU -->
   <div class="w-full md:max-w-80 xl:max-w-96">
     <link-menu></link-menu>
   </div>

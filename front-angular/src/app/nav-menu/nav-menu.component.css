@@ -29,17 +29,18 @@
     background-color: #008697;
   }
 
-  /* Color of each rectangle on focus */
-  .button-menu:nth-child(1):focus::after {
-    background-color: #cf3d6e;
+  /* Color of rectangle when clicked/enabled */
+  .menu-box .active-page::after{
+    background-color: var(--active-menu-bg-color);
+    transform: rotateX(0deg);
+    @apply top-0
   }
 
-  .button-menu:nth-child(2):focus::after {
-    background-color: #e4a42d;
-  }
-
-  .button-menu:nth-child(3):focus::after {
-    background-color: #14afc4;
+  /* Triggers reviews button in root & review pages */
+  .menu-box .active-page-root-review::after{
+    background-color: var(--active-menu-bg-color);
+    transform: rotateX(0deg);
+    @apply top-0
   }
 
   /* Show rectangle on Hover/Focus */

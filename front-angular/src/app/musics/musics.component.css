@@ -6,7 +6,8 @@
   .music-box {
     @apply flex flex-col gap-4;
   }
-
+  
+  /* Title */
   .title-box {
     @apply flex items-center gap-6;
   }
@@ -15,15 +16,18 @@
     @apply text-2xl text-neutral-200;
   }
 
+  /* Line */
   .line {
     @apply h-[1px] flex-grow bg-neutral-800;
   }
 
+  /* Music card */
   .music {
     @apply cursor-pointer px-5 py-4 duration-100 first:rounded-t-lg last:rounded-b-lg odd:bg-[#242424] even:bg-[#2e2e2e] hover:bg-neutral-900;
     animation: genre-fade-in 2s forwards;
   }
 
+  /* Music animation */
   @keyframes genre-fade-in {
     0% {
       opacity: 0;
@@ -34,6 +38,7 @@
     }
   }
 
+  /* Music info */
   .name-anime-box {
     @apply flex gap-2;
   }
@@ -50,11 +55,13 @@
     @apply font-light text-neutral-500 group-hover:text-gray-400;
   }
 
+  /* Button Show More */
   .btn-show-more {
     @apply flex w-full items-center justify-end gap-2 rounded-b-lg bg-[#1d1d1d] px-5 py-2 text-sm;
     animation: genre-fade-in 2s forwards;
   }
 
+  /* SVG Icon */
   .arrow-down {
     @apply w-7 fill-neutral-600;
   }

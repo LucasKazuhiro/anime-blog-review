@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 @layer base {
+
+  /* Table style */
   tr {
     @apply flex items-start;
   }
@@ -18,7 +20,7 @@
 
 @layer components {
 
-  /* Rates */
+  /* Rates metrics */
   .rate-box {
     @apply select-none;
   }
@@ -43,7 +45,7 @@
     @apply text-[#ca4545];
   }
 
-  /* Seasons */
+  /* Seasons metrics */
   .winter {
     @apply text-[#68c9f0];
   }
@@ -173,5 +175,55 @@
 
   .suspense {
     @apply border-[#ff684d] text-[#ff684d];
+  }
+
+
+
+  /* External Links */
+  .links-img {
+    @apply w-10 rounded-xl opacity-0;
+    animation: genre-fade-in 2s ease-out forwards;
+  }
+
+  @keyframes logos-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0)
+    }
+  }
+
+
+
+  /* Published Text */
+  .published {
+    @apply overflow-hidden text-nowrap text-sm border-r-[2px] h-fit pb-0 pr-[2px] opacity-0 text-neutral-500;
+    animation:
+      typing-effect 4s steps(40) forwards 6s,
+      blinking-effect .5s infinite 6s
+  }
+
+  @keyframes typing-effect {
+    0% {
+      @apply w-0 opacity-100;
+    }
+
+    100% {
+      @apply w-full opacity-100
+    }
+  }
+
+  @keyframes blinking-effect {
+    0% {
+      @apply border-r-transparent
+    }
+
+    100% {
+      @apply border-r-orange-900
+    }
   }
 }

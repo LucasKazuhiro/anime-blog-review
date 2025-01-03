@@ -1,29 +1,48 @@
 <div>
-  <nav class="relative flex gap-0 md:gap-6">
+  <nav class="menu-box relative flex gap-0 md:gap-6">
+    <!-- REVIEWS -->
     <button
       data-title="REVIEWS"
       class="button-menu"
+      [ngClass]="{
+        'active-page-root-review': isRouteActive() || isRouteActive(),
+      }"
       id="button-menu-reviews"
       (mouseenter)="calcCenterDot($event.target)"
+      (click)="goToReviewsPage()"
+      [routerLinkActive]="['active-page']"
+      [style.--active-menu-bg-color]="activeColor"
     >
       REVIEWS
     </button>
+
+    <!-- FAVORITES -->
     <button
       data-title="FAVORITES"
       class="button-menu"
       id="button-menu-favorites"
       (mouseenter)="calcCenterDot($event.target)"
+      [routerLink]="['/favorites']"
+      [routerLinkActive]="['active-page']"
+      [style.--active-menu-bg-color]="activeColor"
     >
       FAVORITES
     </button>
+
+    <!-- MUSICS -->
     <button
       data-title="MUSICS"
       class="button-menu"
       id="button-menu-musics"
       (mouseenter)="calcCenterDot($event.target)"
+      [routerLink]="['/musics']"
+      [routerLinkActive]="['active-page']"
+      [style.--active-menu-bg-color]="activeColor"
     >
       MUSICS
     </button>
+
+    <!-- COLORIZED DOT -->
     <div class="dot"></div>
   </nav>
 </div>

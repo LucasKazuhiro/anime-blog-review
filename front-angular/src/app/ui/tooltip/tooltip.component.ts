@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
     templateUrl: './tooltip.component.html',
     styleUrl: './tooltip.component.css'
 })
-  export class TooltipComponent {
+export class TooltipComponent {
+  // Get some variables via input
   @Input() tooltip_id: string = "";
   @Input() x: number = 0;
   @Input() text: string = "";

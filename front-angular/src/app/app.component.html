@@ -1,51 +1,66 @@
 <div class="relative w-full">
   <!-- MOBILE LINK MENU -->
-  <svg
-    (click)="toggleMobileLinkMenu()"
-    class="fixed left-2 top-2 z-[25] w-10 rounded-xl bg-gray-800 fill-neutral-300 p-[5px] md:hidden"
-    viewBox="0 0 28 28"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-    <g
-      id="SVGRepo_tracerCarrier"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    ></g>
-    <g id="SVGRepo_iconCarrier">
-      <path
-        d="M4 7C4 6.44771 4.44772 6 5 6H24C24.5523 6 25 6.44771 25 7C25 7.55229 24.5523 8 24 8H5C4.44772 8 4 7.55229 4 7Z"
-      ></path>
-      <path
-        d="M4 13.9998C4 13.4475 4.44772 12.9997 5 12.9997L16 13C16.5523 13 17 13.4477 17 14C17 14.5523 16.5523 15 16 15L5 14.9998C4.44772 14.9998 4 14.552 4 13.9998Z"
-      ></path>
-      <path
-        d="M5 19.9998C4.44772 19.9998 4 20.4475 4 20.9998C4 21.552 4.44772 21.9997 5 21.9997H22C22.5523 21.9997 23 21.552 23 20.9998C23 20.4475 22.5523 19.9998 22 19.9998H5Z"
-      ></path>
-    </g>
-  </svg>
-  <p
-    id="link-menu-mobile-title"
-    class="invisible fixed -top-[50px] left-14 z-[25] rounded-lg bg-gray-800 px-4 py-2 text-sm text-neutral-300 duration-1000 md:hidden"
-  >
-    Useful Links
-  </p>
+  <div>
+    <!-- NOTIFICATION DOT -->
+    <span
+      id="notification-dot-1"
+      class="fixed left-10 top-[7px] z-[26] h-3 w-3 rounded-full bg-pink-800 md:hidden"
+    ></span>
+    <span
+      id="notification-dot-2"
+      class="fixed left-10 top-[7px] z-[26] h-3 w-3 animate-ping rounded-full bg-pink-700 md:hidden"
+    ></span>
 
-  <!-- LINK MENU -->
-  <div
-    id="link-menu-mobile"
-    class="invisible absolute -left-[420px] top-[60px] z-20 w-[95%] max-w-96 duration-1000 md:hidden"
-  >
-    <link-menu></link-menu>
+    <!-- BURGER MENU -->
+    <svg
+      (click)="toggleMobileLinkMenu()"
+      class="fixed left-2 top-2 z-[25] w-10 rounded-xl bg-gray-800 fill-neutral-300 p-[5px] md:hidden"
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M4 7C4 6.44771 4.44772 6 5 6H24C24.5523 6 25 6.44771 25 7C25 7.55229 24.5523 8 24 8H5C4.44772 8 4 7.55229 4 7Z"
+        ></path>
+        <path
+          d="M4 13.9998C4 13.4475 4.44772 12.9997 5 12.9997L16 13C16.5523 13 17 13.4477 17 14C17 14.5523 16.5523 15 16 15L5 14.9998C4.44772 14.9998 4 14.552 4 13.9998Z"
+        ></path>
+        <path
+          d="M5 19.9998C4.44772 19.9998 4 20.4475 4 20.9998C4 21.552 4.44772 21.9997 5 21.9997H22C22.5523 21.9997 23 21.552 23 20.9998C23 20.4475 22.5523 19.9998 22 19.9998H5Z"
+        ></path>
+      </g>
+    </svg>
+
+    <!-- MENU TITLE -->
+    <p
+      id="link-menu-mobile-title"
+      class="invisible fixed -top-[50px] left-14 z-[25] rounded-lg bg-gray-800 px-4 py-2 text-sm text-neutral-300 duration-1000 md:hidden"
+    >
+      Useful Links
+    </p>
+
+    <!-- LINK MENU -->
+    <div
+      id="link-menu-mobile"
+      class="invisible absolute -left-[420px] top-[60px] z-20 w-[95%] max-w-96 duration-1000 md:hidden"
+    >
+      <link-menu></link-menu>
+    </div>
+
+    <!-- BLACK SCREEN -->
+    <div
+      id="black-screen"
+      class="absolute z-0 h-full w-full bg-black opacity-0 transition-opacity duration-1000 md:z-0 md:hidden"
+      (click)="toggleMobileLinkMenu()"
+    ></div>
   </div>
-
-  <!-- BLACK SCREEN -->
-  <div
-    id="black-screen"
-    class="absolute z-[19] h-full w-full bg-black opacity-0 transition-opacity duration-1000"
-    (click)="toggleMobileLinkMenu()"
-  ></div>
 
   <!-- BANNER -->
   <div class="relative xl:h-72">
@@ -57,7 +72,7 @@
     class="m-auto flex w-full flex-col justify-center gap-14 p-6 sm:px-12 lg:px-20 xl:flex-row"
   >
     <!-- USER MENU -->
-    <div class="w-full md:m-auto md:max-w-2xl xl:m-0 xl:max-w-sm 2xl:max-w-md">
+    <div class="w-full md:m-auto md:max-w-2xl xl:m-0 xl:max-w-sm">
       <user-menu></user-menu>
     </div>
 

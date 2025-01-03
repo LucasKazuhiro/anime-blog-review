@@ -1,0 +1,19 @@
+{
+  "id": "dr-stone",
+  "name": "Dr. Stone",
+  "intro": "Sed at felis eget ligula aliquam efficitur sed et neque. Fusce vel nisl in justo feugiat laoreet. Curabitur sed leo tincidunt, euismod quam ac, suscipit massa. Quisque venenatis euismod ligula, vel consectetur justo egestas id. Nam eget nisl at ipsum pretium sollicitudin.",
+  "rate": 10,
+  "type": "TV",
+  "episodes": 24,
+  "startDate": "2019-07-05",
+  "endDate": "2019-12-13",
+  "season": "Summer",
+  "studio": "TMS Entertainment",
+  "demographic": "Shounen",
+  "source": "Manga",
+  "genres": ["adventure", "comedy", "sciFi"],
+  "reviewDate": "2025-01-03",
+  "malLink": "https://myanimelist.net/anime/38691/Dr_Stone",
+  "anilistLink": "https://anilist.co/anime/105333/Dr-STONE",
+  "kitsuLink": "https://kitsu.app/anime/dr-stone"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "spy-x-family",
+  "name": "Spy x Family",
+  "intro": "Fusce vitae nibh nec dolor interdum volutpat. Morbi interdum nunc ut purus volutpat consectetur. Proin tempus tempor mi non eleifend. Quisque tincidunt condimentum odio et suscipit. Mauris mattis ante sapien, a scelerisque lacus aliquam sit amet.",
+  "rate": 9,
+  "type": "TV",
+  "episodes": 12,
+  "startDate": "2022-04-09",
+  "endDate": "2022-06-25",
+  "season": "Spring",
+  "studio": " Wit Studio, CloverWorks",
+  "demographic": "Shounen",
+  "source": "Manga",
+  "genres": ["action", "awardWinning", "comedy"],
+  "reviewDate": "2025-01-03",
+  "malLink": "https://myanimelist.net/anime/50265/Spy_x_Family",
+  "anilistLink": "https://anilist.co/anime/140960/SPYFAMILY",
+  "kitsuLink": "https://kitsu.app/anime/spy-x-family"
+}

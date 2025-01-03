@@ -27,6 +27,11 @@ export class AppComponent implements OnInit {
     const linkMenuMobileTitle = document.getElementById('link-menu-mobile-title')?.classList;
     const blackScreen = document.getElementById('black-screen')?.classList;
 
+    const notficationDotOne = document.getElementById('notification-dot-1')
+    const notficationDotTwo = document.getElementById('notification-dot-2')
+    notficationDotOne?.remove()
+    notficationDotTwo?.remove()
+
     if (linkMenuMobile && linkMenuMobileTitle && blackScreen) {
       // Is VISIBLE and needs to disapear
       if (linkMenuMobile.contains('left-2')) {

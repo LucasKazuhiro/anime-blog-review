@@ -59,7 +59,7 @@ export class MusicsComponent {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOpsLoaded += 1;
-          }, i * 180)
+          }, i * 100)
         }
         break;
 
@@ -67,7 +67,7 @@ export class MusicsComponent {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsEdsLoaded += 1;
-          }, i * 180)
+          }, i * 100)
         }
         break;
 
@@ -75,7 +75,7 @@ export class MusicsComponent {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOstsLoaded += 1;
-          }, i * 180)
+          }, i * 100)
         }
         break;
     }

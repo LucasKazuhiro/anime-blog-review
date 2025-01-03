@@ -6,7 +6,7 @@
   .music-box {
     @apply flex flex-col gap-4;
   }
-  
+
   /* Title */
   .title-box {
     @apply flex items-center gap-6;
@@ -24,17 +24,19 @@
   /* Music card */
   .music {
     @apply cursor-pointer px-5 py-4 duration-100 first:rounded-t-lg last:rounded-b-lg odd:bg-[#242424] even:bg-[#2e2e2e] hover:bg-neutral-900;
-    animation: genre-fade-in 2s forwards;
+    animation: genre-fade-in 1s forwards ease-out;
   }
 
   /* Music animation */
   @keyframes genre-fade-in {
     0% {
       opacity: 0;
+      transform: scale(0.75);
     }
 
     100% {
       opacity: 1;
+      transform: scale(1);
     }
   }
 
@@ -58,7 +60,7 @@
   /* Button Show More */
   .btn-show-more {
     @apply flex w-full items-center justify-end gap-2 rounded-b-lg bg-[#1d1d1d] px-5 py-2 text-sm;
-    animation: genre-fade-in 2s forwards;
+    animation: genre-fade-in 1s forwards;
   }
 
   /* SVG Icon */

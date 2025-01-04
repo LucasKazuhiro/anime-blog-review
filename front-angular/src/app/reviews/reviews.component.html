@@ -1,9 +1,10 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="w-full">
+    <!-- SEARCH BOX -->
     <div class="relative mb-14 mt-6 w-full">
       <svg
         [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
-        class="absolute left-0 top-1 w-8"
+        class="absolute left-0 top-[5px] w-8"
         enable-background="new 0 0 100 100"
         id="Layer_1"
         version="1.1"
@@ -20,64 +21,90 @@
       </svg>
       <input
         type="text"
-        class="w-full border-b border-b-neutral-800 bg-transparent py-2 pl-10 pr-3 font-light text-neutral-500 outline-none placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600"
+        id="search-box"
+        class="w-full border-b border-b-neutral-800 bg-transparent pb-1 pl-10 pr-9 pt-2 text-lg font-light text-neutral-500 outline-none placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600"
         placeholder="Type the anime name"
         [(ngModel)]="searchValue"
         (input)="this.searchValueUpdate.next('')"
         (focus)="isSearchFocused = true"
         (focusout)="isSearchFocused = false"
       />
+      <svg
+        [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
+        class="absolute right-1 top-2 w-6 hover:fill-pink-700 duration-500"
+        (click)="cleanSearchBox()"
+        viewBox="-3.5 0 19 19"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"
+          ></path>
+        </g>
+      </svg>
     </div>
 
     <!-- REVIEWS -->
     <div class="flex w-full flex-col gap-12">
-      <!-- LOOP TO DISPLAY REVIEWS BANNER -->
-      <div
-        *ngFor="let review of displayReviews"
-        class="box group flex cursor-pointer flex-col gap-4"
-        (click)="navigateTo(review.id)"
-      >
-        <!-- REVIEW HEADER -->
-        <div>
-          <!-- REVIEW DATE -->
-          <p class="text-sm text-neutral-600 group-hover:text-neutral-500">
-            {{ review.reviewDate }}
-          </p>
-
-          <div class="flex items-end gap-4">
-            <!-- REVIEW TITLE -->
-            <h1
-              class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
-            >
-              {{ review.name }}
-            </h1>
-
-            <!-- REVIEW TAG -->
-            <span
-              *ngIf="review.id === this.allReviews[0].id"
-              class="group-hover:text-rose-600; block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500 group-hover:bg-rose-500 group-hover:bg-opacity-20"
-            >
-              NEW REVIEW
-            </span>
-          </div>
-        </div>
-
-        <!-- REVIEW IMG -->
-        <div class="overflow-hidden rounded-xl">
-          <img
-            src="/review_banner/{{ review.id }}.jpg"
-            alt="Image of {{ review.name }}"
-            class="w-full scale-125 transition-transform duration-500 group-hover:scale-100"
-          />
-        </div>
-
-        <!-- REVIEW INTRO -->
-        <p
-          class="font-extralight leading-7 text-neutral-300 group-hover:text-neutral-100"
-        >
-          {{ review.intro }}
-        </p>
+      <!-- NO ANIMES FOUND -->
+      <div *ngIf="displayReviews?.length === 0" class="w-full text-center">
+        <p class="text-lg">No results found...</p>
       </div>
+
+      <!-- LOOP TO DISPLAY REVIEWS BANNER -->
+      <ng-container *ngIf="displayReviews != null; else loadingScreen">
+        <div
+          *ngFor="let review of displayReviews"
+          class="box group flex cursor-pointer flex-col gap-4"
+          (click)="navigateTo(review.id)"
+        >
+          <!-- REVIEW HEADER -->
+          <div>
+            <!-- REVIEW DATE -->
+            <p class="text-sm text-neutral-600 group-hover:text-neutral-500">
+              {{ review.reviewDate }}
+            </p>
+
+            <div class="flex items-end gap-4">
+              <!-- REVIEW TITLE -->
+              <h1
+                class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
+              >
+                {{ review.name }}
+              </h1>
+
+              <!-- REVIEW TAG -->
+              <span
+                *ngIf="review.id === this.allReviews[0].id"
+                class="group-hover:text-rose-600; block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500 group-hover:bg-rose-500 group-hover:bg-opacity-20"
+              >
+                NEW REVIEW
+              </span>
+            </div>
+          </div>
+
+          <!-- REVIEW IMG -->
+          <div class="overflow-hidden rounded-xl">
+            <img
+              src="/review_banner/{{ review.id }}.jpg"
+              alt="Image of {{ review.name }}"
+              class="w-full scale-125 transition-transform duration-500 group-hover:scale-100"
+            />
+          </div>
+
+          <!-- REVIEW INTRO -->
+          <p
+            class="font-extralight leading-7 text-neutral-300 group-hover:text-neutral-100"
+          >
+            {{ review.intro }}
+          </p>
+        </div>
+      </ng-container>
 
       <!-- LOADING TEMPLATE -->
       <ng-template #loadingScreen>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, HostListener } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,7 @@ export class ReviewsComponent implements AfterViewInit {
   fuse!: Fuse<Review>;
   fuseOptions = {
     // minMatchCharLength: 1,
-    threshold: 0.8,
+    threshold: 0.7,
     keys: [
       "name"
     ]
@@ -33,7 +33,7 @@ export class ReviewsComponent implements AfterViewInit {
   // Search & Reviews
   searchValue: string = "";
   allReviews: Review[] = [];
-  displayReviews: Review[] = [];
+  displayReviews: Review[] | null = null;
 
   // Debounce search (cooldown)
   searchValueUpdate = new Subject<string>();
@@ -63,10 +63,30 @@ export class ReviewsComponent implements AfterViewInit {
     if (this.searchValue) {
       // Return all possible matches
       this.displayReviews = this.fuse.search(this.searchValue).map(result => result.item);
+      console.log(this.displayReviews)
     }
     else {
       // If input is empty, return all reviews
       this.displayReviews = this.allReviews;
+    }
+  }
+
+  // Clean search box
+  cleanSearchBox() {
+    this.searchValue = '';
+    this.searchValueUpdate.next('');
+  }
+
+  // Search box shortcut (ctrl + k)
+  @HostListener('window:keydown', ['$event'])
+  focusSearchBoxShortcut(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'k') {
+      event.preventDefault(); // Prevent default browser action
+
+      const searchBox = document.getElementById('search-box')
+      if (searchBox) {
+        searchBox.focus();
+      }
     }
   }
 

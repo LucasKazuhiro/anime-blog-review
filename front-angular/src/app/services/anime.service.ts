@@ -8,8 +8,7 @@ import { Music } from '../models/music.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AnimeService
-{
+export class AnimeService {
   // private backend_domain = "http://127.0.0.1:5000";    // development
   private backend_domain = "https://korosenku-flask.vercel.app";   // production
 
@@ -60,6 +59,27 @@ export class AnimeService
 
   private musicOsts = new BehaviorSubject<Music[]>([]);
   musicOsts$ = this.musicOsts.asObservable();
+
+
+  // Search
+  private searchReview = new BehaviorSubject<string>('');
+  searchReview$ = this.searchReview.asObservable();
+
+  private searchMusic = new BehaviorSubject<string>('');
+  searchMusic$ = this.searchMusic.asObservable();
+
+  updateSearchValue(searchType: string, searchValue: string) {
+    switch (searchType) {
+      case "review":
+        this.searchReview.next(searchValue);
+        break;
+
+      case "music":
+        this.searchMusic.next(searchValue);
+        break;
+    }
+  }
+
 
 
   getAllReviews() {

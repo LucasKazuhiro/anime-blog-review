@@ -8,21 +8,19 @@ import { FormsModule } from '@angular/forms';
 import Fuse from 'fuse.js'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, Subject } from 'rxjs';
+import { SearchBoxComponent } from "../ui/search-box/search-box.component";
 
 @Component({
   selector: 'app-reviews',
-  imports: [CommonModule, FormsModule, LinkMenuComponent],
+  imports: [CommonModule, FormsModule, LinkMenuComponent, SearchBoxComponent],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent implements AfterViewInit {
 
-  // Variable to change magnifier SVG fill color
-  isSearchFocused = false;
-
   // Fuse.js
-  fuse!: Fuse<Review>;
-  fuseOptions = {
+  private fuse!: Fuse<Review>;
+  private fuseOptions = {
     // minMatchCharLength: 1,
     threshold: 0.7,
     keys: [
@@ -30,40 +28,38 @@ export class ReviewsComponent implements AfterViewInit {
     ]
   };
 
-  // Search & Reviews
-  searchValue: string = "";
-  allReviews: Review[] = [];
-  displayReviews: Review[] | null = null;
-
-  // Debounce search (cooldown)
-  searchValueUpdate = new Subject<string>();
+  // Reviews arrays
+  public allReviews: Review[] = [];
+  public displayReviews: Review[] | null = null;
 
   constructor(private router: Router, private animeService: AnimeService) {
+    // Creste Fuse instance
+    this.fuse = new Fuse([], this.fuseOptions);
+
     // Get all reviews
     this.animeService.reviewsBanner$.pipe(takeUntilDestroyed()).subscribe(reviews => {
       if (reviews) {
         this.allReviews = reviews;
-        this.fuse = new Fuse(this.allReviews, this.fuseOptions); // Create Fuse instance
+        this.fuse.setCollection(this.allReviews); // Updates the Fuse data (to use on search)
         this.displayReviews = this.allReviews; // Display all the reviews
       }
     })
 
-    // Debounce search (cooldown)
-    this.searchValueUpdate.pipe(debounceTime(500)).subscribe(() => {
-      this.handleSearch();
+    // Get searched value
+    this.animeService.searchReview$.subscribe(searchedReview => {
+      this.handleSearch(searchedReview);
     })
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.startAnimation(0.05, 17, "loading_");
   }
 
   // Search the anime name
-  handleSearch() {
-    if (this.searchValue) {
+  private handleSearch(searchedReview: string) {
+    if (searchedReview) {
       // Return all possible matches
-      this.displayReviews = this.fuse.search(this.searchValue).map(result => result.item);
-      console.log(this.displayReviews)
+      this.displayReviews = this.fuse.search(searchedReview).map(result => result.item);
     }
     else {
       // If input is empty, return all reviews
@@ -71,39 +67,8 @@ export class ReviewsComponent implements AfterViewInit {
     }
   }
 
-  // Clean search box
-  cleanSearchBox() {
-    this.searchValue = '';
-    this.searchValueUpdate.next('');
-    this.focusSearchBox();
-  }
-
-  focusSearchBox() {
-    const searchBox = document.getElementById('search-box');
-    if (searchBox) searchBox.focus();
-  }
-
-  // Search box shortcuts
-  @HostListener('window:keydown', ['$event'])
-  handleSearchBoxShortcut(event: KeyboardEvent) {
-    const searchBox = document.getElementById('search-box')
-
-    if (searchBox) {
-      // Ctrl + K
-      if (event.ctrlKey && event.key === 'k') {
-        event.preventDefault(); // Prevent default browser action
-        searchBox.focus();
-      }
-
-      // Esc
-      else if (event.key === 'Escape') {
-        searchBox.blur();
-      }
-    }
-  }
-
   // Fuction to animate several items with some delay between each of them
-  startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
+  private startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
     let delay = 0;
     for (let i = 1; i <= loopLimit; i++) {
       // Calculates the delay value
@@ -118,7 +83,7 @@ export class ReviewsComponent implements AfterViewInit {
   }
 
   // Navigate to review page and send the animeId
-  navigateTo(reviewId: String): void {
+  public navigateTo(reviewId: String): void {
     this.router.navigate([`/review/${reviewId}`]);
   }
 }

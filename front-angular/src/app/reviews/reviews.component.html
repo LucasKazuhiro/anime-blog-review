@@ -33,7 +33,7 @@
     <div class="flex w-full flex-col gap-12">
       <!-- LOOP TO DISPLAY REVIEWS BANNER -->
       <div
-        *ngFor="let review of displayReviews; let isFirst = first"
+        *ngFor="let review of displayReviews"
         class="box group flex cursor-pointer flex-col gap-4"
         (click)="navigateTo(review.id)"
       >
@@ -54,7 +54,7 @@
 
             <!-- REVIEW TAG -->
             <span
-              *ngIf="isFirst"
+              *ngIf="review.id === this.allReviews[0].id"
               class="group-hover:text-rose-600; block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500 group-hover:bg-rose-500 group-hover:bg-opacity-20"
             >
               NEW REVIEW

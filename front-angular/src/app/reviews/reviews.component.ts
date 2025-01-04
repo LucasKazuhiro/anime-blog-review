@@ -75,17 +75,29 @@ export class ReviewsComponent implements AfterViewInit {
   cleanSearchBox() {
     this.searchValue = '';
     this.searchValueUpdate.next('');
+    this.focusSearchBox();
   }
 
-  // Search box shortcut (ctrl + k)
-  @HostListener('window:keydown', ['$event'])
-  focusSearchBoxShortcut(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key === 'k') {
-      event.preventDefault(); // Prevent default browser action
+  focusSearchBox() {
+    const searchBox = document.getElementById('search-box');
+    if (searchBox) searchBox.focus();
+  }
 
-      const searchBox = document.getElementById('search-box')
-      if (searchBox) {
+  // Search box shortcuts
+  @HostListener('window:keydown', ['$event'])
+  handleSearchBoxShortcut(event: KeyboardEvent) {
+    const searchBox = document.getElementById('search-box')
+
+    if (searchBox) {
+      // Ctrl + K
+      if (event.ctrlKey && event.key === 'k') {
+        event.preventDefault(); // Prevent default browser action
         searchBox.focus();
+      }
+
+      // Esc
+      else if (event.key === 'Escape') {
+        searchBox.blur();
       }
     }
   }

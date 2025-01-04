@@ -1,10 +1,12 @@
-<div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
+<div class="flex w-full flex-col gap-14 lg:flex-row 2xl:gap-14">
   <div class="w-full">
     <!-- SEARCH BOX -->
     <div class="relative mb-14 mt-6 w-full">
+      <!-- MAGNIFIER -->
       <svg
         [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
-        class="absolute left-0 top-[5px] w-8"
+        class="absolute left-0 top-[5px] w-8 cursor-pointer duration-500"
+        (click)="focusSearchBox()"
         enable-background="new 0 0 100 100"
         id="Layer_1"
         version="1.1"
@@ -19,19 +21,37 @@
           fill-rule="evenodd"
         />
       </svg>
+
+      <!-- SEARCH BOX -->
       <input
         type="text"
         id="search-box"
-        class="w-full border-b border-b-neutral-800 bg-transparent pb-1 pl-10 pr-9 pt-2 text-lg font-light text-neutral-500 outline-none placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600"
-        placeholder="Type the anime name"
+        class="w-full border-b border-b-neutral-800 bg-transparent pb-2 pl-10 pr-9 pt-2 font-light text-neutral-500 outline-none duration-300 placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600 sm:pb-1 sm:text-lg"
+        placeholder="Search an anime"
         [(ngModel)]="searchValue"
         (input)="this.searchValueUpdate.next('')"
         (focus)="isSearchFocused = true"
         (focusout)="isSearchFocused = false"
       />
+
+      <!-- CTRL K -->
+      <div class="invisible absolute right-9 top-[6px] flex gap-1 lg:visible">
+        <kbd
+          [ngClass]="{ 'opacity-0': searchValue }"
+          class="rounded-md border border-neutral-600 px-2 py-[2px] font-lexend text-sm duration-300"
+          >Ctrl</kbd
+        >
+        <kbd
+          [ngClass]="{ 'opacity-0': searchValue }"
+          class="rounded-md border border-neutral-600 px-2 py-[2px] font-lexend text-sm duration-300"
+          >K</kbd
+        >
+      </div>
+
+      <!-- 'X' SVG TO DELETE -->
       <svg
         [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
-        class="absolute right-1 top-2 w-6 hover:fill-pink-700 duration-500"
+        class="absolute right-1 top-2 w-6 cursor-pointer duration-500 hover:fill-pink-800"
         (click)="cleanSearchBox()"
         viewBox="-3.5 0 19 19"
       >
@@ -141,7 +161,7 @@
   </div>
 
   <!-- LINK MENU -->
-  <div class="hidden w-full md:block md:max-w-80 xl:max-w-96">
+  <div class="hidden w-full md:max-w-80 lg:block xl:max-w-96">
     <link-menu></link-menu>
   </div>
 </div>

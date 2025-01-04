@@ -4,9 +4,10 @@ import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
-import { map, Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import Fuse from 'fuse.js'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-reviews',
@@ -20,6 +21,7 @@ export class ReviewsComponent implements AfterViewInit {
   isSearchFocused = false;
 
   // Fuse.js
+  fuse!: Fuse<Review>;
   fuseOptions = {
     // minMatchCharLength: 1,
     threshold: 0.8,
@@ -28,19 +30,27 @@ export class ReviewsComponent implements AfterViewInit {
     ]
   };
 
-  fuse!: Fuse<Review>;
+  // Search & Reviews
   searchValue: string = "";
   allReviews: Review[] = [];
   displayReviews: Review[] = [];
 
+  // Debounce search (cooldown)
+  searchValueUpdate = new Subject<string>();
+
   constructor(private router: Router, private animeService: AnimeService) {
     // Get all reviews
-    this.animeService.reviewsBanner$.subscribe(reviews => {
+    this.animeService.reviewsBanner$.pipe(takeUntilDestroyed()).subscribe(reviews => {
       if (reviews) {
         this.allReviews = reviews;
         this.fuse = new Fuse(this.allReviews, this.fuseOptions); // Create Fuse instance
         this.displayReviews = this.allReviews; // Display all the reviews
       }
+    })
+
+    // Debounce search (cooldown)
+    this.searchValueUpdate.pipe(debounceTime(500)).subscribe(() => {
+      this.handleSearch();
     })
   }
 

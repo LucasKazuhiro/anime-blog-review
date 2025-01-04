@@ -8,9 +8,10 @@ import { Music } from '../models/music.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AnimeService {
-
-  private backend_domain = "korosenku-flask.vercel.app";
+export class AnimeService
+{
+  // private backend_domain = "http://127.0.0.1:5000";    // development
+  private backend_domain = "https://korosenku-flask.vercel.app";   // production
 
   constructor(private http: HttpClient) { }
 
@@ -63,7 +64,7 @@ export class AnimeService {
 
   getAllReviews() {
     // Get all reviews
-    this.http.get<Review[]>(`https://${this.backend_domain}/reviews`).subscribe({
+    this.http.get<Review[]>(`${this.backend_domain}/reviews`).subscribe({
       next: (data) => {
         // Create date formatting
         const formatter = new Intl.DateTimeFormat('en-us', {
@@ -105,7 +106,7 @@ export class AnimeService {
 
   getFavoritesByType(type: string) {
     // Get reviews by type
-    this.http.get<Favorite[]>(`https://${this.backend_domain}/favorites/${type}`).subscribe({
+    this.http.get<Favorite[]>(`${this.backend_domain}/favorites/${type}`).subscribe({
       // Save the reviews according to its type
       next: (data) => {
         switch (type) {
@@ -154,7 +155,7 @@ export class AnimeService {
 
   getMusicsByType(type: string) {
     // Get musics by type
-    this.http.get<Music[]>(`https://${this.backend_domain}/musics/${type}`).subscribe({
+    this.http.get<Music[]>(`${this.backend_domain}/musics/${type}`).subscribe({
       // Save the musics according to its type
       next: (data) => {
         switch (type) {

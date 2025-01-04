@@ -5,29 +5,59 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { map, Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import Fuse from 'fuse.js'
 
 @Component({
   selector: 'app-reviews',
-  imports: [CommonModule, LinkMenuComponent],
+  imports: [CommonModule, FormsModule, LinkMenuComponent],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent implements AfterViewInit {
-  reviewsBanner$: Observable<Review[] | null>;
-  reviewsTotalCount$: Observable<number>;
 
-  public LimitReviewsBanner = 3;
-  public addMoreReviewsBanner = 5;
-
+  // Variable to change magnifier SVG fill color
   isSearchFocused = false;
 
+  // Fuse.js
+  fuseOptions = {
+    // minMatchCharLength: 1,
+    threshold: 0.8,
+    keys: [
+      "name"
+    ]
+  };
+
+  fuse!: Fuse<Review>;
+  searchValue: string = "";
+  allReviews: Review[] = [];
+  displayReviews: Review[] = [];
+
   constructor(private router: Router, private animeService: AnimeService) {
-    this.reviewsBanner$ = this.animeService.reviewsBanner$;
-    this.reviewsTotalCount$ = this.reviewsBanner$.pipe(map(reviews => reviews?.length || 0));
+    // Get all reviews
+    this.animeService.reviewsBanner$.subscribe(reviews => {
+      if (reviews) {
+        this.allReviews = reviews;
+        this.fuse = new Fuse(this.allReviews, this.fuseOptions); // Create Fuse instance
+        this.displayReviews = this.allReviews; // Display all the reviews
+      }
+    })
   }
 
   ngAfterViewInit() {
     this.startAnimation(0.05, 17, "loading_");
+  }
+
+  // Search the anime name
+  handleSearch() {
+    if (this.searchValue) {
+      // Return all possible matches
+      this.displayReviews = this.fuse.search(this.searchValue).map(result => result.item);
+    }
+    else {
+      // If input is empty, return all reviews
+      this.displayReviews = this.allReviews;
+    }
   }
 
   // Fuction to animate several items with some delay between each of them
@@ -45,13 +75,8 @@ export class ReviewsComponent implements AfterViewInit {
     }
   }
 
+  // Navigate to review page and send the animeId
   navigateTo(reviewId: String): void {
-    // Navigate to review page and send the animeId
     this.router.navigate([`/review/${reviewId}`]);
-  }
-
-  showMore() {
-    // // Increases de number of itens to show
-    this.LimitReviewsBanner += this.addMoreReviewsBanner;
   }
 }

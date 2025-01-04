@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { Music } from '../models/music.model';
-import { delay, map, Observable } from 'rxjs';
 import { AnimeService } from '../services/anime.service';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'musics',
@@ -13,9 +13,9 @@ import { CommonModule } from '@angular/common';
 })
 export class MusicsComponent {
   // Variables to store the musics array
-  musicOps$: Observable<Music[] | null>;
-  musicEds$: Observable<Music[] | null>;
-  musicOsts$: Observable<Music[] | null>;
+  public musicsOps: Music[] = [];
+  public musicsEds: Music[] = [];
+  public musicsOsts: Music[] = [];
 
   // All types of music
   fav_types: string[] = ['op', 'ed', 'ost']
@@ -25,11 +25,6 @@ export class MusicsComponent {
   musicsEdsLoaded = 5;
   musicsOstsLoaded = 3;
 
-  // Variable to store to total number of musics
-  musicsOpsTotal$: Observable<number>;
-  musicsEdsTotal$: Observable<number>;
-  musicsOstsTotal$: Observable<number>;
-
   constructor(private animeService: AnimeService) {
     // Loop to get all types of music
     this.fav_types.forEach(type => {
@@ -37,14 +32,17 @@ export class MusicsComponent {
     })
 
     // Store the musics
-    this.musicOps$ = this.animeService.musicOps$;
-    this.musicEds$ = this.animeService.musicEds$;
-    this.musicOsts$ = this.animeService.musicOsts$;
+    this.animeService.musicOps$.pipe(takeUntilDestroyed()).subscribe(data => {
+      this.musicsOps = data;
+    });
 
-    // Store the total number of musics of each type
-    this.musicsOpsTotal$ = this.musicOps$.pipe(map(musics => musics?.length || 0));
-    this.musicsEdsTotal$ = this.musicEds$.pipe(map(musics => musics?.length || 0));
-    this.musicsOstsTotal$ = this.musicOsts$.pipe(map(musics => musics?.length || 0));
+    this.animeService.musicEds$.pipe(takeUntilDestroyed()).subscribe(data => {
+      this.musicsEds = data;
+    });
+
+    this.animeService.musicOsts$.pipe(takeUntilDestroyed()).subscribe(data => {
+      this.musicsOsts = data;
+    });
   }
 
   // Function to send the user to an external website
@@ -55,11 +53,12 @@ export class MusicsComponent {
   // Function to load more music
   showMore(type: string) {
     switch (type) {
+      // Load new musics one by one, creating a good visual effect
       case "op":
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOpsLoaded += 1;
-          }, i * 100)
+          }, i * 30)
         }
         break;
 
@@ -67,7 +66,7 @@ export class MusicsComponent {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsEdsLoaded += 1;
-          }, i * 100)
+          }, i * 30)
         }
         break;
 
@@ -75,7 +74,7 @@ export class MusicsComponent {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOstsLoaded += 1;
-          }, i * 100)
+          }, i * 30)
         }
         break;
     }

@@ -8,12 +8,17 @@
         <h6 class="line"></h6>
       </div>
       <div>
-        <div *ngIf="musicOps$ | async as musicOps">
-          <!-- LOOP TO DISPLAY MUSICS -->
+        <!-- LOOP TO DISPLAY MUSICS -->
+        <div
+          *ngFor="
+            let music of musicsOps | slice: 0 : musicsOpsLoaded;
+            let last = last
+          "
+          class="music-box-2"
+        >
           <div
-            *ngFor="let music of musicOps | slice: 0 : musicsOpsLoaded"
-            (click)="navigateToMusicPage(music.name, music.author)"
             class="music group"
+            (click)="navigateToMusicPage(music.name, music.author)"
           >
             <!-- MUSICS INFO -->
             <div class="name-anime-box">
@@ -23,9 +28,8 @@
             <h2 class="author">by {{ music.author }}</h2>
           </div>
 
-          <!-- SHOW MORE BUTTON -->
           <button
-            *ngIf="musicsOpsLoaded < ((musicsOpsTotal$ | async) || 0)"
+            *ngIf="last && musicsOpsLoaded < musicsOps.length"
             (click)="showMore('op')"
             class="btn-show-more"
           >
@@ -51,6 +55,8 @@
             </svg>
           </button>
         </div>
+
+        <!-- SHOW MORE BUTTON -->
       </div>
     </div>
 
@@ -62,12 +68,17 @@
         <h6 class="line"></h6>
       </div>
       <div>
-        <div *ngIf="musicEds$ | async as musicEds">
-          <!-- LOOP TO DISPLAY MUSICS -->
+        <!-- LOOP TO DISPLAY MUSICS -->
+        <div
+          *ngFor="
+            let music of musicsEds | slice: 0 : musicsEdsLoaded;
+            let last = last
+          "
+          class="music-box-2"
+        >
           <div
-            *ngFor="let music of musicEds | slice: 0 : musicsEdsLoaded"
-            (click)="navigateToMusicPage(music.name, music.author)"
             class="music group"
+            (click)="navigateToMusicPage(music.name, music.author)"
           >
             <!-- MUSICS INFO -->
             <div class="name-anime-box">
@@ -79,7 +90,7 @@
 
           <!-- SHOW MORE BUTTON -->
           <button
-            *ngIf="musicsEdsLoaded < ((musicsEdsTotal$ | async) || 0)"
+            *ngIf="last && musicsEdsLoaded < musicsEds.length"
             (click)="showMore('ed')"
             class="btn-show-more"
           >
@@ -116,12 +127,17 @@
         <h6 class="line"></h6>
       </div>
       <div>
-        <div *ngIf="musicOsts$ | async as musicOsts">
-          <!-- LOOP TO DISPLAY MUSICS -->
+        <!-- LOOP TO DISPLAY MUSICS -->
+        <div
+          *ngFor="
+            let music of musicsOsts | slice: 0 : musicsOstsLoaded;
+            let last = last
+          "
+          class="music-box-2"
+        >
           <div
-            *ngFor="let music of musicOsts | slice: 0 : musicsOstsLoaded"
-            (click)="navigateToMusicPage(music.name, music.author)"
             class="music group"
+            (click)="navigateToMusicPage(music.name, music.author)"
           >
             <!-- MUSICS INFO -->
             <div class="name-anime-box">
@@ -133,7 +149,7 @@
 
           <!-- SHOW MORE BUTTON -->
           <button
-            *ngIf="musicsOstsLoaded < ((musicsOstsTotal$ | async) || 0)"
+            *ngIf="last && musicsOstsLoaded < musicsOsts.length"
             (click)="showMore('ost')"
             class="btn-show-more"
           >

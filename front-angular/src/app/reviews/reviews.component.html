@@ -1,114 +1,143 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
-  <!-- REVIEWS -->
-  <div class="flex w-full flex-col gap-12">
-    <div
-      *ngIf="reviewsBanner$ | async as reviewsBanner; else loadingScreen"
-      class="flex flex-col gap-12"
-    >
-      <!-- LOOP TO DISPLAY REVIEWS BANNER -->
-      <div
-        *ngFor="
-          let review of reviewsBanner | slice: 0 : LimitReviewsBanner;
-          let isFirst = first
-        "
-        class="box group flex cursor-pointer flex-col gap-4"
-        (click)="navigateTo(review.id)"
+  <div class="w-full">
+    <div class="relative mb-14 mt-6 w-full">
+      <svg
+        [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
+        class="absolute left-0 top-1 w-8"
+        enable-background="new 0 0 100 100"
+        id="Layer_1"
+        version="1.1"
+        viewBox="0 0 100 100"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
       >
-        <!-- REVIEW HEADER -->
-        <div>
-          <!-- REVIEW DATE -->
-          <p class="text-sm text-neutral-600 group-hover:text-neutral-500">
-            {{ review.reviewDate }}
-          </p>
-
-          <div class="flex items-end gap-4">
-            <!-- REVIEW TITLE -->
-            <h1
-              class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
-            >
-              {{ review.name }}
-            </h1>
-
-            <!-- REVIEW TAG -->
-            <span
-              *ngIf="isFirst"
-              class="group-hover:text-rose-600; block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500 group-hover:bg-rose-500 group-hover:bg-opacity-20"
-            >
-              NEW REVIEW
-            </span>
-          </div>
-        </div>
-
-        <!-- REVIEW IMG -->
-        <div class="overflow-hidden rounded-xl">
-          <img
-            src="/review_banner/{{ review.id }}-banner.jpg"
-            alt="Image of {{ review.name }}"
-            class="w-full scale-125 transition-transform duration-500 group-hover:scale-100"
-          />
-        </div>
-
-        <!-- REVIEW INTRO -->
-        <p
-          class="font-extralight leading-7 text-neutral-300 group-hover:text-neutral-100"
-        >
-          {{ review.intro }}
-        </p>
-      </div>
+        <path
+          clip-rule="evenodd"
+          d="M64.5,44.6c0-11.6-9.4-20.9-20.9-20.9c-11.6,0-20.9,9.4-20.9,20.9  c0,11.6,9.4,20.9,20.9,20.9C55.1,65.6,64.5,56.2,64.5,44.6z M80,79.3l-1.8,1.8l-19-19c-4.2,3.7-9.6,6-15.7,6  c-13,0-23.5-10.5-23.5-23.5c0-13,10.5-23.5,23.5-23.5c13,0,23.5,10.5,23.5,23.5c0,6-2.3,11.5-6,15.7L80,79.3z"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <input
+        type="text"
+        class="w-full border-b border-b-neutral-800 bg-transparent py-2 pl-10 pr-3 font-light text-neutral-500 outline-none placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600"
+        placeholder="Type the anime name"
+        (focus)="isSearchFocused = true"
+        (focusout)="isSearchFocused = false"
+      />
     </div>
 
-    <!-- LOADING TEMPLATE -->
-    <ng-template #loadingScreen>
-      <div class="mt-16 flex w-full items-center justify-center gap-3">
-        <!-- LOADING ICON -->
+    <!-- REVIEWS -->
+    <div class="flex w-full flex-col gap-12">
+      <div
+        *ngIf="reviewsBanner$ | async as reviewsBanner; else loadingScreen"
+        class="flex flex-col gap-12"
+      >
+        <!-- LOOP TO DISPLAY REVIEWS BANNER -->
         <div
-          class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
-        ></div>
-        <!-- ANIMATION LOADING TEXT -->
-        <div class="flex select-none gap-[1px]" aria-hidden="true">
-          <p id="loading_1" class="loading">L</p>
-          <p id="loading_2" class="loading">o</p>
-          <p id="loading_3" class="loading">a</p>
-          <p id="loading_4" class="loading">d</p>
-          <p id="loading_5" class="loading">i</p>
-          <p id="loading_6" class="loading">n</p>
-          <p id="loading_7" class="loading">g&nbsp;</p>
-          <p id="loading_8" class="loading">c</p>
-          <p id="loading_9" class="loading">o</p>
-          <p id="loading_10" class="loading">n</p>
-          <p id="loading_11" class="loading">t</p>
-          <p id="loading_12" class="loading">e</p>
-          <p id="loading_13" class="loading">n</p>
-          <p id="loading_14" class="loading">t</p>
-          <p id="loading_15" class="loading">.</p>
-          <p id="loading_16" class="loading">.</p>
-          <p id="loading_17" class="loading">.</p>
-        </div>
-        <!-- LOADING MESSAGE FOR SCREEN READER -->
-        <span class="sr-only">Loading content...</span>
-      </div>
-    </ng-template>
+          *ngFor="
+            let review of reviewsBanner | slice: 0 : LimitReviewsBanner;
+            let isFirst = first
+          "
+          class="box group flex cursor-pointer flex-col gap-4"
+          (click)="navigateTo(review.id)"
+        >
+          <!-- REVIEW HEADER -->
+          <div>
+            <!-- REVIEW DATE -->
+            <p class="text-sm text-neutral-600 group-hover:text-neutral-500">
+              {{ review.reviewDate }}
+            </p>
 
-    <button
-      *ngIf="LimitReviewsBanner < ((reviewsTotalCount$ | async) || 0)"
-      (click)="showMore()"
-      class="group relative m-auto inline-flex w-fit items-center justify-start overflow-hidden rounded bg-orange-500 px-8 py-3 font-medium transition-all"
-    >
-      <span
-        class="absolute right-0 top-0 inline-block h-4 w-4 rounded bg-orange-700 transition-all duration-500 ease-in-out group-hover:-mr-4 group-hover:-mt-4"
+            <div class="flex items-end gap-4">
+              <!-- REVIEW TITLE -->
+              <h1
+                class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
+              >
+                {{ review.name }}
+              </h1>
+
+              <!-- REVIEW TAG -->
+              <span
+                *ngIf="isFirst"
+                class="group-hover:text-rose-600; block h-full rounded-lg bg-rose-500 bg-opacity-15 px-2 py-[5px] text-sm font-semibold text-rose-500 group-hover:bg-rose-500 group-hover:bg-opacity-20"
+              >
+                NEW REVIEW
+              </span>
+            </div>
+          </div>
+
+          <!-- REVIEW IMG -->
+          <div class="overflow-hidden rounded-xl">
+            <img
+              src="/review_banner/{{ review.id }}.jpg"
+              alt="Image of {{ review.name }}"
+              class="w-full scale-125 transition-transform duration-500 group-hover:scale-100"
+            />
+          </div>
+
+          <!-- REVIEW INTRO -->
+          <p
+            class="font-extralight leading-7 text-neutral-300 group-hover:text-neutral-100"
+          >
+            {{ review.intro }}
+          </p>
+        </div>
+      </div>
+
+      <!-- LOADING TEMPLATE -->
+      <ng-template #loadingScreen>
+        <div class="mt-16 flex w-full items-center justify-center gap-3">
+          <!-- LOADING ICON -->
+          <div
+            class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
+          ></div>
+          <!-- ANIMATION LOADING TEXT -->
+          <div class="flex select-none gap-[1px]" aria-hidden="true">
+            <p id="loading_1" class="loading">L</p>
+            <p id="loading_2" class="loading">o</p>
+            <p id="loading_3" class="loading">a</p>
+            <p id="loading_4" class="loading">d</p>
+            <p id="loading_5" class="loading">i</p>
+            <p id="loading_6" class="loading">n</p>
+            <p id="loading_7" class="loading">g&nbsp;</p>
+            <p id="loading_8" class="loading">c</p>
+            <p id="loading_9" class="loading">o</p>
+            <p id="loading_10" class="loading">n</p>
+            <p id="loading_11" class="loading">t</p>
+            <p id="loading_12" class="loading">e</p>
+            <p id="loading_13" class="loading">n</p>
+            <p id="loading_14" class="loading">t</p>
+            <p id="loading_15" class="loading">.</p>
+            <p id="loading_16" class="loading">.</p>
+            <p id="loading_17" class="loading">.</p>
+          </div>
+          <!-- LOADING MESSAGE FOR SCREEN READER -->
+          <span class="sr-only">Loading content...</span>
+        </div>
+      </ng-template>
+
+      <button
+        *ngIf="LimitReviewsBanner < ((reviewsTotalCount$ | async) || 0)"
+        (click)="showMore()"
+        class="group relative m-auto inline-flex w-fit items-center justify-start overflow-hidden rounded bg-orange-500 px-8 py-3 font-medium transition-all"
       >
         <span
-          class="absolute right-0 top-0 h-5 w-5 -translate-y-1/2 translate-x-1/2 rotate-45 bg-main"
+          class="absolute right-0 top-0 inline-block h-4 w-4 rounded bg-orange-700 transition-all duration-500 ease-in-out group-hover:-mr-4 group-hover:-mt-4"
+        >
+          <span
+            class="absolute right-0 top-0 h-5 w-5 -translate-y-1/2 translate-x-1/2 rotate-45 bg-main"
+          ></span>
+        </span>
+        <span
+          class="absolute bottom-0 left-0 h-full w-full -translate-x-full translate-y-full rounded border-0 bg-orange-600 transition-all delay-200 duration-300 ease-in-out group-hover:mb-12 group-hover:translate-x-0"
         ></span>
-      </span>
-      <span
-        class="absolute bottom-0 left-0 h-full w-full -translate-x-full translate-y-full rounded border-0 bg-orange-600 transition-all delay-200 duration-300 ease-in-out group-hover:mb-12 group-hover:translate-x-0"
-      ></span>
-      <span
-        class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
-        >Show More
-      </span>
-    </button>
+        <span
+          class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
+          >Show More
+        </span>
+      </button>
+    </div>
   </div>
 
   <!-- LINK MENU -->

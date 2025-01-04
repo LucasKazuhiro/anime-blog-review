@@ -19,6 +19,8 @@ export class ReviewsComponent implements AfterViewInit {
   public LimitReviewsBanner = 3;
   public addMoreReviewsBanner = 5;
 
+  isSearchFocused = false;
+
   constructor(private router: Router, private animeService: AnimeService) {
     this.reviewsBanner$ = this.animeService.reviewsBanner$;
     this.reviewsTotalCount$ = this.reviewsBanner$.pipe(map(reviews => reviews?.length || 0));
@@ -28,6 +30,7 @@ export class ReviewsComponent implements AfterViewInit {
     this.startAnimation(0.05, 17, "loading_");
   }
 
+  // Fuction to animate several items with some delay between each of them
   startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
     let delay = 0;
     for (let i = 1; i <= loopLimit; i++) {

@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  toggleMobileLinkMenu() {
+  public toggleMobileLinkMenu() {
     // Opens mobile link menu if its already on top of the page
     if (window.scrollY < 700) {
       this.isMenuMobileEnabled = !this.isMenuMobileEnabled;

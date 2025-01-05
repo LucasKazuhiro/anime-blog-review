@@ -50,7 +50,7 @@ export class SearchBoxComponent implements OnInit {
   // Clean search box
   public cleanSearchBox() {
     this.searchValue = "";
-    this.searchValueDebounce.next('')
+    this.searchValueDebounce.next('');
     this.focusSearchBox();
   }
 

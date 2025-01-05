@@ -7,6 +7,4 @@ import { TooltipComponent } from '../ui/tooltip/tooltip.component';
     templateUrl: './link-menu.component.html',
     styleUrl: './link-menu.component.css'
 })
-export class LinkMenuComponent {
-
-}
+export class LinkMenuComponent { }

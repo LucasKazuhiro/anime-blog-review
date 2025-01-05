@@ -53,9 +53,7 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
       else {
         this.reviewInfo = new Review;
       }
-
-      console.log("aa" + reviewInfo)
-    })
+    });
   }
 
   ngAfterViewChecked() {
@@ -72,7 +70,7 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
       // Calculates the delay value
       delay += delayIncrease;
       // Find a specific star element
-      const element = document.getElementById(idPrefix + i)
+      const element = document.getElementById(idPrefix + i);
       if (element) {
         // Defines the delay for the star animation
         element.style.animationDelay = delay.toString() + 's';

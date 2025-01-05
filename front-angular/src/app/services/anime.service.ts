@@ -18,7 +18,15 @@ export class AnimeService {
   destroyRef = inject(DestroyRef);
 
 
-  // Reviews
+  // SEARCH
+  private searchReview = new BehaviorSubject<string>('');
+  public searchReview$ = this.searchReview.asObservable();
+
+  private searchMusic = new BehaviorSubject<string>('');
+  public searchMusic$ = this.searchMusic.asObservable();
+
+
+  // REVIEWS VARIABLES
   // Create an Observable of type BehaviorSubject that will store the reviews banner array.
   private reviewsBanner = new BehaviorSubject<Review[] | null>(null);
   // Create an Observable for reviewsBanner (read only)
@@ -28,7 +36,7 @@ export class AnimeService {
   public reviewSelected$ = this.reviewSelected.asObservable();
 
 
-  // Favorites
+  // FAVORITES VARIABLES
   private favoriteTvs = new BehaviorSubject<Favorite[]>([]);
   public favoriteTvs$ = this.favoriteTvs.asObservable();
 
@@ -54,7 +62,7 @@ export class AnimeService {
   public favoriteStudios$ = this.favoriteStudios.asObservable();
 
 
-  // Musics
+  // MUSICS VARIABLES
   private musicOps = new BehaviorSubject<Music[]>([]);
   public musicOps$ = this.musicOps.asObservable();
 
@@ -65,17 +73,10 @@ export class AnimeService {
   public musicOsts$ = this.musicOsts.asObservable();
 
 
-  // Search
-  private searchReview = new BehaviorSubject<string>('');
-  public searchReview$ = this.searchReview.asObservable();
-
-  private searchMusic = new BehaviorSubject<string>('');
-  public searchMusic$ = this.searchMusic.asObservable();
-
-
   constructor(private http: HttpClient) { }
 
 
+  // SEARCH
   public updateSearchValue(searchType: string, searchValue: string) {
     switch (searchType) {
       case "review":
@@ -101,6 +102,8 @@ export class AnimeService {
     }
   }
 
+
+  // REVIEWS (or specific review)
   public getAllReviews() {
     // Get all reviews
     this.http.get<Review[]>(`${this.backendDomain}/reviews`).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -125,7 +128,7 @@ export class AnimeService {
       error: (err) => {
         console.error('Error on getAllReviews: ', err); // Error message
       }
-    })
+    });
   }
 
   public getReview(reviewId: string) {
@@ -143,6 +146,8 @@ export class AnimeService {
     this.reviewSelected.next(null);
   }
 
+
+  // FAVORITES
   public getFavoritesByType(type: string) {
     // Get reviews by type
     this.http.get<Favorite[]>(`${this.backendDomain}/favorites/${type}`).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -189,9 +194,11 @@ export class AnimeService {
       error: (err) => {
         console.error(`Error on getFavoritesByType ${type}: `, err); // Error message
       }
-    })
+    });
   }
 
+
+  // MUSICS
   public getMusicsByType(type: string) {
     // Get musics by type
     this.http.get<Music[]>(`${this.backendDomain}/musics/${type}`).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -217,6 +224,6 @@ export class AnimeService {
       error: (err) => {
         console.error(`Error on getMusicsByType ${type}: `, err); // Error message
       }
-    })
+    });
   }
 }

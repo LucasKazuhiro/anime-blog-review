@@ -79,7 +79,7 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
       // Calculates the delay value
       delay += delayIncrease;
       // Find a specific star element
-      const element = document.getElementById(idPrefix + i)
+      const element = document.getElementById(idPrefix + i);
       if (element) {
         // Defines the delay for the star animation
         element.style.animationDelay = delay.toString() + 's';

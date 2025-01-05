@@ -16,7 +16,6 @@
     @apply w-fit font-staatliches text-3xl tracking-[2.5px];
   }
 
-
   /* Line */
   .line {
     @apply h-[1px] flex-grow bg-neutral-800;

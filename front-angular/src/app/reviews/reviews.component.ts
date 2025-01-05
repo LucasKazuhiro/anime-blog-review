@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,6 @@ import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { FormsModule } from '@angular/forms';
 import Fuse from 'fuse.js'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, Subject } from 'rxjs';
 import { SearchBoxComponent } from "../ui/search-box/search-box.component";
 
 @Component({

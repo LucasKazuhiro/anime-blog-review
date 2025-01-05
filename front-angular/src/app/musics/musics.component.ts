@@ -4,45 +4,125 @@ import { Music } from '../models/music.model';
 import { AnimeService } from '../services/anime.service';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SearchBoxComponent } from '../ui/search-box/search-box.component';
+import Fuse from 'fuse.js';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'musics',
-  imports: [LinkMenuComponent, CommonModule],
+  imports: [LinkMenuComponent, CommonModule, SearchBoxComponent],
   templateUrl: './musics.component.html',
   styleUrl: './musics.component.css'
 })
 export class MusicsComponent {
-  // Variables to store the musics array
-  public musicsOps: Music[] = [];
-  public musicsEds: Music[] = [];
-  public musicsOsts: Music[] = [];
 
-  // All types of music
-  fav_types: string[] = ['op', 'ed', 'ost']
+  // Fuse.js
+  private fuse!: Fuse<Music>;
+  private fuseOptions = {
+    // minMatchCharLength: 1,
+    threshold: 0.4,
+    ignoreLocation: true,
+    keys: [
+      "name",
+      "anime",
+      "author"
+    ]
+  };
+
+  // Variables to store the musics array
+  public allMusicsOps: Music[] = [];
+  public displayMusicsOps: Music[] = [];
+
+  public allMusicsEds: Music[] = [];
+  public displayMusicsEds: Music[] = [];
+
+  public allMusicsOsts: Music[] = [];
+  public displayMusicsOsts: Music[] = [];
+
 
   // Variable to store the number of musics loaded in the screen
-  musicsOpsLoaded = 2;
+  musicsOpsLoaded = 5;
   musicsEdsLoaded = 5;
-  musicsOstsLoaded = 3;
+  musicsOstsLoaded = 5;
 
   constructor(private animeService: AnimeService) {
-    // Loop to get all types of music
-    this.fav_types.forEach(type => {
-      animeService.getMusicsByType(type);
+    // Create Fuse instance
+    this.fuse = new Fuse([], this.fuseOptions);
+
+    // Combine the streams of observables
+    combineLatest([
+      this.animeService.musicOps$,
+      this.animeService.musicEds$,
+      this.animeService.musicOsts$
+    ])
+      .pipe(takeUntilDestroyed())
+      .subscribe(([ops, eds, osts]) => {
+        // Update the arrays that store all values of each type of music
+        this.allMusicsOps = ops;
+        this.allMusicsEds = eds;
+        this.allMusicsOsts = osts;
+
+        // At the beginning, display all data
+        this.displayMusicsOps = this.allMusicsOps;
+        this.displayMusicsEds = this.allMusicsEds;
+        this.displayMusicsOsts = this.allMusicsOsts;
+
+        // Combine the arrays (to search)
+        const combinedData = [...this.allMusicsOps, ...this.allMusicsEds, ...this.allMusicsOsts];
+
+        // Update Fuse collection
+        this.fuse.setCollection(combinedData);
+      });
+
+
+    // Get searched value
+    this.animeService.searchMusic$.subscribe(searchMusic => {
+      this.handleSearch(searchMusic);
     })
+  }
 
-    // Store the musics
-    this.animeService.musicOps$.pipe(takeUntilDestroyed()).subscribe(data => {
-      this.musicsOps = data;
-    });
+  // Search the anime name
+  private handleSearch(searchMusic: string) {
+    if (searchMusic) {
+      // Return all possible matches
+      let searchedMatches = this.fuse.search(searchMusic).map(result => result.item);
 
-    this.animeService.musicEds$.pipe(takeUntilDestroyed()).subscribe(data => {
-      this.musicsEds = data;
-    });
+      // Use reduce to group musics by type
+      const categorizedMusics = searchedMatches.reduce<{
+        openings: Music[],
+        endings: Music[],
+        osts: Music[]
+      }>
+        ((acc, item: Music) => {
+          switch (item.type) {
+            case "opening":
+              acc.openings.push(item);
+              break;
 
-    this.animeService.musicOsts$.pipe(takeUntilDestroyed()).subscribe(data => {
-      this.musicsOsts = data;
-    });
+            case "ending":
+              acc.endings.push(item);
+              break;
+
+            case "originalSoundtrack":
+              acc.osts.push(item);
+              break;
+
+            default:
+          }
+          return acc;
+        }, { openings: [], endings: [], osts: [] });
+
+      // Saves the searched data according to its type
+      this.displayMusicsOps = categorizedMusics.openings;
+      this.displayMusicsEds = categorizedMusics.endings;
+      this.displayMusicsOsts = categorizedMusics.osts;
+    }
+    else {
+      // If input is empty, return all musics of all types
+      this.displayMusicsOps = this.allMusicsOps;
+      this.displayMusicsEds = this.allMusicsEds;
+      this.displayMusicsOsts = this.allMusicsOsts;
+    }
   }
 
   // Function to send the user to an external website

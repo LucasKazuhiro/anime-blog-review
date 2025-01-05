@@ -1,179 +1,201 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
-  <div class="flex w-full flex-col gap-24">
-    <!-- OPENINGS -->
-    <div class="music-box mt-[42px]">
-      <!-- TITLE -->
-      <div class="title-box">
-        <h1 class="title">Openings</h1>
-        <h6 class="line"></h6>
-      </div>
-      <div>
-        <!-- LOOP TO DISPLAY MUSICS -->
-        <div
-          *ngFor="
-            let music of musicsOps | slice: 0 : musicsOpsLoaded;
-            let last = last
-          "
-          class="music-box-2"
-        >
-          <div
-            class="music group"
-            (click)="navigateToMusicPage(music.name, music.author)"
-          >
-            <!-- MUSICS INFO -->
-            <div class="name-anime-box">
-              <h1 class="name">{{ music.name }}</h1>
-              <h3 class="anime">({{ music.anime }})</h3>
-            </div>
-            <h2 class="author">by {{ music.author }}</h2>
-          </div>
-
-          <button
-            *ngIf="last && musicsOpsLoaded < musicsOps.length"
-            (click)="showMore('op')"
-            class="btn-show-more"
-          >
-            Show more OP's
-
-            <svg
-              class="arrow-down"
-              viewBox="0 0 18 18"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
-                ></path>
-              </g>
-            </svg>
-          </button>
-        </div>
-
-        <!-- SHOW MORE BUTTON -->
-      </div>
+  <div class="w-full">
+    <!-- SEARCH BOX -->
+    <div class="relative mb-8 mt-5 w-full">
+      <search-box
+        type="music"
+        placeholderText="Search for the anime"
+      ></search-box>
     </div>
 
-    <!-- ENDINGS -->
-    <div class="music-box">
-      <!-- TITLE -->
-      <div class="title-box">
-        <h1 class="title">Endings</h1>
-        <h6 class="line"></h6>
+    <!-- MUSICS -->
+    <div class="flex w-full flex-col gap-20">
+      <!-- NO ANIMES FOUND -->
+      <div
+        *ngIf="
+          displayMusicsOps.length === 0 &&
+          displayMusicsEds.length === 0 &&
+          displayMusicsOsts.length === 0
+        "
+        class="w-full text-center"
+      >
+        <p class="text-lg">No results found...</p>
       </div>
-      <div>
-        <!-- LOOP TO DISPLAY MUSICS -->
-        <div
-          *ngFor="
-            let music of musicsEds | slice: 0 : musicsEdsLoaded;
-            let last = last
-          "
-          class="music-box-2"
-        >
+
+      <!-- OPENINGS -->
+      <div *ngIf="displayMusicsOps.length != 0" class="music-box mt-[30px]">
+        <!-- TITLE -->
+        <div class="title-box">
+          <h1 class="title">Openings</h1>
+          <h6 class="line"></h6>
+        </div>
+        <div>
+          <!-- LOOP TO DISPLAY MUSICS -->
           <div
-            class="music group"
-            (click)="navigateToMusicPage(music.name, music.author)"
+            *ngFor="
+              let music of displayMusicsOps | slice: 0 : musicsOpsLoaded;
+              let last = last
+            "
+            class="music-box-2"
           >
-            <!-- MUSICS INFO -->
-            <div class="name-anime-box">
-              <h1 class="name">{{ music.name }}</h1>
-              <h3 class="anime">({{ music.anime }})</h3>
-            </div>
-            <h2 class="author">by {{ music.author }}</h2>
-          </div>
-
-          <!-- SHOW MORE BUTTON -->
-          <button
-            *ngIf="last && musicsEdsLoaded < musicsEds.length"
-            (click)="showMore('ed')"
-            class="btn-show-more"
-          >
-            Show more ED's
-
-            <svg
-              class="arrow-down"
-              viewBox="0 0 18 18"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
+            <div
+              class="music group"
+              (click)="navigateToMusicPage(music.name, music.author)"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
-                ></path>
-              </g>
-            </svg>
-          </button>
+              <!-- MUSICS INFO -->
+              <div class="name-anime-box">
+                <h1 class="name">{{ music.name }}</h1>
+                <h3 class="anime">({{ music.anime }})</h3>
+              </div>
+              <h2 class="author">by {{ music.author }}</h2>
+            </div>
+
+            <!-- SHOW MORE BUTTON -->
+            <button
+              *ngIf="last && musicsOpsLoaded < displayMusicsOps.length"
+              (click)="showMore('op')"
+              class="btn-show-more"
+            >
+              Show more OP's
+
+              <svg
+                class="arrow-down"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- ORIGINAL SOUNDTRACKS (OST) -->
-    <div class="music-box">
-      <!-- TITLE -->
-      <div class="title-box">
-        <h1 class="title">Original Soundtracks</h1>
-        <h6 class="line"></h6>
-      </div>
-      <div>
-        <!-- LOOP TO DISPLAY MUSICS -->
-        <div
-          *ngFor="
-            let music of musicsOsts | slice: 0 : musicsOstsLoaded;
-            let last = last
-          "
-          class="music-box-2"
-        >
+      <!-- ENDINGS -->
+      <div *ngIf="displayMusicsEds.length != 0" class="music-box">
+        <!-- TITLE -->
+        <div class="title-box">
+          <h1 class="title">Endings</h1>
+          <h6 class="line"></h6>
+        </div>
+        <div>
+          <!-- LOOP TO DISPLAY MUSICS -->
           <div
-            class="music group"
-            (click)="navigateToMusicPage(music.name, music.author)"
+            *ngFor="
+              let music of displayMusicsEds | slice: 0 : musicsEdsLoaded;
+              let last = last
+            "
+            class="music-box-2"
           >
-            <!-- MUSICS INFO -->
-            <div class="name-anime-box">
-              <h1 class="name">{{ music.name }}</h1>
-              <h3 class="anime">({{ music.anime }})</h3>
-            </div>
-            <h2 class="author">by {{ music.author }}</h2>
-          </div>
-
-          <!-- SHOW MORE BUTTON -->
-          <button
-            *ngIf="last && musicsOstsLoaded < musicsOsts.length"
-            (click)="showMore('ost')"
-            class="btn-show-more"
-          >
-            Show more OST's
-
-            <svg
-              class="arrow-down"
-              viewBox="0 0 18 18"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
+            <div
+              class="music group"
+              (click)="navigateToMusicPage(music.name, music.author)"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
-                ></path>
-              </g>
-            </svg>
-          </button>
+              <!-- MUSICS INFO -->
+              <div class="name-anime-box">
+                <h1 class="name">{{ music.name }}</h1>
+                <h3 class="anime">({{ music.anime }})</h3>
+              </div>
+              <h2 class="author">by {{ music.author }}</h2>
+            </div>
+
+            <!-- SHOW MORE BUTTON -->
+            <button
+              *ngIf="last && musicsEdsLoaded < displayMusicsEds.length"
+              (click)="showMore('ed')"
+              class="btn-show-more"
+            >
+              Show more ED's
+
+              <svg
+                class="arrow-down"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORIGINAL SOUNDTRACKS (OST) -->
+      <div *ngIf="displayMusicsOsts.length != 0" class="music-box">
+        <!-- TITLE -->
+        <div class="title-box">
+          <h1 class="title">Original Soundtracks</h1>
+          <h6 class="line"></h6>
+        </div>
+        <div>
+          <!-- LOOP TO DISPLAY MUSICS -->
+          <div
+            *ngFor="
+              let music of displayMusicsOsts | slice: 0 : musicsOstsLoaded;
+              let last = last
+            "
+            class="music-box-2"
+          >
+            <div
+              class="music group"
+              (click)="navigateToMusicPage(music.name, music.author)"
+            >
+              <!-- MUSICS INFO -->
+              <div class="name-anime-box">
+                <h1 class="name">{{ music.name }}</h1>
+                <h3 class="anime">({{ music.anime }})</h3>
+              </div>
+              <h2 class="author">by {{ music.author }}</h2>
+            </div>
+
+            <!-- SHOW MORE BUTTON -->
+            <button
+              *ngIf="last && musicsOstsLoaded < displayMusicsOsts.length"
+              (click)="showMore('ost')"
+              class="btn-show-more"
+            >
+              Show more OST's
+
+              <svg
+                class="arrow-down"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>

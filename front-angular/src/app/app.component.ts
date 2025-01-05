@@ -14,6 +14,12 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit {
 
+  // All favorites type
+  fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
+
+  // All types of music
+  music_types: string[] = ['op', 'ed', 'ost']
+
   isMenuMobileLocked: boolean = false;
 
   constructor(private animeService: AnimeService) { }
@@ -21,6 +27,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Get all reviews
     this.animeService.getAllReviews();
+
+    // Loop to get all favorites of each type
+    this.fav_types.forEach(type => {
+      this.animeService.getFavoritesByType(type);
+    })
+
+    // Loop to get all types of music
+    this.music_types.forEach(type => {
+      this.animeService.getMusicsByType(type);
+    })
   }
 
   toggleMobileLinkMenu() {

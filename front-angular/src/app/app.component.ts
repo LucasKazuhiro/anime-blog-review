@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   // All types of music
   private music_types: string[] = ['op', 'ed', 'ost']
 
-  private isMenuMobileLocked: boolean = false;
+  public isMenuMobileEnabled: boolean = false;
 
   constructor(private animeService: AnimeService) { }
 
@@ -59,81 +59,16 @@ export class AppComponent implements OnInit {
   }
 
   toggleMobileLinkMenu() {
-    // Prevents the mobile menu from being triggered multiple times when clicked
-    if (this.isMenuMobileLocked) return;
-
-    this.isMenuMobileLocked = true;
-
-    setTimeout(() => {
-      this.isMenuMobileLocked = false;
-    }, 800)
-
-    // Get the Mobile menu and its Title
-    const linkMenuMobile = document.getElementById('link-menu-mobile')?.classList;
-    const linkMenuMobileTitle = document.getElementById('link-menu-mobile-title')?.classList;
-    const blackScreen = document.getElementById('black-screen')?.classList;
-
-    const notficationDotOne = document.getElementById('notification-dot-1')
-    const notficationDotTwo = document.getElementById('notification-dot-2')
-    notficationDotOne?.remove()
-    notficationDotTwo?.remove()
-
-    if (linkMenuMobile && linkMenuMobileTitle && blackScreen) {
-      // Is VISIBLE and needs to disapear
-      if (linkMenuMobile.contains('left-2')) {
-        // Title
-        linkMenuMobileTitle.remove('top-[10px]', 'visible');
-        linkMenuMobileTitle.add('-top-[50px]', 'invisible');
-
-        // Menu mobile
-        linkMenuMobile.remove('left-2', 'visible');
-        linkMenuMobile.add('-left-[420px]', 'invisible');
-
-        // Black screen
-        blackScreen.remove('opacity-95')
-        blackScreen.add('opacity-0')
-
-        setTimeout(() => {
-          blackScreen.remove('z-[19]')
-          blackScreen.add('z-0')
-        }, 500)
-      }
-      // Is INVISIBLE and needs to appear
-      else {
-        if (window.scrollY !== 0) {
-          // Scrolls to the top of the page
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-
-          // Wait scroll up
-          setTimeout(() => {
-            // Title
-            linkMenuMobileTitle.add('top-[10px]', 'visible');
-            linkMenuMobileTitle.remove('-top-[50px]', 'invisible');
-
-            // Menu mobile
-            linkMenuMobile.add('left-2', 'visible');
-            linkMenuMobile.remove('-left-[420px]', 'invisible');
-
-            // Black screen
-            blackScreen.add('opacity-95', 'z-[19]');
-            blackScreen.remove('opacity-0', 'z-0');
-          }, 800);
-        } else {
-          // Runs immediately if the user is alreay on top of the page
-          // Title
-          linkMenuMobileTitle.add('top-[10px]', 'visible');
-          linkMenuMobileTitle.remove('-top-[50px]', 'invisible');
-
-          // Menu mobile
-          linkMenuMobile.add('left-2', 'visible');
-          linkMenuMobile.remove('-left-[420px]', 'invisible');
-
-          // Black screen
-          blackScreen.add('opacity-95', 'z-[19]');
-          blackScreen.remove('opacity-0', 'z-0');
-        }
-      }
+    // Opens mobile link menu if its already on top of the page
+    if (window.scrollY < 700) {
+      this.isMenuMobileEnabled = !this.isMenuMobileEnabled;
     }
-
+    // Scrolls to the top of the page and then opens mobile link menu
+    else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        this.isMenuMobileEnabled = !this.isMenuMobileEnabled;
+      }, 500);
+    }
   }
 }

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { AnimeService } from '../services/anime.service';
 import { Favorite } from '../models/favorite.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,20 +11,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit {
   // Variables to store the favorites arrays
-  favoriteTvs$: Observable<Favorite[] | null>;
-  favoriteFilms$: Observable<Favorite[] | null>;
-  favoriteCharsMale$: Observable<Favorite[] | null>;
-  favoriteCharsFemale$: Observable<Favorite[] | null>;
-  favoriteCharsNoIdea$: Observable<Favorite[] | null>;
-  favoriteSeiyuusMale$: Observable<Favorite[] | null>;
-  favoriteSeiyuusFemale$: Observable<Favorite[] | null>;
-  favoriteStudios$: Observable<Favorite[] | null>;
-
+  public favoriteTvs$: Observable<Favorite[]> = of([]);
+  public favoriteFilms$: Observable<Favorite[]> = of([]);
+  public favoriteCharsMale$: Observable<Favorite[]> = of([]);
+  public favoriteCharsFemale$: Observable<Favorite[]> = of([]);
+  public favoriteCharsNoIdea$: Observable<Favorite[]> = of([]);
+  public favoriteSeiyuusMale$: Observable<Favorite[]> = of([]);
+  public favoriteSeiyuusFemale$: Observable<Favorite[]> = of([]);
+  public favoriteStudios$: Observable<Favorite[]> = of([]);
 
   // Pre-defined color for title and border hover effect
-  borderLightColor: string[] = [
+  public borderLightColor: string[] = [
     'rgba(209, 49, 89, 1)',    // Tv Series    (0)
     'rgba(228, 152, 53, 1)',   // Films        (1)
     'rgba(30, 135, 214, 1)',   // Char Male    (2)
@@ -36,7 +35,9 @@ export class FavoritesComponent {
   ];
 
 
-  constructor(private animeService: AnimeService) {
+  constructor(private animeService: AnimeService) { }
+
+  ngOnInit() {
     // Saving the values in the variables
     this.favoriteTvs$ = this.animeService.favoriteTvs$;
     this.favoriteFilms$ = this.animeService.favoriteFilms$;
@@ -50,7 +51,7 @@ export class FavoritesComponent {
 
 
   // Calculates the position of the mouse for border hover effect
-  onMouseMove(event: MouseEvent, favItemBoxId: string) {
+  public onMouseMove(event: MouseEvent, favItemBoxId: string) {
     // Get the specific fav item
     const favItemBox = document.querySelector<HTMLElement>(`#${favItemBoxId}`)
 
@@ -72,7 +73,7 @@ export class FavoritesComponent {
   }
 
   // Function to send the user to an external website
-  navigateToAnimePage(url: string) {
+  public navigateToAnimePage(url: string) {
     window.open(url, '_blank');
   }
 }

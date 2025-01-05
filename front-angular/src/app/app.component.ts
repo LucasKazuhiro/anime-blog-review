@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -15,12 +15,12 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
 
   // All favorites type
-  fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
+  private fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
 
   // All types of music
-  music_types: string[] = ['op', 'ed', 'ost']
+  private music_types: string[] = ['op', 'ed', 'ost']
 
-  isMenuMobileLocked: boolean = false;
+  private isMenuMobileLocked: boolean = false;
 
   constructor(private animeService: AnimeService) { }
 
@@ -37,6 +37,25 @@ export class AppComponent implements OnInit {
     this.music_types.forEach(type => {
       this.animeService.getMusicsByType(type);
     })
+  }
+
+  // Search box shortcuts
+  @HostListener('window:keydown', ['$event'])
+  public handleSearchBoxShortcut(event: KeyboardEvent) {
+    const searchBox = document.getElementById('search-box')
+
+    if (searchBox) {
+      // Ctrl + K
+      if (event.ctrlKey && event.key === 'k') {
+        event.preventDefault(); // Prevent default browser action
+        searchBox.focus();
+      }
+
+      // Esc
+      else if (event.key === 'Escape') {
+        searchBox.blur();
+      }
+    }
   }
 
   toggleMobileLinkMenu() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { Music } from '../models/music.model';
 import { AnimeService } from '../services/anime.service';
@@ -14,13 +14,14 @@ import { combineLatest } from 'rxjs';
   templateUrl: './musics.component.html',
   styleUrl: './musics.component.css'
 })
-export class MusicsComponent {
+export class MusicsComponent implements OnInit {
+  // Injects DestroyRef to automatically handle (destroy) subscriptions
+  private destroyRef = inject(DestroyRef);
 
   // Fuse.js
-  private fuse!: Fuse<Music>;
   private fuseOptions = {
     // minMatchCharLength: 1,
-    threshold: 0.4,
+    threshold: 0.3,
     ignoreLocation: true,
     keys: [
       "name",
@@ -28,6 +29,7 @@ export class MusicsComponent {
       "author"
     ]
   };
+  private fuse: Fuse<Music> = new Fuse([], this.fuseOptions);
 
   // Variables to store the musics array
   public allMusicsOps: Music[] = [];
@@ -41,21 +43,20 @@ export class MusicsComponent {
 
 
   // Variable to store the number of musics loaded in the screen
-  musicsOpsLoaded = 5;
-  musicsEdsLoaded = 5;
-  musicsOstsLoaded = 5;
+  public musicsOpsLoaded = 5;
+  public musicsEdsLoaded = 5;
+  public musicsOstsLoaded = 5;
 
-  constructor(private animeService: AnimeService) {
-    // Create Fuse instance
-    this.fuse = new Fuse([], this.fuseOptions);
+  constructor(private animeService: AnimeService) { }
 
+  ngOnInit() {
     // Combine the streams of observables
     combineLatest([
       this.animeService.musicOps$,
       this.animeService.musicEds$,
       this.animeService.musicOsts$
     ])
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(([ops, eds, osts]) => {
         // Update the arrays that store all values of each type of music
         this.allMusicsOps = ops;
@@ -76,7 +77,7 @@ export class MusicsComponent {
 
 
     // Get searched value
-    this.animeService.searchMusic$.subscribe(searchMusic => {
+    this.animeService.searchMusic$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(searchMusic => {
       this.handleSearch(searchMusic);
     })
   }
@@ -126,12 +127,12 @@ export class MusicsComponent {
   }
 
   // Function to send the user to an external website
-  navigateToMusicPage(musicName: string, musicAuthor: string) {
+  public navigateToMusicPage(musicName: string, musicAuthor: string) {
     window.open(`https://www.youtube.com/results?search_query=${musicName}+by+${musicAuthor}`, '_blank');
   }
 
   // Function to load more music
-  showMore(type: string) {
+  public showMore(type: string) {
     switch (type) {
       // Load new musics one by one, creating a good visual effect
       case "op":

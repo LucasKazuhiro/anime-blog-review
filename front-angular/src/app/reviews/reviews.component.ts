@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -15,10 +15,11 @@ import { SearchBoxComponent } from "../ui/search-box/search-box.component";
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
-export class ReviewsComponent implements AfterViewInit {
+export class ReviewsComponent implements OnInit, AfterViewInit {
+  // Injects DestroyRef to automatically handle (destroy) subscriptions
+  destroyRef = inject(DestroyRef);
 
   // Fuse.js
-  private fuse!: Fuse<Review>;
   private fuseOptions = {
     // minMatchCharLength: 1,
     threshold: 0.7,
@@ -26,17 +27,20 @@ export class ReviewsComponent implements AfterViewInit {
       "name"
     ]
   };
+  private fuse: Fuse<Review> = new Fuse([], this.fuseOptions);
 
   // Reviews arrays
   public allReviews: Review[] = [];
-  public displayReviews: Review[] | null = null;
+  public displayReviews: Review[] = [];
 
-  constructor(private router: Router, private animeService: AnimeService) {
-    // Creste Fuse instance
-    this.fuse = new Fuse([], this.fuseOptions);
+  // Chenge between "Loading content..." or "No results found..."
+  public firstSearch: number = 0;
 
+  constructor(private router: Router, private animeService: AnimeService) { }
+
+  ngOnInit() {
     // Get all reviews
-    this.animeService.reviewsBanner$.pipe(takeUntilDestroyed()).subscribe(reviews => {
+    this.animeService.reviewsBanner$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(reviews => {
       if (reviews) {
         this.allReviews = reviews;
         this.fuse.setCollection(this.allReviews); // Updates the Fuse data (to use on search)
@@ -45,7 +49,7 @@ export class ReviewsComponent implements AfterViewInit {
     })
 
     // Get searched value
-    this.animeService.searchReview$.subscribe(searchedReview => {
+    this.animeService.searchReview$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(searchedReview => {
       this.handleSearch(searchedReview);
     })
   }
@@ -64,6 +68,8 @@ export class ReviewsComponent implements AfterViewInit {
       // If input is empty, return all reviews
       this.displayReviews = this.allReviews;
     }
+
+    this.firstSearch++;
   }
 
   // Fuction to animate several items with some delay between each of them

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AnimeService } from '../../services/anime.service';
 import { debounceTime, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'search-box',
@@ -14,22 +15,26 @@ export class SearchBoxComponent implements OnInit {
   @Input() type: string = "";
   @Input() placeholderText: string = "Search...";
 
-  public searchBox!: HTMLInputElement | null;
-  public searchValue: string = ""
+  // Injects DestroyRef to automatically handle (destroy) subscriptions
+  destroyRef = inject(DestroyRef);
+
+  public searchBox: HTMLInputElement | null = null;
+  public searchValue: string = "";
 
   // Debounce search (cooldown)
-  searchValueDebounce = new Subject<string>();
+  public searchValueDebounce = new Subject<string>();
 
   // Variable to change magnifier SVG fill color
-  isSearchFocused = false;
+  public isSearchFocused = false;
 
-  constructor(private animeService: AnimeService) {
-    this.searchValueDebounce.pipe(debounceTime(400)).subscribe(() => {
-      this.updateSearchValue();
-    })
-  }
+  constructor(private animeService: AnimeService) { }
 
   ngOnInit(): void {
+    // Adds a debounce when updating search value
+    this.searchValueDebounce.pipe(debounceTime(400), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      this.updateSearchValue();
+    })
+
     // Get the searched value and displays it in the search box
     this.searchValue = this.animeService.getCurrentSearchValue(this.type);
 
@@ -38,38 +43,19 @@ export class SearchBoxComponent implements OnInit {
   }
 
   // Updates the searched value
-  updateSearchValue() {
+  private updateSearchValue() {
     this.animeService.updateSearchValue(this.type, this.searchValue);
   }
 
   // Clean search box
-  cleanSearchBox() {
+  public cleanSearchBox() {
     this.searchValue = "";
     this.searchValueDebounce.next('')
     this.focusSearchBox();
   }
 
   // Change the focus to the search box
-  focusSearchBox() {
+  public focusSearchBox() {
     if (this.searchBox) this.searchBox.focus();
-  }
-
-  // Search box shortcuts
-  @HostListener('window:keydown', ['$event'])
-  handleSearchBoxShortcut(event: KeyboardEvent) {
-    const searchBox = document.getElementById('search-box')
-
-    if (searchBox) {
-      // Ctrl + K
-      if (event.ctrlKey && event.key === 'k') {
-        event.preventDefault(); // Prevent default browser action
-        searchBox.focus();
-      }
-
-      // Esc
-      else if (event.key === 'Escape') {
-        searchBox.blur();
-      }
-    }
   }
 }

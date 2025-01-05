@@ -22,8 +22,6 @@ export class FavoritesComponent {
   favoriteSeiyuusFemale$: Observable<Favorite[] | null>;
   favoriteStudios$: Observable<Favorite[] | null>;
 
-  // All favorites type
-  fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
 
   // Pre-defined color for title and border hover effect
   borderLightColor: string[] = [
@@ -39,11 +37,6 @@ export class FavoritesComponent {
 
 
   constructor(private animeService: AnimeService) {
-    // Loop to get all favorites of each type
-    this.fav_types.forEach(type => {
-      animeService.getFavoritesByType(type);
-    })
-
     // Saving the values in the variables
     this.favoriteTvs$ = this.animeService.favoriteTvs$;
     this.favoriteFilms$ = this.animeService.favoriteFilms$;

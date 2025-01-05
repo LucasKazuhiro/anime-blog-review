@@ -8,6 +8,10 @@
   }
 
   ::selection {
-    @apply text-[#e4e4e4] bg-[#b96f00];
-}
+    @apply text-[#ececec] bg-purple-950;
+  }
+
+  img {
+    @apply select-none
+  }
 }

@@ -143,7 +143,7 @@ export class AnimeService {
   }
 
   public removeReviewSelected() {
-    this.reviewSelected.next(null);
+    this.reviewSelected.next(new Review());
   }
 
 

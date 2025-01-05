@@ -64,8 +64,10 @@
 
     <!-- BLACK SCREEN -->
     <div
-      [ngClass]="isMenuMobileEnabled ? 'z-[22] opacity-95' : 'z-0 opacity-0'"
-      class="absolute h-full w-full bg-black transition-all duration-1000 lg:z-0 lg:opacity-0"
+      [ngClass]="
+        isMenuMobileEnabled ? 'z-[22] opacity-95' : '-z-[10] opacity-0'
+      "
+      class="absolute h-full w-full bg-black transition-all duration-1000 lg:-z-[10] lg:opacity-0"
       (click)="toggleMobileLinkMenu()"
     ></div>
   </div>
@@ -75,25 +77,42 @@
     <img src="/banner.jpg" alt="" class="h-52 w-full object-cover xl:h-full" />
   </div>
 
-  <!-- PAGE INFO -->
-  <div
-    class="m-auto flex w-full flex-col justify-center gap-14 px-6 sm:px-12 lg:px-20 xl:flex-row"
-  >
-    <!-- USER MENU -->
-    <div class="w-full md:m-auto md:max-w-2xl xl:m-0 xl:max-w-sm">
-      <user-menu></user-menu>
+  <div class="flex flex-col gap-28">
+    <!-- PAGE INFO -->
+    <div
+      class="m-auto flex w-full flex-col justify-center gap-14 px-6 sm:px-12 lg:px-20 xl:flex-row"
+    >
+      <!-- USER MENU -->
+      <div class="w-full md:m-auto md:max-w-2xl xl:m-0 xl:max-w-xs">
+        <user-menu></user-menu>
+      </div>
+
+      <!-- NAV MENU & PAGE ACTIVATED -->
+      <div class="flex w-full max-w-5xl flex-col gap-4 pt-12">
+        <div>
+          <!-- NAV MENU -->
+          <nav-menu></nav-menu>
+        </div>
+        <div>
+          <!-- PAGE ACTIVATED -->
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
 
-    <!-- NAV MENU & PAGE ACTIVATED -->
-    <div class="flex w-full max-w-5xl flex-col gap-4 pt-12">
-      <div>
-        <!-- NAV MENU -->
-        <nav-menu></nav-menu>
-      </div>
-      <div>
-        <!-- PAGE ACTIVATED -->
-        <router-outlet></router-outlet>
-      </div>
+    <!-- FOOTER -->
+    <div class="w-full bg-neutral-950 p-4 text-center">
+      <p
+        class="font-facultyGlyphic text-xs tracking-wider text-neutral-100 sm:text-sm"
+      >
+        Designed and Built with 🧡 by
+        <a
+          class="font-facultyGlyphic tracking-normal underline decoration-amber-700 underline-offset-4 duration-300 hover:text-orange-400"
+          href="https://github.com/LucasKazuhiro"
+          target="_blank"
+          >Lucas Kazuhiro</a
+        >
+      </p>
     </div>
   </div>
 </div>

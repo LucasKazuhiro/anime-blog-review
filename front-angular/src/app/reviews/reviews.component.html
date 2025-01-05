@@ -1,63 +1,26 @@
-<div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
+<div class="flex w-full flex-col gap-14 lg:flex-row 2xl:gap-14">
   <div class="w-full">
     <!-- SEARCH BOX -->
-    <div class="relative mb-14 mt-6 w-full">
-      <svg
-        [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
-        class="absolute left-0 top-[5px] w-8"
-        enable-background="new 0 0 100 100"
-        id="Layer_1"
-        version="1.1"
-        viewBox="0 0 100 100"
-        xml:space="preserve"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <path
-          clip-rule="evenodd"
-          d="M64.5,44.6c0-11.6-9.4-20.9-20.9-20.9c-11.6,0-20.9,9.4-20.9,20.9  c0,11.6,9.4,20.9,20.9,20.9C55.1,65.6,64.5,56.2,64.5,44.6z M80,79.3l-1.8,1.8l-19-19c-4.2,3.7-9.6,6-15.7,6  c-13,0-23.5-10.5-23.5-23.5c0-13,10.5-23.5,23.5-23.5c13,0,23.5,10.5,23.5,23.5c0,6-2.3,11.5-6,15.7L80,79.3z"
-          fill-rule="evenodd"
-        />
-      </svg>
-      <input
-        type="text"
-        id="search-box"
-        class="w-full border-b border-b-neutral-800 bg-transparent pb-1 pl-10 pr-9 pt-2 text-lg font-light text-neutral-500 outline-none placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600"
-        placeholder="Type the anime name"
-        [(ngModel)]="searchValue"
-        (input)="this.searchValueUpdate.next('')"
-        (focus)="isSearchFocused = true"
-        (focusout)="isSearchFocused = false"
-      />
-      <svg
-        [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
-        class="absolute right-1 top-2 w-6 hover:fill-pink-700 duration-500"
-        (click)="cleanSearchBox()"
-        viewBox="-3.5 0 19 19"
-      >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"
-          ></path>
-        </g>
-      </svg>
+    <div class="relative mb-8 mt-5 w-full">
+      <search-box
+        type="review"
+        placeholderText="Search for the anime"
+      ></search-box>
     </div>
 
     <!-- REVIEWS -->
     <div class="flex w-full flex-col gap-12">
       <!-- NO ANIMES FOUND -->
-      <div *ngIf="displayReviews?.length === 0" class="w-full text-center">
+      <div
+        *ngIf="firstSearch >= 2 && displayReviews?.length === 0"
+        id="no-results-found"
+        class="w-full text-center"
+      >
         <p class="text-lg">No results found...</p>
       </div>
 
       <!-- LOOP TO DISPLAY REVIEWS BANNER -->
-      <ng-container *ngIf="displayReviews != null; else loadingScreen">
+      <ng-container *ngIf="displayReviews?.length != 0; else loadingScreen">
         <div
           *ngFor="let review of displayReviews"
           class="box group flex cursor-pointer flex-col gap-4"
@@ -108,7 +71,11 @@
 
       <!-- LOADING TEMPLATE -->
       <ng-template #loadingScreen>
-        <div class="mt-16 flex w-full items-center justify-center gap-3">
+        <div
+          *ngIf="firstSearch <= 1"
+          id="loading-screen"
+          class="mt-16 flex w-full items-center justify-center gap-3"
+        >
           <!-- LOADING ICON -->
           <div
             class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
@@ -141,7 +108,7 @@
   </div>
 
   <!-- LINK MENU -->
-  <div class="hidden w-full md:block md:max-w-80 xl:max-w-96">
+  <div class="hidden w-full md:max-w-80 lg:block xl:max-w-96">
     <link-menu></link-menu>
   </div>
 </div>

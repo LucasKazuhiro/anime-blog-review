@@ -15,7 +15,7 @@ import { ReviewInfoComponent } from '../review-info/review-info.component';
 })
 export class ReviewComponent implements OnInit {
 
-  public reviewText: string | null = null;
+  public reviewText: string = "";
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private animeService: AnimeService, private mdService: MarkdownService) { }
 

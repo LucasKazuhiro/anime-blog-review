@@ -1,7 +1,8 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'review-info',
@@ -10,6 +11,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './review-info.component.css'
 })
 export class ReviewInfoComponent implements OnInit, AfterViewChecked {
+  // Injects DestroyRef to automatically handle (destroy) subscriptions
+  destroyRef = inject(DestroyRef);
+
   // Store the review to be displayed
   public reviewInfo: Review = new Review;
 
@@ -36,19 +40,21 @@ export class ReviewInfoComponent implements OnInit, AfterViewChecked {
   };
 
   // Variable to trigger all genres (for test purposes)
-  allGenres = Object.keys(this.genresMap);
+  // allGenres = Object.keys(this.genresMap);
 
   constructor(private animeService: AnimeService) { }
 
   ngOnInit() {
     // Get the saved review to display its data on the website
-    this.animeService.reviewSelected$.subscribe(reviewInfo => {
+    this.animeService.reviewSelected$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(reviewInfo => {
       if (reviewInfo && reviewInfo.id != '') {
         this.reviewInfo = reviewInfo;
       }
       else {
         this.reviewInfo = new Review;
       }
+
+      console.log("aa" + reviewInfo)
     })
   }
 

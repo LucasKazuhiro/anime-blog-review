@@ -15,7 +15,7 @@ export class TooltipComponent {
   public isTooltipActive: boolean = false;
 
   // Fuction to enable or disable the tooltip box
-  showTooltip(isActive: boolean) {
+  public showTooltip(isActive: boolean) {
     this.isTooltipActive = isActive;
   }
 }

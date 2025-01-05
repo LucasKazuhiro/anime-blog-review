@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -7,91 +7,73 @@ import { LinkMenuComponent } from '../link-menu/link-menu.component';
 import { FormsModule } from '@angular/forms';
 import Fuse from 'fuse.js'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, Subject } from 'rxjs';
+import { SearchBoxComponent } from "../ui/search-box/search-box.component";
 
 @Component({
   selector: 'app-reviews',
-  imports: [CommonModule, FormsModule, LinkMenuComponent],
+  imports: [CommonModule, FormsModule, LinkMenuComponent, SearchBoxComponent],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
-export class ReviewsComponent implements AfterViewInit {
-
-  // Variable to change magnifier SVG fill color
-  isSearchFocused = false;
+export class ReviewsComponent implements OnInit, AfterViewInit {
+  // Injects DestroyRef to automatically handle (destroy) subscriptions
+  destroyRef = inject(DestroyRef);
 
   // Fuse.js
-  fuse!: Fuse<Review>;
-  fuseOptions = {
+  private fuseOptions = {
     // minMatchCharLength: 1,
     threshold: 0.7,
     keys: [
       "name"
     ]
   };
+  private fuse: Fuse<Review> = new Fuse([], this.fuseOptions);
 
-  // Search & Reviews
-  searchValue: string = "";
-  allReviews: Review[] = [];
-  displayReviews: Review[] | null = null;
+  // Reviews arrays
+  public allReviews: Review[] = [];
+  public displayReviews: Review[] = [];
 
-  // Debounce search (cooldown)
-  searchValueUpdate = new Subject<string>();
+  // Chenge between "Loading content..." or "No results found..."
+  public firstSearch: number = 0;
 
-  constructor(private router: Router, private animeService: AnimeService) {
+  constructor(private router: Router, private animeService: AnimeService) { }
+
+  ngOnInit() {
     // Get all reviews
-    this.animeService.reviewsBanner$.pipe(takeUntilDestroyed()).subscribe(reviews => {
+    this.animeService.reviewsBanner$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(reviews => {
       if (reviews) {
         this.allReviews = reviews;
-        this.fuse = new Fuse(this.allReviews, this.fuseOptions); // Create Fuse instance
+        this.fuse.setCollection(this.allReviews); // Updates the Fuse data (to use on search)
         this.displayReviews = this.allReviews; // Display all the reviews
       }
     })
 
-    // Debounce search (cooldown)
-    this.searchValueUpdate.pipe(debounceTime(500)).subscribe(() => {
-      this.handleSearch();
+    // Get searched value
+    this.animeService.searchReview$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(searchedReview => {
+      this.handleSearch(searchedReview);
     })
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.startAnimation(0.05, 17, "loading_");
   }
 
   // Search the anime name
-  handleSearch() {
-    if (this.searchValue) {
+  private handleSearch(searchedReview: string) {
+    if (searchedReview) {
       // Return all possible matches
-      this.displayReviews = this.fuse.search(this.searchValue).map(result => result.item);
-      console.log(this.displayReviews)
+      this.displayReviews = this.fuse.search(searchedReview).map(result => result.item);
     }
     else {
       // If input is empty, return all reviews
       this.displayReviews = this.allReviews;
     }
-  }
 
-  // Clean search box
-  cleanSearchBox() {
-    this.searchValue = '';
-    this.searchValueUpdate.next('');
-  }
-
-  // Search box shortcut (ctrl + k)
-  @HostListener('window:keydown', ['$event'])
-  focusSearchBoxShortcut(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key === 'k') {
-      event.preventDefault(); // Prevent default browser action
-
-      const searchBox = document.getElementById('search-box')
-      if (searchBox) {
-        searchBox.focus();
-      }
-    }
+    this.firstSearch++;
   }
 
   // Fuction to animate several items with some delay between each of them
-  startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
+  private startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
     let delay = 0;
     for (let i = 1; i <= loopLimit; i++) {
       // Calculates the delay value
@@ -106,7 +88,7 @@ export class ReviewsComponent implements AfterViewInit {
   }
 
   // Navigate to review page and send the animeId
-  navigateTo(reviewId: String): void {
+  public navigateTo(reviewId: String): void {
     this.router.navigate([`/review/${reviewId}`]);
   }
 }

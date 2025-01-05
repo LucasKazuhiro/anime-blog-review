@@ -4,13 +4,13 @@ import { Review } from '../models/review.model';
 import { HttpClient } from '@angular/common/http';
 import { Favorite } from '../models/favorite.model';
 import { Music } from '../models/music.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimeService {
-  // private backend_domain = "http://127.0.0.1:5000";    // development
-  private backend_domain = "https://korosenku-flask.vercel.app";   // production
+  private backendDomain:string = environment.backendDomain;
 
   constructor(private http: HttpClient) { }
 
@@ -80,11 +80,24 @@ export class AnimeService {
     }
   }
 
+  getCurrentSearchValue(searchType: string): string {
+    switch (searchType) {
+      case "review":
+        return this.searchReview.getValue();
+
+      case "music":
+        return this.searchMusic.getValue();
+
+      default:
+        return "";
+    }
+  }
+
 
 
   getAllReviews() {
     // Get all reviews
-    this.http.get<Review[]>(`${this.backend_domain}/reviews`).subscribe({
+    this.http.get<Review[]>(`${this.backendDomain}/reviews`).subscribe({
       next: (data) => {
         // Create date formatting
         const formatter = new Intl.DateTimeFormat('en-us', {
@@ -126,7 +139,7 @@ export class AnimeService {
 
   getFavoritesByType(type: string) {
     // Get reviews by type
-    this.http.get<Favorite[]>(`${this.backend_domain}/favorites/${type}`).subscribe({
+    this.http.get<Favorite[]>(`${this.backendDomain}/favorites/${type}`).subscribe({
       // Save the reviews according to its type
       next: (data) => {
         switch (type) {
@@ -175,7 +188,7 @@ export class AnimeService {
 
   getMusicsByType(type: string) {
     // Get musics by type
-    this.http.get<Music[]>(`${this.backend_domain}/musics/${type}`).subscribe({
+    this.http.get<Music[]>(`${this.backendDomain}/musics/${type}`).subscribe({
       // Save the musics according to its type
       next: (data) => {
         switch (type) {

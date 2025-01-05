@@ -11,6 +11,7 @@ import { debounceTime, Subject } from 'rxjs';
   styleUrl: './search-box.component.css'
 })
 export class SearchBoxComponent implements OnInit {
+  @Input() type: string = "";
   @Input() placeholderText: string = "Search...";
 
   public searchBox!: HTMLInputElement | null;
@@ -29,12 +30,16 @@ export class SearchBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Get the searched value and displays it in the search box
+    this.searchValue = this.animeService.getCurrentSearchValue(this.type);
+
+    // Get the search box element
     this.searchBox = document.getElementById('search-box') as HTMLInputElement;
   }
 
   // Updates the searched value
   updateSearchValue() {
-    this.animeService.updateSearchValue('review', this.searchValue);
+    this.animeService.updateSearchValue(this.type, this.searchValue);
   }
 
   // Clean search box

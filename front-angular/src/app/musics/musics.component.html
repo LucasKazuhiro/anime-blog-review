@@ -1,11 +1,133 @@
 <div class="flex w-full flex-col gap-14 md:flex-row md:gap-6 2xl:gap-14">
   <div class="w-full">
     <!-- SEARCH BOX -->
-    <div class="relative mb-8 mt-5 w-full">
+    <div class="relative mb-[38px] mt-5 flex h-fit w-full flex-col gap-3">
       <search-box
         type="music"
         placeholderText="Search for the anime"
       ></search-box>
+
+      <!-- MUSICS FILTERS -->
+      <div class="flex h-full items-center justify-between">
+        <!-- MUSICS TYPES -->
+        <div class="flex gap-3">
+          <!-- OPENING FILTER -->
+          <p
+            [ngClass]="{
+              'disabled-filter': searchedMusic === '',
+              'opening-enabled': openingEnabled,
+            }"
+            class="filter-item text-[#3f9624]"
+            (click)="editMusicTypeSearch('opening')"
+          >
+            OPENING
+          </p>
+
+          <!-- ENDING FILTER -->
+          <p
+            [ngClass]="{
+              'disabled-filter': searchedMusic === '',
+              'ending-enabled': endingEnabled,
+            }"
+            class="filter-item text-[#c264da]"
+            (click)="editMusicTypeSearch('ending')"
+          >
+            ENDING
+          </p>
+
+          <!-- OST FILTER -->
+          <p
+            [ngClass]="{
+              'disabled-filter': searchedMusic === '',
+              'ost-enabled': ostEnabled,
+            }"
+            class="filter-item text-[#5180ff]"
+            (click)="editMusicTypeSearch('originalSoundtrack')"
+          >
+            OST
+          </p>
+        </div>
+
+        <!-- SINGLE LIST OR MULITPLE LISTS -->
+        <div class="flex h-full items-center gap-1">
+          <div class="svg-box">
+            <svg
+              class="svg-list-option w-7"
+              viewBox="-0.5 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M6.54504 12.5H21.705"
+                  stroke="#FFFFFF"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M6.54504 6.5H21.705"
+                  stroke="#FFFFFF"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M6.54504 18.5H21.705"
+                  stroke="#FFFFFF"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M3.29504 7.5C3.84733 7.5 4.29504 7.05228 4.29504 6.5C4.29504 5.94772 3.84733 5.5 3.29504 5.5C2.74276 5.5 2.29504 5.94772 2.29504 6.5C2.29504 7.05228 2.74276 7.5 3.29504 7.5Z"
+                  fill="#FFFFFF"
+                ></path>
+                <path
+                  d="M3.29504 13.5C3.84733 13.5 4.29504 13.0523 4.29504 12.5C4.29504 11.9477 3.84733 11.5 3.29504 11.5C2.74276 11.5 2.29504 11.9477 2.29504 12.5C2.29504 13.0523 2.74276 13.5 3.29504 13.5Z"
+                  fill="#FFFFFF"
+                ></path>
+                <path
+                  d="M3.29504 19.5C3.84733 19.5 4.29504 19.0523 4.29504 18.5C4.29504 17.9477 3.84733 17.5 3.29504 17.5C2.74276 17.5 2.29504 17.9477 2.29504 18.5C2.29504 19.0523 2.74276 19.5 3.29504 19.5Z"
+                  fill="#FFFFFF"
+                ></path>
+              </g>
+            </svg>
+          </div>
+
+          <div class="svg-box">
+            <svg
+              class="svg-list-option w-6"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 470.1 470.1"
+              xml:space="preserve"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g>
+                  <path
+                    d="M461.971,113.804h-58.249V50.125c0-4.487-3.633-8.129-8.129-8.129H8.129 C3.642,41.996,0,45.638,0,50.125v298.042c0,4.495,3.642,8.129,8.129,8.129h58.249v63.679c0,4.495,3.642,8.129,8.129,8.129h387.465 c4.495,0,8.129-3.633,8.129-8.129V121.933C470.1,117.438,466.458,113.804,461.971,113.804z M16.257,340.039V58.253h371.208v55.551 H74.515c-4.487,0-8.129,3.642-8.129,8.129v218.106H16.257z M453.843,411.846H82.635v-63.679V130.061h312.95h58.249v281.785H453.843 z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- MUSICS -->
@@ -23,7 +145,7 @@
       </div>
 
       <!-- OPENINGS -->
-      <div *ngIf="displayMusicsOps.length != 0" class="music-box mt-[30px]">
+      <div *ngIf="displayMusicsOps.length != 0" class="music-box">
         <!-- TITLE -->
         <div class="title-box">
           <h1 class="title">Openings</h1>
@@ -105,7 +227,7 @@
               <!-- MUSICS INFO -->
               <div class="name-anime-box">
                 <h1 class="name">{{ music.name }}</h1>
-                 <h3 class="anime hidden sm:block">({{ music.anime }})</h3>
+                <h3 class="anime hidden sm:block">({{ music.anime }})</h3>
               </div>
               <h3 class="anime block sm:hidden">from {{ music.anime }}</h3>
               <h2 class="author">by {{ music.author }}</h2>
@@ -165,7 +287,7 @@
               <!-- MUSICS INFO -->
               <div class="name-anime-box">
                 <h1 class="name">{{ music.name }}</h1>
-                 <h3 class="anime hidden sm:block">({{ music.anime }})</h3>
+                <h3 class="anime hidden sm:block">({{ music.anime }})</h3>
               </div>
               <h3 class="anime block sm:hidden">from {{ music.anime }}</h3>
               <h2 class="author">by {{ music.author }}</h2>

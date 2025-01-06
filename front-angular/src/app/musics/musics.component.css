@@ -3,6 +3,36 @@
 @tailwind utilities;
 
 @layer components {
+  .filter-item {
+    @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-2 text-xs font-light duration-200 hover:scale-110;
+  }
+
+  p.disabled-filter {
+    @apply cursor-not-allowed bg-transparent text-neutral-600 hover:scale-100;
+  }
+
+  .opening-enabled {
+    @apply bg-[#0f2209];
+  }
+
+  .ending-enabled {
+    @apply bg-[#2b0b31];
+  }
+
+  .ost-enabled {
+    @apply bg-[#122141];
+  }
+
+  .svg-box {
+    @apply flex h-[34px] w-[38px] items-center justify-center rounded-sm px-1 duration-200 hover:bg-neutral-800 hover:bg-opacity-50;
+  }
+
+  .svg-list-option,
+  .svg-list-option g,
+  .svg-list-option path {
+    @apply h-full fill-neutral-600 stroke-neutral-600;
+  }
+
   .music-box {
     @apply flex flex-col gap-4;
   }

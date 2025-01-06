@@ -47,6 +47,21 @@ export class MusicsComponent implements OnInit {
   public musicsEdsLoaded = 5;
   public musicsOstsLoaded = 5;
 
+
+  // Varibles to store the searched value and search results
+  public searchedMusic: string = "";
+  public searchedResults: { openings: Music[]; endings: Music[]; osts: Music[] } = {
+    openings: [],
+    endings: [],
+    osts: []
+  };
+
+  // Types selected
+  private typesForSearch: string[] = [];
+  public openingEnabled: boolean = false;
+  public endingEnabled: boolean = false;
+  public ostEnabled: boolean = false;
+
   constructor(private animeService: AnimeService) { }
 
   ngOnInit() {
@@ -78,6 +93,7 @@ export class MusicsComponent implements OnInit {
 
     // Get searched value
     this.animeService.searchMusic$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(searchMusic => {
+      this.searchedMusic = searchMusic;
       this.handleSearch(searchMusic);
     })
   }
@@ -85,7 +101,7 @@ export class MusicsComponent implements OnInit {
   // Search the anime name
   private handleSearch(searchMusic: string) {
     if (searchMusic) {
-      // Return all possible matches
+      // Return all possible matches in a full search
       let searchedMatches = this.fuse.search(searchMusic).map(result => result.item);
 
       // Use reduce to group musics by type
@@ -113,16 +129,86 @@ export class MusicsComponent implements OnInit {
           return acc;
         }, { openings: [], endings: [], osts: [] });
 
-      // Saves the searched data according to its type
-      this.displayMusicsOps = categorizedMusics.openings;
-      this.displayMusicsEds = categorizedMusics.endings;
-      this.displayMusicsOsts = categorizedMusics.osts;
+      this.searchedResults = categorizedMusics;
+      this.updateDisplaySearchResults();
     }
     else {
+      // Reset number of loaded musics of each music type
+      this.musicsOpsLoaded = 5;
+      this.musicsEdsLoaded = 5;
+      this.musicsOstsLoaded = 5;
+
       // If input is empty, return all musics of all types
       this.displayMusicsOps = this.allMusicsOps;
       this.displayMusicsEds = this.allMusicsEds;
       this.displayMusicsOsts = this.allMusicsOsts;
+    }
+  }
+
+  // Filter musics by type (op, ed, ost)
+  editMusicTypeSearch(type: string) {
+    // Block filters if theres no searched value
+    if (this.searchedMusic !== '') {
+      if (!this.typesForSearch.includes(type)) {
+        // Add the type in the array
+        this.typesForSearch.push(type);
+
+        // Change the button color
+        switch (type) {
+          case "opening":
+            this.openingEnabled = true;
+            break;
+
+          case "ending":
+            this.endingEnabled = true;
+            break;
+
+          case "originalSoundtrack":
+            this.ostEnabled = true;
+            break;
+        }
+      }
+      else {
+        // Remote the type from the array
+        this.typesForSearch = this.typesForSearch.filter(item => item !== type);
+
+        // Remove the button color
+        switch (type) {
+          case "opening":
+            this.openingEnabled = false;
+            break;
+
+          case "ending":
+            this.endingEnabled = false;
+            break;
+
+          case "originalSoundtrack":
+            this.ostEnabled = false;
+            break;
+        }
+      }
+
+      this.updateDisplaySearchResults();
+    }
+  }
+
+  private updateDisplaySearchResults() {
+    // Clean all arrays of music
+    this.displayMusicsOps = []
+    this.displayMusicsEds = []
+    this.displayMusicsOsts = []
+
+    if (this.typesForSearch.length !== 0) {
+      // Returns the music types results specified
+      if (this.typesForSearch.includes('opening')) this.displayMusicsOps = this.searchedResults.openings;
+      if (this.typesForSearch.includes('ending')) this.displayMusicsEds = this.searchedResults.endings;
+      if (this.typesForSearch.includes('originalSoundtrack')) this.displayMusicsOsts = this.searchedResults.osts;
+    }
+    else {
+      // Returns all music types results
+      this.displayMusicsOps = this.searchedResults.openings;
+      this.displayMusicsEds = this.searchedResults.endings;
+      this.displayMusicsOsts = this.searchedResults.osts;
     }
   }
 

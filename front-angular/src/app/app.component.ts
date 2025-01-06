@@ -59,8 +59,10 @@ export class AppComponent implements OnInit {
   }
 
   public toggleMobileLinkMenu() {
+    document.getElementById('notification-dot')?.classList.add('opacity-0', 'insivible')
+
     // Opens mobile link menu if its already on top of the page
-    if (window.scrollY < 700) {
+    if (window.scrollY < 1500) {
       this.isMenuMobileEnabled = !this.isMenuMobileEnabled;
     }
     // Scrolls to the top of the page and then opens mobile link menu

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Review } from '../models/review.model';
@@ -34,6 +34,12 @@ export class NavMenuComponent implements OnInit {
       }
     })
   };
+
+  // Browser back button
+  @HostListener('window:popstate', ['$event'])
+  public handleBackButton() {
+    this.goToReviewsPage();
+  }
 
   // Calculates the position of the dot (on hover)
   public calcCenterDot(btn_menu: EventTarget | null) {

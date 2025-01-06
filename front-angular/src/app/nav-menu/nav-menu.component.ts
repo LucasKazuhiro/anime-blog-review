@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Review } from '../models/review.model';
@@ -34,6 +34,12 @@ export class NavMenuComponent implements OnInit {
       }
     })
   };
+
+  // Browser back button
+  @HostListener('window:popstate', ['$event'])
+  public handleBackButton() {
+    this.goToReviewsPage();
+  }
 
   // Calculates the position of the dot (on hover)
   public calcCenterDot(btn_menu: EventTarget | null) {
@@ -86,12 +92,12 @@ export class NavMenuComponent implements OnInit {
   // Handle reviews menu button
   public goToReviewsPage() {
     // If the user is in /review or there is no review selected
-    if (this.router.url.includes('/review/') || this.reviewSelected === null) {
+    if (this.router.url.includes('/review/') || this.reviewSelected.id === '') {
       this.animeService.removeReviewSelected(); // Clean the reviewSelected
       this.router.navigate(['/'])  // Go to home page
     }
     // If there is a review selected
-    else if (this.reviewSelected != null) {
+    else if (this.reviewSelected.id != '') {
       this.router.navigate([`/review/${this.reviewSelected.id}`]) // Go to /review page
     }
   }

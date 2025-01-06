@@ -139,7 +139,7 @@ export class MusicsComponent implements OnInit {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOpsLoaded += 1;
-          }, i * 30)
+          }, i * 30);
         }
         break;
 
@@ -147,7 +147,7 @@ export class MusicsComponent implements OnInit {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsEdsLoaded += 1;
-          }, i * 30)
+          }, i * 30);
         }
         break;
 
@@ -155,7 +155,7 @@ export class MusicsComponent implements OnInit {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOstsLoaded += 1;
-          }, i * 30)
+          }, i * 30);
         }
         break;
     }

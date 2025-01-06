@@ -10,7 +10,8 @@ module.exports = {
       },
       fontFamily: {
         'lexend': ['Lexend', 'sans-serif'],
-        'staatliches': ['Staatliches', 'sans-serif']
+        'staatliches': ['Staatliches', 'sans-serif'],
+        'facultyGlyphic': ['Faculty Glyphic', 'sans-serif']
       }
     },
   },

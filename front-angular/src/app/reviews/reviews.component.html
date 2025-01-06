@@ -9,10 +9,16 @@
     </div>
 
     <!-- REVIEWS -->
-    <div class="flex w-full flex-col gap-12">
-      <!-- NO ANIMES FOUND -->
+    <div
+      class="flex w-full flex-col gap-12"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="1000"
+      (scrolled)="loadMoreReviews()"
+    >
+      <!-- NO RESULTS FOUND -->
       <div
-        *ngIf="firstSearch >= 2 && displayReviews?.length === 0"
+        *ngIf="searchValue !== '' && displayReviews?.length === 0"
         id="no-results-found"
         class="w-full text-center"
       >
@@ -33,8 +39,8 @@
               {{ review.reviewDate }}
             </p>
 
+            <!-- REVIEW TITLE -->
             <div class="flex items-end gap-4">
-              <!-- REVIEW TITLE -->
               <h1
                 class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
               >
@@ -72,7 +78,7 @@
       <!-- LOADING TEMPLATE -->
       <ng-template #loadingScreen>
         <div
-          *ngIf="firstSearch <= 1"
+          *ngIf="searchValue === ''"
           id="loading-screen"
           class="mt-16 flex w-full items-center justify-center gap-3"
         >
@@ -80,6 +86,7 @@
           <div
             class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
           ></div>
+
           <!-- ANIMATION LOADING TEXT -->
           <div class="flex select-none gap-[1px]" aria-hidden="true">
             <p id="loading_1" class="loading">L</p>
@@ -100,6 +107,7 @@
             <p id="loading_16" class="loading">.</p>
             <p id="loading_17" class="loading">.</p>
           </div>
+
           <!-- LOADING MESSAGE FOR SCREEN READER -->
           <span class="sr-only">Loading content...</span>
         </div>

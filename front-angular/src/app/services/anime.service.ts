@@ -1,5 +1,5 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { BehaviorSubject, delay, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, delay, map, Observable, of } from 'rxjs';
 import { Review } from '../models/review.model';
 import { HttpClient } from '@angular/common/http';
 import { Favorite } from '../models/favorite.model';
@@ -18,17 +18,30 @@ export class AnimeService {
   destroyRef = inject(DestroyRef);
 
 
-  // Reviews
+  // INFINITY SCROLL VARIABLES
+  private currentPage = new BehaviorSubject<number>(1);
+  private itemsPerPage = new BehaviorSubject<number>(4);
+
+
+  // SEARCH VARIABLES
+  private searchReview = new BehaviorSubject<string>("");
+  public searchReview$ = this.searchReview.asObservable();
+
+  private searchMusic = new BehaviorSubject<string>("");
+  public searchMusic$ = this.searchMusic.asObservable();
+
+
+  // REVIEWS VARIABLES
   // Create an Observable of type BehaviorSubject that will store the reviews banner array.
-  private reviewsBanner = new BehaviorSubject<Review[] | null>(null);
+  private reviewsBanner = new BehaviorSubject<Review[]>([]);
   // Create an Observable for reviewsBanner (read only)
   public reviewsBanner$ = this.reviewsBanner.asObservable();
 
-  private reviewSelected = new BehaviorSubject<Review | null>(new Review);
+  private reviewSelected = new BehaviorSubject<Review>(new Review);
   public reviewSelected$ = this.reviewSelected.asObservable();
 
 
-  // Favorites
+  // FAVORITES VARIABLES
   private favoriteTvs = new BehaviorSubject<Favorite[]>([]);
   public favoriteTvs$ = this.favoriteTvs.asObservable();
 
@@ -54,7 +67,7 @@ export class AnimeService {
   public favoriteStudios$ = this.favoriteStudios.asObservable();
 
 
-  // Musics
+  // MUSICS VARIABLES
   private musicOps = new BehaviorSubject<Music[]>([]);
   public musicOps$ = this.musicOps.asObservable();
 
@@ -65,17 +78,42 @@ export class AnimeService {
   public musicOsts$ = this.musicOsts.asObservable();
 
 
-  // Search
-  private searchReview = new BehaviorSubject<string>('');
-  public searchReview$ = this.searchReview.asObservable();
-
-  private searchMusic = new BehaviorSubject<string>('');
-  public searchMusic$ = this.searchMusic.asObservable();
-
-
   constructor(private http: HttpClient) { }
 
 
+  // INFINITY SCROLL
+  public loadReviewsOnScroll(): Observable<Review[]> {
+    // Return an Observable
+    return combineLatest([this.reviewsBanner, this.currentPage, this.itemsPerPage]).pipe(
+      map(([reviews, currentPage, itemsPerPage]) => {
+        if (this.searchReview.getValue() === '' || this.searchReview.getValue() === null) {
+          let startIndex = (currentPage - 1) * itemsPerPage; // Index showing where it should start get the data
+          let endIndex = currentPage * itemsPerPage; // Index showing where it should stop (its exclusionary)
+
+          if (!reviews) {
+            console.error('No reviews available in reviewsBanner');
+            return [];
+          }
+          // Get the reviews between startIndex and endIndex (Reviews[])
+          return reviews.slice(startIndex, endIndex);
+        }
+
+        // If there's some written in the search box...
+        return [];
+      })
+    )
+  }
+
+  public updateCurrentPage(currentPage: number) {
+    this.currentPage.next(currentPage);
+  }
+
+  public updateItemsPerPage(itemsPerPage: number) {
+    this.itemsPerPage.next(itemsPerPage);
+  }
+
+
+  // SEARCH
   public updateSearchValue(searchType: string, searchValue: string) {
     switch (searchType) {
       case "review":
@@ -101,6 +139,8 @@ export class AnimeService {
     }
   }
 
+
+  // REVIEWS (or specific review)
   public getAllReviews() {
     // Get all reviews
     this.http.get<Review[]>(`${this.backendDomain}/reviews`).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -125,7 +165,7 @@ export class AnimeService {
       error: (err) => {
         console.error('Error on getAllReviews: ', err); // Error message
       }
-    })
+    });
   }
 
   public getReview(reviewId: string) {
@@ -140,9 +180,11 @@ export class AnimeService {
   }
 
   public removeReviewSelected() {
-    this.reviewSelected.next(null);
+    this.reviewSelected.next(new Review());
   }
 
+
+  // FAVORITES
   public getFavoritesByType(type: string) {
     // Get reviews by type
     this.http.get<Favorite[]>(`${this.backendDomain}/favorites/${type}`).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -189,9 +231,11 @@ export class AnimeService {
       error: (err) => {
         console.error(`Error on getFavoritesByType ${type}: `, err); // Error message
       }
-    })
+    });
   }
 
+
+  // MUSICS
   public getMusicsByType(type: string) {
     // Get musics by type
     this.http.get<Music[]>(`${this.backendDomain}/musics/${type}`).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -217,6 +261,6 @@ export class AnimeService {
       error: (err) => {
         console.error(`Error on getMusicsByType ${type}: `, err); // Error message
       }
-    })
+    });
   }
 }

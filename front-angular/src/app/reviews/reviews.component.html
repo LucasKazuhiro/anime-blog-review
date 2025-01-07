@@ -10,7 +10,7 @@
 
     <!-- REVIEWS -->
     <div
-      class="flex w-full flex-col gap-12"
+      class="flex w-full flex-col gap-12 pt-[46px]"
       infiniteScroll
       [infiniteScrollDistance]="2"
       [infiniteScrollThrottle]="1000"
@@ -25,8 +25,63 @@
         <p class="text-lg">No results found...</p>
       </div>
 
+      <!-- LOADING -->
+      <div
+        *ngIf="searchValue === '' && displayReviews.length === 0"
+        id="loading-screen"
+        class="flex w-full flex-col items-center justify-center gap-20"
+      >
+        <div class="flex w-full animate-pulse flex-col">
+          <div class="loading-items mb-2 h-[10px] w-[33%]"></div>
+          <div class="mb-4 flex flex-col gap-2">
+            <div class="loading-items h-4 w-full"></div>
+            <div class="loading-items h-4 w-[66%]"></div>
+          </div>
+          <div
+            class="loading-items mb-4 aspect-video h-[320px] max-h-48 w-full sm:max-h-72 md:h-[400px] md:max-h-full lg:h-[300px]"
+          ></div>
+          <div class="flex flex-col gap-2">
+            <div class="loading-items h-3 w-full"></div>
+            <div class="loading-items h-3 w-[90%]"></div>
+            <div class="loading-items h-3 w-[45%]"></div>
+          </div>
+        </div>
+
+        <div class="flex w-full animate-pulse flex-col">
+          <div class="loading-items mb-2 h-[10px] w-[33%]"></div>
+          <div class="mb-4 flex flex-col gap-2">
+            <div class="loading-items h-4 w-full"></div>
+            <div class="loading-items h-4 w-[66%]"></div>
+          </div>
+          <div
+            class="loading-items mb-4 aspect-video h-[320px] max-h-48 w-full sm:max-h-72 md:h-[400px] md:max-h-full lg:h-[300px]"
+          ></div>
+          <div class="flex flex-col gap-2">
+            <div class="loading-items h-3 w-full"></div>
+            <div class="loading-items h-3 w-[90%]"></div>
+            <div class="loading-items h-3 w-[45%]"></div>
+          </div>
+        </div>
+
+        <div class="flex w-full animate-pulse flex-col">
+          <div class="loading-items mb-2 h-[10px] w-[33%]"></div>
+          <div class="mb-4 flex flex-col gap-2">
+            <div class="loading-items h-4 w-full"></div>
+            <div class="loading-items h-4 w-[66%]"></div>
+          </div>
+          <div
+            class="loading-items mb-4 aspect-video h-[320px] max-h-48 w-full sm:max-h-72 md:h-[400px] md:max-h-full lg:h-[300px]"
+          ></div>
+          <div class="flex flex-col gap-2">
+            <div class="loading-items h-3 w-full"></div>
+            <div class="loading-items h-3 w-[90%]"></div>
+            <div class="loading-items h-3 w-[45%]"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- LOOP TO DISPLAY REVIEWS BANNER -->
-      <ng-container *ngIf="displayReviews?.length != 0; else loadingScreen">
+      <ng-container *ngIf="displayReviews?.length != 0">
         <div
           *ngFor="let review of displayReviews"
           class="box group flex cursor-pointer flex-col gap-4"
@@ -74,44 +129,6 @@
           </p>
         </div>
       </ng-container>
-
-      <!-- LOADING TEMPLATE -->
-      <ng-template #loadingScreen>
-        <div
-          *ngIf="searchValue === ''"
-          id="loading-screen"
-          class="mt-16 flex w-full items-center justify-center gap-3"
-        >
-          <!-- LOADING ICON -->
-          <div
-            class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
-          ></div>
-
-          <!-- ANIMATION LOADING TEXT -->
-          <div class="flex select-none gap-[1px]" aria-hidden="true">
-            <p id="loading_1" class="loading">L</p>
-            <p id="loading_2" class="loading">o</p>
-            <p id="loading_3" class="loading">a</p>
-            <p id="loading_4" class="loading">d</p>
-            <p id="loading_5" class="loading">i</p>
-            <p id="loading_6" class="loading">n</p>
-            <p id="loading_7" class="loading">g&nbsp;</p>
-            <p id="loading_8" class="loading">c</p>
-            <p id="loading_9" class="loading">o</p>
-            <p id="loading_10" class="loading">n</p>
-            <p id="loading_11" class="loading">t</p>
-            <p id="loading_12" class="loading">e</p>
-            <p id="loading_13" class="loading">n</p>
-            <p id="loading_14" class="loading">t</p>
-            <p id="loading_15" class="loading">.</p>
-            <p id="loading_16" class="loading">.</p>
-            <p id="loading_17" class="loading">.</p>
-          </div>
-
-          <!-- LOADING MESSAGE FOR SCREEN READER -->
-          <span class="sr-only">Loading content...</span>
-        </div>
-      </ng-template>
     </div>
   </div>
 

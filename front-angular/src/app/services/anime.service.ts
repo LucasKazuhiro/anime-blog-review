@@ -1,5 +1,5 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, delay, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, delay, map, Observable } from 'rxjs';
 import { Review } from '../models/review.model';
 import { HttpClient } from '@angular/common/http';
 import { Favorite } from '../models/favorite.model';
@@ -100,7 +100,8 @@ export class AnimeService {
 
         // If there's some written in the search box...
         return [];
-      })
+      }),
+       delay(5000)
     )
   }
 

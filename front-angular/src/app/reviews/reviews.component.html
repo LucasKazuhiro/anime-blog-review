@@ -10,10 +10,10 @@
 
     <!-- REVIEWS -->
     <div
-      class="flex w-full flex-col gap-12 pt-[46px]"
+      class="flex w-full flex-col gap-12 pt-6"
       infiniteScroll
       [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="1000"
+      [infiniteScrollThrottle]="500"
       (scrolled)="loadMoreReviews()"
     >
       <!-- NO RESULTS FOUND -->
@@ -81,7 +81,10 @@
       </div>
 
       <!-- LOOP TO DISPLAY REVIEWS BANNER -->
-      <ng-container *ngIf="displayReviews?.length != 0">
+      <div
+        *ngIf="displayReviews?.length != 0"
+        class="flex w-full flex-col items-center justify-center gap-14"
+      >
         <div
           *ngFor="let review of displayReviews"
           class="box group flex cursor-pointer flex-col gap-4"
@@ -128,7 +131,18 @@
             {{ review.intro }}
           </p>
         </div>
-      </ng-container>
+      </div>
+
+      <!-- LOADING NEW REVIEWS -->
+      <div
+        *ngIf="displayReviews?.length != 0"
+        class="flex w-full justify-center"
+        [ngClass]="{ invisible: !isNewReviewsLoading }"
+      >
+        <div
+          class="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-purple-700"
+        ></div>
+      </div>
     </div>
   </div>
 

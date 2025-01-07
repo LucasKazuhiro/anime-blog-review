@@ -14,23 +14,8 @@
     transform: translateY(-5px);
   }
 
-  /* LOADING ANIMATION */
-  @keyframes loading-text {
-    0% {
-      transform: translateY(-5px);
-    }
-
-    50% {
-      transform: translateY(5px);
-    }
-
-    100% {
-      transform: translateY(-5px);
-    }
-  }
-
   .box {
-    animation: anime-banner-fade-in 1s ease-out forwards;
+    animation: anime-banner-fade-in 0.7s ease-out forwards;
   }
 
   @keyframes anime-banner-fade-in {

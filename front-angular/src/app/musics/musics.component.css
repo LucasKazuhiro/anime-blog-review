@@ -4,7 +4,7 @@
 
 @layer components {
   .filter-item {
-    @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-2 text-xs font-light duration-200 hover:scale-110;
+    @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-[6px] text-xs font-light duration-200 hover:scale-110 sm:p-2;
   }
 
   p.disabled-filter {
@@ -65,7 +65,7 @@
 
   /* Music card */
   .music {
-    @apply flex cursor-pointer flex-col gap-[6px] px-5 py-4 duration-100 hover:bg-neutral-900 sm:gap-0;
+    @apply flex cursor-pointer flex-col gap-0 p-3 sm:px-5 sm:py-4 duration-100 hover:bg-neutral-900;
     animation: genre-fade-in 0.1s forwards ease-out;
   }
 

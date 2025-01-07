@@ -7,9 +7,8 @@
     @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-2 text-xs font-light duration-200 hover:scale-110;
   }
 
-  p.disabled-filter,
-  .svg-box.disabled-filter {
-    @apply cursor-not-allowed bg-transparent fill-neutral-800 stroke-red-600 text-neutral-600 hover:scale-100 hover:bg-transparent;
+  p.disabled-filter {
+    @apply cursor-not-allowed bg-transparent text-neutral-600 hover:scale-100 hover:bg-transparent;
   }
 
   .opening-enabled {
@@ -28,10 +27,13 @@
     @apply flex h-[34px] w-[38px] cursor-pointer items-center justify-center rounded-sm px-1 duration-200;
   }
 
-  .svg-list-option,
-  .svg-list-option g,
-  .svg-list-option path {
-    @apply h-full fill-neutral-600 stroke-neutral-600;
+  .svg-list-option {
+    @apply fill-neutral-600 stroke-neutral-600 duration-200 hover:scale-110;
+  }
+
+  div.disabled-filter,
+  div.disabled-filter svg {
+    @apply bg-transparent fill-neutral-800 stroke-neutral-800 hover:scale-100;
   }
 
   .list-block-filter-enabled {

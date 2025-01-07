@@ -158,7 +158,7 @@ export class MusicsComponent implements OnInit {
   // Filter musics by type (op, ed, ost)
   public editMusicTypeSearch(typeMusic: string) {
     // Block filters if theres no searched value
-    if (this.searchedMusic !== '') {
+    if (this.searchedMusic !== '' && this.blockEnabled) {
       if (!this.typesForSearch.includes(typeMusic)) {
         // Add the type in the array
         this.typesForSearch.push(typeMusic);

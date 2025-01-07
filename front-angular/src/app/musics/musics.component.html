@@ -14,7 +14,7 @@
           <!-- OPENING FILTER -->
           <p
             [ngClass]="{
-              'disabled-filter': searchedMusic === '',
+              'disabled-filter': searchedMusic === '' || this.listEnabled,
               'opening-enabled': openingEnabled,
             }"
             class="filter-item text-[#3f9624]"
@@ -26,7 +26,7 @@
           <!-- ENDING FILTER -->
           <p
             [ngClass]="{
-              'disabled-filter': searchedMusic === '',
+              'disabled-filter': searchedMusic === '' || this.listEnabled,
               'ending-enabled': endingEnabled,
             }"
             class="filter-item text-[#c264da]"
@@ -38,7 +38,7 @@
           <!-- OST FILTER -->
           <p
             [ngClass]="{
-              'disabled-filter': searchedMusic === '',
+              'disabled-filter': searchedMusic === '' || this.listEnabled,
               'ost-enabled': ostEnabled,
             }"
             class="filter-item text-[#5180ff]"
@@ -50,7 +50,14 @@
 
         <!-- SINGLE LIST OR MULITPLE LISTS -->
         <div class="flex h-full items-center gap-1">
-          <div class="svg-box">
+          <div
+            class="svg-box"
+            [ngClass]="{
+              'disabled-filter': searchedMusic === '',
+              'list-block-filter-enabled': listEnabled,
+            }"
+            (click)="editDisplayStyle()"
+          >
             <svg
               class="svg-list-option w-7"
               viewBox="-0.5 0 25 25"
@@ -101,7 +108,14 @@
             </svg>
           </div>
 
-          <div class="svg-box">
+          <div
+            class="svg-box"
+            [ngClass]="{
+              'disabled-filter': searchedMusic === '',
+              'list-block-filter-enabled': blockEnabled,
+            }"
+            (click)="editDisplayStyle()"
+          >
             <svg
               class="svg-list-option w-6"
               version="1.1"
@@ -137,11 +151,72 @@
         *ngIf="
           displayMusicsOps.length === 0 &&
           displayMusicsEds.length === 0 &&
-          displayMusicsOsts.length === 0
+          displayMusicsOsts.length === 0 &&
+          allMusics.length === 0
         "
         class="w-full text-center"
       >
         <p class="text-lg">No results found...</p>
+      </div>
+
+      <!-- ALL MUSICS (LIST) -->
+      <div *ngIf="allMusics.length != 0 && this.listEnabled" class="music-box">
+        <!-- TITLE -->
+        <div class="title-box">
+          <h1 class="title">List of results</h1>
+          <h6 class="line"></h6>
+        </div>
+        <div>
+          <!-- LOOP TO DISPLAY MUSICS -->
+          <div
+            *ngFor="
+              let music of allMusics | slice: 0 : allMusicsLoaded;
+              let last = last
+            "
+            class="music-box-2"
+          >
+            <div
+              class="music group"
+              (click)="navigateToMusicPage(music.name, music.author)"
+            >
+              <!-- MUSICS INFO -->
+              <div class="name-anime-box">
+                <h1 class="name">{{ music.name }}</h1>
+                <h3 class="anime hidden sm:block">({{ music.anime }})</h3>
+              </div>
+              <h3 class="anime block sm:hidden">from {{ music.anime }}</h3>
+              <h2 class="author">by {{ music.author }}</h2>
+            </div>
+
+            <!-- SHOW MORE BUTTON -->
+            <button
+              *ngIf="last && allMusicsLoaded < allMusics.length"
+              (click)="showMore('all')"
+              class="btn-show-more"
+            >
+              Show more musics!
+
+              <svg
+                class="arrow-down"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M13.708 6.29A1.006 1.006 0 0 0 13 6H5.005A1 1 0 0 0 4.3 7.71l4 4a1.013 1.013 0 0 0 1.42 0l4-4a1.01 1.01 0 0 0-.013-1.42z"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- OPENINGS -->

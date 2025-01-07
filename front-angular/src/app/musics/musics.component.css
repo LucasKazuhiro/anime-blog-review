@@ -7,8 +7,9 @@
     @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-2 text-xs font-light duration-200 hover:scale-110;
   }
 
-  p.disabled-filter {
-    @apply cursor-not-allowed bg-transparent text-neutral-600 hover:scale-100;
+  p.disabled-filter,
+  .svg-box.disabled-filter {
+    @apply cursor-not-allowed bg-transparent fill-neutral-800 stroke-red-600 text-neutral-600 hover:scale-100 hover:bg-transparent;
   }
 
   .opening-enabled {
@@ -24,13 +25,17 @@
   }
 
   .svg-box {
-    @apply flex h-[34px] w-[38px] items-center justify-center rounded-sm px-1 duration-200 hover:bg-neutral-800 hover:bg-opacity-50;
+    @apply flex h-[34px] w-[38px] cursor-pointer items-center justify-center rounded-sm px-1 duration-200;
   }
 
   .svg-list-option,
   .svg-list-option g,
   .svg-list-option path {
     @apply h-full fill-neutral-600 stroke-neutral-600;
+  }
+
+  .list-block-filter-enabled {
+    @apply bg-neutral-800 bg-opacity-50;
   }
 
   .music-box {

@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "dist/*",
-      "use": "@vercel/static"
+      "src": "src/**/*",
+      "use": "@vercel/webpack"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "dist/front-angular/browser/index.html"
     }
   ],
   "git": {

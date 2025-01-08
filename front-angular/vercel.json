@@ -1,12 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/front-angular",
-  "framework": "angular",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ],
   "git": {
     "deploymentEnabled": {
       "main": false,

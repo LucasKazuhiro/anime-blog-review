@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TooltipComponent } from '../ui/tooltip/tooltip.component';
 
 @Component({
@@ -7,4 +7,16 @@ import { TooltipComponent } from '../ui/tooltip/tooltip.component';
     templateUrl: './link-menu.component.html',
     styleUrl: './link-menu.component.css'
 })
-export class LinkMenuComponent { }
+export class LinkMenuComponent {
+    // Get the IDs via input
+    @Input() idRedactor: string = ""
+    @Input() idPodcasts: string = "";
+    @Input() idLinks: string = "";
+    @Input() idFlowcharts: string = "";
+
+    // Get the Positions via input
+    @Input() positionRedactor: string = ""
+    @Input() positionPodcasts: string = "";
+    @Input() positionLinks: string = "";
+    @Input() positionFlowcharts: string = "";
+}

@@ -4,12 +4,13 @@
     <!-- TITLE -->
     <div class="title-box">
       <div class="title-box-2">
-        <h3>REDACTOR</h3>
-        <!-- TOOLTIP -->
-        <tooltip
-          [x]="4"
-          [text]="'Some of my profiles on other platforms'"
-        ></tooltip>
+          <h3>REDACTOR</h3>
+          <!-- TOOLTIP -->
+          <tooltip
+            [id]="idRedactor"
+            [text]="'Some of my profiles on other platforms'"
+            [position]="positionRedactor"
+          ></tooltip>
       </div>
       <!-- SVG ICON -->
       <svg
@@ -73,10 +74,11 @@
     <div class="title-box">
       <div class="title-box-2">
         <h3>PODCASTS</h3>
-         <!-- TOOLTIP -->
+        <!-- TOOLTIP -->
         <tooltip
-          [x]="3"
+          [id]="idPodcasts"
           [text]="'Good podcasts that I recommend.'"
+          [position]="positionPodcasts"
         ></tooltip>
       </div>
       <!-- SVG ICON -->
@@ -142,8 +144,11 @@
         <h3>LINKS</h3>
         <!-- TOOLTIP -->
         <tooltip
-          [x]="-42"
-          [text]="'Some useful links related to Anime'"
+          [id]="idLinks"
+          [text]="
+            'Flowcharts that recommend animes based on personal preferences.'
+          "
+          [position]="positionLinks"
         ></tooltip>
       </div>
       <!-- SVG ICON -->
@@ -164,7 +169,11 @@
     <span class="link-line"></span>
     <a href="https://myanimelist.net/anime/season" target="_blank">
       <div class="info-box">
-        <img src="/logos-pfps/mal.png" alt="MyAnimeList logo" class="link-img" />
+        <img
+          src="/logos-pfps/mal.png"
+          alt="MyAnimeList logo"
+          class="link-img"
+        />
         <div class="info">
           <h4>Seasonal Animes</h4>
           <h5>
@@ -191,7 +200,11 @@
     <span class="link-line"></span>
     <a href="https://myanimelist.net/topanime.php" target="_blank">
       <div class="info-box">
-        <img src="/logos-pfps/mal.png" alt="MyAnimeList logo" class="link-img" />
+        <img
+          src="/logos-pfps/mal.png"
+          alt="MyAnimeList logo"
+          class="link-img"
+        />
         <div class="info">
           <h4>Top Animes</h4>
           <h5>
@@ -218,7 +231,11 @@
     <span class="link-line"></span>
     <a href="https://myanimelist.net/watch/promotion" target="_blank">
       <div class="info-box">
-        <img src="/logos-pfps/mal.png" alt="MyAnimeList logo" class="link-img" />
+        <img
+          src="/logos-pfps/mal.png"
+          alt="MyAnimeList logo"
+          class="link-img"
+        />
         <div class="info">
           <h4>Latest Trailers</h4>
           <h5>
@@ -284,10 +301,11 @@
         <h3>FLOWCHARTS</h3>
         <!-- TOOLTIP -->
         <tooltip
-          [x]="21"
+          [id]="idFlowcharts"
           [text]="
             'Flowcharts that recommend animes based on personal preferences.'
           "
+          [position]="positionFlowcharts"
         ></tooltip>
       </div>
       <!-- SVG ICON -->

@@ -18,7 +18,7 @@
   }
 
   .title-box-2 {
-    @apply relative flex items-center;
+    @apply relative flex w-full items-center gap-[6px];
   }
 
   .title-box h3 {
@@ -54,6 +54,7 @@
   .external-website {
     @apply inline-block h-fit w-4 fill-gray-600;
   }
+
   .info h5 {
     @apply flex items-center gap-[2px] text-sm font-normal text-gray-500;
   }

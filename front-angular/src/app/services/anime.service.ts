@@ -100,8 +100,7 @@ export class AnimeService {
 
         // If there's some written in the search box...
         return [];
-      }),
-       delay(5000)
+      })
     )
   }
 

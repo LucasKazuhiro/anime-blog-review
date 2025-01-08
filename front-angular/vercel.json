@@ -1,10 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "src/**/*",
-      "use": "@vercel/webpack"
-    }
-  ],
   "routes": [
     {
       "src": "/(.*)",

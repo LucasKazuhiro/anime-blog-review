@@ -249,7 +249,16 @@
   </div>
 
   <!-- LINK MENU -->
-  <div class="w-full md:max-w-80 xl:max-w-96">
-    <link-menu></link-menu>
+  <div class="hidden w-full md:max-w-80 lg:block xl:max-w-96">
+    <link-menu
+      [idRedactor]="'tooltip-redactor'"
+      [idPodcasts]="'tooltip-podcasts'"
+      [idLinks]="'tooltip-links'"
+      [idFlowcharts]="'tooltip-flowcharts'"
+      [positionRedactor]="'center'"
+      [positionPodcasts]="'center'"
+      [positionLinks]="'center'"
+      [positionFlowcharts]="'center'"
+    ></link-menu>
   </div>
 </div>

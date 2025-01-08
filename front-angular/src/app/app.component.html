@@ -57,9 +57,18 @@
         isMenuMobileEnabled ? 'visible left-2' : 'invisible -left-[420px]'
       "
       id="link-menu-mobile"
-      class="absolute top-[60px] z-[25] w-[95%] max-w-96 duration-1000"
+      class="absolute top-[60px] z-[30] w-[95%] max-w-96 duration-1000"
     >
-      <link-menu></link-menu>
+      <link-menu
+        [idRedactor]="'tooltip-redactor-mobile'"
+        [idPodcasts]="'tooltip-podcasts-mobile'"
+        [idLinks]="'tooltip-links-mobile'"
+        [idFlowcharts]="'tooltip-flowcharts-mobile'"
+        [positionRedactor]="'center'"
+        [positionPodcasts]="'center'"
+        [positionLinks]="'left'"
+        [positionFlowcharts]="'center'"
+      ></link-menu>
     </div>
 
     <!-- BLACK SCREEN -->

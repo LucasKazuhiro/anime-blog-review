@@ -1,38 +1,39 @@
-<!-- TOOLTIP -->
-<div
-  [ngStyle]="{ 'left.%': x }"
-  [ngClass]="{
-    'opacity-100': isTooltipActive,
-    'visible': isTooltipActive,
-    '-translate-y-11': isTooltipActive,
-  }"
-  class="absolute bottom-0 opacity-0 duration-200 ease-in-out"
->
-  <!-- TEXT -->
+<div class="relative">
+  <!-- TOOLTIP -->
   <div
-    class="relative z-[5] block w-56 rounded-lg border-[1.5px] border-zinc-800 bg-zinc-900 p-3 text-center text-sm text-zinc-500"
+    [id]="id"
+    [ngClass]="{
+      'opacity-0': !isTooltipActive,
+      '-translate-y-10': isTooltipActive,
+    }"
+    class="absolute bottom-0 duration-200 ease-in-out"
   >
-    {{ text }}
+    <!-- TEXT -->
+    <div
+      class="relative z-[5] block w-56 rounded-lg border-[1.5px] border-zinc-800 bg-zinc-900 p-3 text-center text-sm text-zinc-500"
+    >
+      {{ text }}
+    </div>
+    <!-- ARROW DOWN OF THE BOX -->
+    <p
+      class="absolute bottom-[0%] z-10 h-4 w-4 -translate-x-1/2 translate-y-[50%] rotate-45 transform rounded-br-sm border-b-[1.5px] border-r-[1.5px] border-zinc-800 bg-zinc-900"
+    ></p>
   </div>
-  <!-- ARROW DOWN OF THE BOX -->
-  <p
-    class="absolute bottom-[0%] left-[50%] z-10 h-4 w-4 -translate-x-1/2 translate-y-[7.7px] rotate-45 transform rounded-br-sm border-b-[1.5px] border-r-[1.5px] border-zinc-800 bg-zinc-900"
-  ></p>
-</div>
 
-<!-- SVG ICON (hover here triggers tooltip div) -->
-<svg
-  class="info-icon relative z-20 ml-[6px] h-fit w-5 fill-neutral-700"
-  (mouseenter)="showTooltip(true)"
-  (mouseleave)="showTooltip(false)"
-  xmlns="http://www.w3.org/2000/svg"
-  x="0px"
-  y="0px"
-  width="100"
-  height="100"
-  viewBox="0 0 24 24"
->
-  <path
-    d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"
-  ></path>
-</svg>
+  <!-- SVG ICON (hover here triggers tooltip div) -->
+  <svg
+    class="info-icon relative z-20 h-fit w-5 fill-neutral-700"
+    (mouseenter)="showTooltip(true)"
+    (mouseleave)="showTooltip(false)"
+    xmlns="http://www.w3.org/2000/svg"
+    x="0px"
+    y="0px"
+    width="100"
+    height="100"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"
+    ></path>
+  </svg>
+</div>

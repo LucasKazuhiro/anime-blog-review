@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  .loading-items {
+    @apply rounded-xl bg-gray-600 opacity-20;
+  }
 
   /* LOADING TEXT */
   .loading {
@@ -11,23 +14,8 @@
     transform: translateY(-5px);
   }
 
-  /* LOADING ANIMATION */
-  @keyframes loading-text {
-    0% {
-      transform: translateY(-5px);
-    }
-
-    50% {
-      transform: translateY(5px);
-    }
-
-    100% {
-      transform: translateY(-5px);
-    }
-  }
-
-  .box{
-    animation: anime-banner-fade-in 1s ease-out forwards;
+  .box {
+    animation: anime-banner-fade-in 0.7s ease-out forwards;
   }
 
   @keyframes anime-banner-fade-in {

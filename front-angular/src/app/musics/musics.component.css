@@ -3,6 +3,43 @@
 @tailwind utilities;
 
 @layer components {
+  .filter-item {
+    @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-[6px] text-xs font-light duration-200 hover:scale-110 sm:p-2;
+  }
+
+  p.disabled-filter {
+    @apply cursor-not-allowed bg-transparent text-neutral-600 hover:scale-100 hover:bg-transparent;
+  }
+
+  .opening-enabled {
+    @apply bg-[#0f2209];
+  }
+
+  .ending-enabled {
+    @apply bg-[#2b0b31];
+  }
+
+  .ost-enabled {
+    @apply bg-[#122141];
+  }
+
+  .svg-box {
+    @apply flex h-[34px] w-[38px] cursor-pointer items-center justify-center rounded-sm px-1 duration-200;
+  }
+
+  .svg-list-option {
+    @apply fill-neutral-600 stroke-neutral-600 duration-200 hover:scale-110;
+  }
+
+  div.disabled-filter,
+  div.disabled-filter svg {
+    @apply bg-transparent fill-neutral-800 stroke-neutral-800 hover:scale-100;
+  }
+
+  .list-block-filter-enabled {
+    @apply bg-neutral-800 bg-opacity-50;
+  }
+
   .music-box {
     @apply flex flex-col gap-4;
   }
@@ -23,12 +60,12 @@
 
   .music-box-2 {
     @apply first:rounded-t-lg last:rounded-b-lg odd:bg-[#1d1d1d] even:bg-[#222222];
-    animation: genre-fade-in .4s forwards ease-out;
+    animation: genre-fade-in 0.4s forwards ease-out;
   }
 
   /* Music card */
   .music {
-    @apply cursor-pointer px-5 py-4 duration-100 hover:bg-neutral-900;
+    @apply flex cursor-pointer flex-col gap-0 p-3 sm:px-5 sm:py-4 duration-100 hover:bg-neutral-900;
     animation: genre-fade-in 0.1s forwards ease-out;
   }
 

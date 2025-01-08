@@ -41,11 +41,31 @@ export class MusicsComponent implements OnInit {
   public allMusicsOsts: Music[] = [];
   public displayMusicsOsts: Music[] = [];
 
+  public allMusics: Music[] = [];
+
 
   // Variable to store the number of musics loaded in the screen
   public musicsOpsLoaded = 5;
   public musicsEdsLoaded = 5;
   public musicsOstsLoaded = 5;
+  public allMusicsLoaded = 10;
+
+
+  // Varibles to store the searched value and search results
+  public searchedMusic: string = "";
+  public searchedResults: { openings: Music[]; endings: Music[]; osts: Music[] } = {
+    openings: [],
+    endings: [],
+    osts: []
+  };
+
+  // Filters selected
+  private typesForSearch: string[] = [];
+  public openingEnabled: boolean = false;
+  public endingEnabled: boolean = false;
+  public ostEnabled: boolean = false;
+  public listEnabled: boolean = false;
+  public blockEnabled: boolean = true;
 
   constructor(private animeService: AnimeService) { }
 
@@ -78,6 +98,7 @@ export class MusicsComponent implements OnInit {
 
     // Get searched value
     this.animeService.searchMusic$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(searchMusic => {
+      this.searchedMusic = searchMusic;
       this.handleSearch(searchMusic);
     })
   }
@@ -85,8 +106,11 @@ export class MusicsComponent implements OnInit {
   // Search the anime name
   private handleSearch(searchMusic: string) {
     if (searchMusic) {
-      // Return all possible matches
+      // Return all possible matches in a full search
       let searchedMatches = this.fuse.search(searchMusic).map(result => result.item);
+
+      // Variable to displays the musics in a list format
+      this.allMusics = searchedMatches;
 
       // Use reduce to group musics by type
       const categorizedMusics = searchedMatches.reduce<{
@@ -113,16 +137,101 @@ export class MusicsComponent implements OnInit {
           return acc;
         }, { openings: [], endings: [], osts: [] });
 
-      // Saves the searched data according to its type
-      this.displayMusicsOps = categorizedMusics.openings;
-      this.displayMusicsEds = categorizedMusics.endings;
-      this.displayMusicsOsts = categorizedMusics.osts;
+      this.searchedResults = categorizedMusics;
+      this.updateDisplaySearchResults();
     }
     else {
+      // Reset number of loaded musics of each music type
+      this.musicsOpsLoaded = 5;
+      this.musicsEdsLoaded = 5;
+      this.musicsOstsLoaded = 5;
+      this.allMusicsLoaded = 10;
+
       // If input is empty, return all musics of all types
       this.displayMusicsOps = this.allMusicsOps;
       this.displayMusicsEds = this.allMusicsEds;
       this.displayMusicsOsts = this.allMusicsOsts;
+      this.allMusics = [];
+    }
+  }
+
+  // Filter musics by type (op, ed, ost)
+  public editMusicTypeSearch(typeMusic: string) {
+    // Block filters if theres no searched value
+    if (this.searchedMusic !== '' && this.blockEnabled) {
+      if (!this.typesForSearch.includes(typeMusic)) {
+        // Add the type in the array
+        this.typesForSearch.push(typeMusic);
+
+        // Change the button color
+        switch (typeMusic) {
+          case "opening":
+            this.openingEnabled = true;
+            break;
+
+          case "ending":
+            this.endingEnabled = true;
+            break;
+
+          case "originalSoundtrack":
+            this.ostEnabled = true;
+            break;
+        }
+      }
+      else {
+        // Remote the type from the array
+        this.typesForSearch = this.typesForSearch.filter(item => item !== typeMusic);
+
+        // Remove the button color
+        switch (typeMusic) {
+          case "opening":
+            this.openingEnabled = false;
+            break;
+
+          case "ending":
+            this.endingEnabled = false;
+            break;
+
+          case "originalSoundtrack":
+            this.ostEnabled = false;
+            break;
+        }
+      }
+
+      this.updateDisplaySearchResults();
+    }
+  }
+
+  public editDisplayStyle() {
+    if (this.searchedMusic !== '') {
+      this.blockEnabled = !this.blockEnabled;
+      this.listEnabled = !this.listEnabled;
+      this.updateDisplaySearchResults();
+    }
+  }
+
+  private updateDisplaySearchResults() {
+    // Clean all arrays of music
+    this.displayMusicsOps = []
+    this.displayMusicsEds = []
+    this.displayMusicsOsts = []
+
+    if (this.blockEnabled) {
+      if (this.typesForSearch.length !== 0) {
+        // Returns the music types results specified
+        if (this.typesForSearch.includes('opening')) this.displayMusicsOps = this.searchedResults.openings;
+        if (this.typesForSearch.includes('ending')) this.displayMusicsEds = this.searchedResults.endings;
+        if (this.typesForSearch.includes('originalSoundtrack')) this.displayMusicsOsts = this.searchedResults.osts;
+      }
+      else {
+        // Returns all music types results
+        this.displayMusicsOps = this.searchedResults.openings;
+        this.displayMusicsEds = this.searchedResults.endings;
+        this.displayMusicsOsts = this.searchedResults.osts;
+      }
+    }
+    else if (this.listEnabled) {
+      // Prints the musics in a list format if listEnabled is equal to True
     }
   }
 
@@ -155,6 +264,14 @@ export class MusicsComponent implements OnInit {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOstsLoaded += 1;
+          }, i * 30);
+        }
+        break;
+
+      case "all":
+        for (let i = 1; i <= 10; i++) {
+          setTimeout(() => {
+            this.allMusicsLoaded += 1;
           }, i * 30);
         }
         break;

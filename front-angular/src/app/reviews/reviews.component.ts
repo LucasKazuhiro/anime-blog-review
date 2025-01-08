@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AnimeService } from '../services/anime.service';
 import { Review } from '../models/review.model';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import { InfiniteScrollDirective } from "ngx-infinite-scroll";
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
-export class ReviewsComponent implements OnInit, AfterViewInit {
+export class ReviewsComponent implements OnInit {
   // Injects DestroyRef to automatically handle (destroy) subscriptions
   destroyRef = inject(DestroyRef);
 
@@ -41,12 +41,22 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
   // Chenge between "Loading content..." or "No results found..."
   public searchValue: string = "";
 
+  // Display the loading circle when loading NEW reviews
+  public isNewReviewsLoading: boolean = false;
+
   constructor(private router: Router, private animeService: AnimeService) { }
 
   ngOnInit() {
     // Concatenate the displayReviews (old) with the new reviews
-    this.animeService.loadReviewsOnScroll().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(newReviews => {
-      this.displayReviews = [...this.displayReviews, ...newReviews];
+    this.animeService.loadReviewsOnScroll().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (newReviews) => {
+        this.displayReviews = [...this.displayReviews, ...newReviews];
+        this.isNewReviewsLoading = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.isNewReviewsLoading = false;
+      }
     });
 
     // Get all reviews for search
@@ -63,12 +73,9 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  public ngAfterViewInit() {
-    this.startAnimation(0.05, 17, "loading_");
-  }
-
   // Increases the number of the current page (loading more data)
   loadMoreReviews() {
+    this.isNewReviewsLoading = true;
     this.currentPage += 1;
     this.animeService.updateCurrentPage(this.currentPage);
   }
@@ -88,21 +95,6 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
       this.displayReviews = [] // Clean display array (remove searched reviews)
       this.currentPage = 0; // Resets the current page
       this.loadMoreReviews(); // Load the first reviews again
-    }
-  }
-
-  // Fuction to animate several items with some delay between each of them
-  private startAnimation(delayIncrease: number, loopLimit: number, idPrefix: string) {
-    let delay = 0;
-    for (let i = 1; i <= loopLimit; i++) {
-      // Calculates the delay value
-      delay += delayIncrease;
-      // Find a specific star element
-      const element = document.getElementById(idPrefix + i);
-      if (element) {
-        // Defines the delay for the star animation
-        element.style.animationDelay = delay.toString() + 's';
-      }
     }
   }
 

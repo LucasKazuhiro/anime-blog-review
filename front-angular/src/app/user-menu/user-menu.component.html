@@ -7,7 +7,7 @@
   />
 
   <!-- PROFILE INFO -->
-  <div class="flex flex-col gap-5">
+  <div class="flex w-full flex-col gap-5">
     <!-- NAME -->
     <div class="text-center">
       <h2 class="text-2xl font-bold text-neutral-300">Hiroshi</h2>
@@ -18,7 +18,7 @@
 
     <!-- BIO -->
     <div>
-      <p class="text-[#c0c0c0] font-extralight leading-8">
+      <p class="font-extralight leading-8 text-[#c0c0c0]">
         Adora assistir animes no seu tempo livre. Seus gêneros favoritos são
         Slife of Life e Comédia para dar uma acalmada na vida. Gosta de Românces
         que se passam em um ambiente mais maduro e adulto, pois já enjoou de
@@ -174,6 +174,72 @@
           lucaslko429&#64;gmail.com
         </p>
       </div>
+    </div>
+
+    <!-- RATING SYSTEM -->
+    <div class="mt-8 flex w-full flex-col gap-4 text-lg text-neutral-500">
+      <h3 class="w-full">Rating System</h3>
+      <table
+        class="flex w-full flex-col gap-4 sm:flex-row sm:gap-8 xl:flex-col xl:gap-4"
+      >
+        <!-- FIRST TABLE HALF -->
+        <div class="flex w-full flex-col gap-4">
+          <tr>
+            <th class="text-[#6236de]">10</th>
+            <td class="">Masterpiece<span>(One Piece)</span></td>
+          </tr>
+          <tr>
+            <th class="text-[#1061c2]">9</th>
+            <td>Legendary<span>(Psycho-Pass)</span></td>
+          </tr>
+          <tr>
+            <th class="text-[#109c99]">8</th>
+            <td>Epic<span>(Haikyuu)</span></td>
+          </tr>
+          <tr>
+            <th class="text-[#0ca05d]">7</th>
+            <td>Very Good<span>(Nana)</span></td>
+          </tr>
+          <tr>
+            <th class="text-[#099f22]">6</th>
+            <td>Good<span>(Horimiya)</span></td>
+          </tr>
+        </div>
+
+        <!-- SECOND TABLE HALF -->
+        <div class="flex w-full flex-col gap-4">
+          <tr>
+            <th class="text-[#8ab000]">5</th>
+            <td>Ok<span>(Kobayashi-san)</span></td>
+          </tr>
+          <tr>
+            <th class="text-[#e2b700]">4</th>
+            <td>
+              <p>Meeh</p>
+              <tooltip
+                [id]="'rate-level-four'"
+                [text]="
+                  'My level 4 would be the equivalent of most people\'s level 6!'
+                "
+                [position]="'left'"
+              ></tooltip>
+              <span>(Kimetsu no Yaiba)</span>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-[#cc7900]">3</th>
+            <td>Bad<span>(Kono Subarashii)</span></td>
+          </tr>
+          <tr>
+            <th class="text-[#ff4c05]">2</th>
+            <td>Weak<span>(Mushoku Tensei)</span></td>
+          </tr>
+          <tr>
+            <th class="font-bold text-[#f20000]">1</th>
+            <td>Awful<span>(Akame ga Kill)</span></td>
+          </tr>
+        </div>
+      </table>
     </div>
   </div>
 </div>

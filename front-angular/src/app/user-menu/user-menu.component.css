@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  tr {
+    @apply flex items-start text-sm;
+  }
+
+  th {
+    @apply w-fit min-w-8 text-left font-facultyGlyphic font-light;
+  }
+
+  td {
+    @apply relative flex flex-col w-full items-start gap-1 font-facultyGlyphic tracking-wider xl:flex-row;
+  }
+
+  td span {
+    @apply font-lexend font-extralight text-[#868686];
+  }
+}

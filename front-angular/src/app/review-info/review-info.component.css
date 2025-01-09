@@ -3,46 +3,64 @@
 @tailwind utilities;
 
 @layer base {
-
   /* Table style */
   tr {
     @apply flex items-start;
   }
 
   th {
-    @apply font-light w-2/5
+    @apply w-2/5 font-light;
   }
 
   td {
-    @apply text-neutral-300 w-3/5 flex;
+    @apply flex w-3/5 text-neutral-300;
   }
 }
 
 @layer components {
-
   /* Rates metrics */
   .rate-box {
-    @apply select-none;
+    @apply select-none font-facultyGlyphic opacity-100;
   }
 
   .masterPiece {
-    @apply text-[#d3862f];
+    @apply text-[#8363da];
   }
 
-  .epicRate {
-    @apply text-[#cc5797];
+  .legendary {
+    @apply text-[#4787d4];
   }
 
-  .goodRate {
-    @apply text-[#42a31b];
+  .epic {
+    @apply text-[#109c99];
   }
 
-  .regularRate {
-    @apply text-[#beaf22];
+  .veryGood {
+    @apply text-[#0ca05d];
   }
 
-  .badRate {
-    @apply text-[#ca4545];
+  .good {
+    @apply text-[#099f22];
+  }
+
+  .ok {
+    @apply text-[#8ab000];
+  }
+
+  .meeh {
+    @apply text-[#e2b700];
+  }
+
+  .bad {
+    @apply text-[#cc7900];
+  }
+
+  .weak {
+    @apply text-[#fd6435];
+  }
+
+  .awful {
+    @apply text-[#ff0000];
   }
 
   /* Seasons metrics */
@@ -73,23 +91,23 @@
     }
 
     6% {
-      transform: translateY(0)
+      transform: translateY(0);
     }
 
-    50% {}
+    50% {
+    }
 
-    100% {}
+    100% {
+    }
   }
 
   .stars {
     animation: star-move 60s infinite;
   }
 
-
-
   /* Genres */
   .genre-box {
-    @apply py-2 px-4 rounded-md w-fit border font-light opacity-0;
+    @apply w-fit rounded-md border px-4 py-2 font-light opacity-0;
     animation: genre-fade-in 1s ease-out forwards;
   }
 
@@ -101,7 +119,7 @@
 
     100% {
       opacity: 1;
-      transform: translateY(0)
+      transform: translateY(0);
     }
   }
 
@@ -142,7 +160,7 @@
   }
 
   .gourmet {
-    @apply border-[#ffa16b] text-[#ffa16b]
+    @apply border-[#ffa16b] text-[#ffa16b];
   }
 
   .horror {
@@ -150,7 +168,7 @@
   }
 
   .mystery {
-    @apply text-[#a659ff] border-[#a659ff];
+    @apply border-[#a659ff] text-[#a659ff];
   }
 
   .romance {
@@ -158,7 +176,7 @@
   }
 
   .sciFi {
-    @apply border-[#d6b2ff] text-[#d6b2ff]
+    @apply border-[#d6b2ff] text-[#d6b2ff];
   }
 
   .slifeOfLife {
@@ -177,8 +195,6 @@
     @apply border-[#ff684d] text-[#ff684d];
   }
 
-
-
   /* External Links */
   .links-img {
     @apply w-10 rounded-xl opacity-0;
@@ -193,18 +209,16 @@
 
     100% {
       opacity: 1;
-      transform: translateY(0)
+      transform: translateY(0);
     }
   }
 
-
-
   /* Published Text */
   .published {
-    @apply overflow-hidden text-nowrap text-sm border-r-[2px] h-fit pb-0 pr-[2px] opacity-0 text-neutral-500;
+    @apply h-fit overflow-hidden text-nowrap border-r-[2px] pb-0 pr-[2px] text-sm text-neutral-500 opacity-0;
     animation:
       typing-effect 4s steps(40) forwards 6s,
-      blinking-effect .5s infinite 6s
+      blinking-effect 0.5s infinite 6s;
   }
 
   @keyframes typing-effect {
@@ -213,17 +227,17 @@
     }
 
     100% {
-      @apply w-full opacity-100
+      @apply w-full opacity-100;
     }
   }
 
   @keyframes blinking-effect {
     0% {
-      @apply border-r-transparent
+      @apply border-r-transparent;
     }
 
     100% {
-      @apply border-r-orange-900
+      @apply border-r-orange-900;
     }
   }
 }

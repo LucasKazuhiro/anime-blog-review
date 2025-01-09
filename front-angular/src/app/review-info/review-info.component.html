@@ -15,11 +15,16 @@
           <!-- RATE COLOR -->
           <span
             [ngClass]="{
-              masterPiece: reviewInfo.rate >= 9,
-              epicRate: reviewInfo.rate === 7 || reviewInfo.rate === 8,
-              goodRate: reviewInfo.rate === 5 || reviewInfo.rate === 6,
-              regularRate: reviewInfo.rate === 4,
-              badRate: reviewInfo.rate <= 3,
+              masterPiece: reviewInfo.rate === 10,
+              legendary: reviewInfo.rate === 9,
+              epic: reviewInfo.rate === 8,
+              veryGood: reviewInfo.rate === 7,
+              good: reviewInfo.rate === 6,
+              ok: reviewInfo.rate === 5,
+              meeh: reviewInfo.rate === 4,
+              bad: reviewInfo.rate === 3,
+              weak: reviewInfo.rate === 2,
+              awful: reviewInfo.rate === 1
             }"
             class="rate-box"
           >

@@ -1,6 +1,10 @@
 <!-- MAGNIFIER -->
 <svg
-  [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
+  [ngClass]="
+    isSearchFocused
+      ? 'fill-neutral-700 dark:fill-neutral-400'
+      : 'fill-neutral-400 dark:fill-neutral-600'
+  "
   class="absolute left-0 top-[5px] w-8 cursor-pointer duration-500"
   (click)="focusSearchBox()"
   enable-background="new 0 0 100 100"
@@ -22,8 +26,8 @@
 <input
   type="text"
   id="search-box"
-  class="w-full border-b border-b-neutral-800 bg-transparent pb-2 pl-10 pr-9 pt-2 font-light text-neutral-500 outline-none duration-300 placeholder:text-neutral-700 focus:border-b-neutral-500 focus:text-neutral-200 focus:placeholder:text-neutral-600 sm:pb-1 sm:text-lg"
-  placeholder="{{placeholderText}}"
+  class="w-full border-b border-b-neutral-300 bg-transparent pb-2 pl-10 pr-9 pt-2 font-light text-neutral-400 outline-none duration-300 placeholder:text-neutral-400 focus:border-b-neutral-500 focus:text-neutral-800 focus:placeholder:text-neutral-700 sm:pb-1 sm:text-lg dark:border-b-neutral-800 dark:text-neutral-500 dark:placeholder:text-neutral-700 dark:focus:border-b-neutral-500 dark:focus:text-neutral-200 dark:focus:placeholder:text-neutral-600"
+  placeholder="{{ placeholderText }}"
   [(ngModel)]="searchValue"
   (ngModelChange)="searchValueDebounce.next('')"
   (focus)="isSearchFocused = true"
@@ -46,8 +50,12 @@
 
 <!-- 'X' SVG TO DELETE -->
 <svg
-  [ngClass]="isSearchFocused ? 'fill-neutral-400' : 'fill-neutral-700'"
-  class="absolute right-1 top-2 w-6 cursor-pointer duration-500 hover:fill-pink-800"
+  [ngClass]="
+    isSearchFocused
+      ? 'fill-neutral-700 dark:fill-neutral-400'
+      : 'fill-neutral-400 dark:fill-neutral-600'
+  "
+  class="absolute right-1 top-2 w-6 cursor-pointer duration-500 hover:fill-pink-700 dark:hover:fill-pink-800"
   (click)="cleanSearchBox()"
   viewBox="-3.5 0 19 19"
 >

@@ -4,11 +4,11 @@
 
 @layer components {
   :host ::ng-deep h1 {
-    @apply text-2xl font-bold pb-2 text-[#c7c7c7];
+    @apply text-2xl font-bold pb-2 dark:text-neutral-300 text-neutral-800;
   }
 
   :host ::ng-deep p {
-    @apply font-light leading-8 text-[#cccccc] pb-3;
+    @apply font-light leading-8 dark:text-neutral-300 text-neutral-900 pb-3;
   }
 
   :host ::ng-deep em{

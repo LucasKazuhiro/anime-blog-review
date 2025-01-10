@@ -18,7 +18,7 @@
 
   /* Line */
   .line {
-    @apply h-[1px] flex-grow bg-neutral-800;
+    @apply h-[1px] flex-grow bg-neutral-400 dark:bg-neutral-800;
   }
 
   /* Favorite Item */
@@ -38,9 +38,11 @@
 
   .content-box::after {
     @apply z-[1];
-    background: radial-gradient(500px circle at var(--mouse-x) var(--mouse-y),
-        var(--border-light-color, rgba(172, 172, 172, 0.6)),
-        transparent 44%);
+    background: radial-gradient(
+      500px circle at var(--mouse-x) var(--mouse-y),
+      var(--border-light-color, rgba(172, 172, 172, 0.6)),
+      transparent 44%
+    );
   }
 
   /* Trigger 'after' (radial gradient) */

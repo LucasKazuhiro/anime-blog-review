@@ -10,11 +10,11 @@
   }
 
   th {
-    @apply font-light w-2/5
+    @apply w-2/5 font-light;
   }
 
   td {
-    @apply text-neutral-300 w-3/5 flex;
+    @apply flex w-3/5 dark:text-neutral-300 text-neutral-700;
   }
 }
 
@@ -22,44 +22,64 @@
 
   /* Rates metrics */
   .rate-box {
-    @apply select-none;
+    @apply select-none font-facultyGlyphic opacity-100;
   }
 
   .masterPiece {
-    @apply text-[#d3862f];
+    @apply text-[#8363da];
   }
 
-  .epicRate {
-    @apply text-[#cc5797];
+  .legendary {
+    @apply text-[#4787d4];
   }
 
-  .goodRate {
-    @apply text-[#42a31b];
+  .epic {
+    @apply text-[#109c99];
   }
 
-  .regularRate {
-    @apply text-[#beaf22];
+  .veryGood {
+    @apply text-[#0ca05d];
   }
 
-  .badRate {
-    @apply text-[#ca4545];
+  .good {
+    @apply text-[#099f22];
+  }
+
+  .ok {
+    @apply text-[#8ab000];
+  }
+
+  .meeh {
+    @apply text-[#e2b700];
+  }
+
+  .bad {
+    @apply text-[#cc7900];
+  }
+
+  .weak {
+    @apply text-[#fd6435];
+  }
+
+  .awful {
+    @apply text-[#ff0000];
   }
 
   /* Seasons metrics */
   .winter {
-    @apply text-[#68c9f0];
+    @apply dark:text-[#68c9f0] text-[#2c90b8];
   }
 
   .spring {
-    @apply text-[#ff8bdc];
+    @apply dark:text-[#ff8bdc] text-[#b44392];
   }
 
   .summer {
-    @apply text-[#81d83a];
+    @apply dark:text-[#81d83a] text-[#66b426];
   }
 
   .fall {
-    @apply text-[#f0a33f];
+    @apply dark:text-[#f0a33f] text-[#cf8a2e];
   }
 
   /* Star Animation */
@@ -73,7 +93,7 @@
     }
 
     6% {
-      transform: translateY(0)
+      transform: translateY(0);
     }
 
     50% {}
@@ -85,11 +105,9 @@
     animation: star-move 60s infinite;
   }
 
-
-
   /* Genres */
   .genre-box {
-    @apply py-2 px-4 rounded-md w-fit border font-light opacity-0;
+    @apply w-fit rounded-md border px-4 py-2 dark:font-light opacity-0;
     animation: genre-fade-in 1s ease-out forwards;
   }
 
@@ -101,80 +119,80 @@
 
     100% {
       opacity: 1;
-      transform: translateY(0)
+      transform: translateY(0);
     }
   }
 
   .action {
-    @apply border-[#6f9dff] text-[#6f9dff];
+    @apply dark:border-[#6f9dff] dark:text-[#6f9dff] border-[#4e7bcc] text-[#4e7bcc];
   }
 
   .adventure {
-    @apply border-[#8aff66] text-[#8aff66];
+    @apply dark:border-[#8aff66] dark:text-[#8aff66] border-[#6baa4d] text-[#6baa4d];
   }
 
   .avantGarde {
-    @apply border-[#ceff49] text-[#ceff49];
+    @apply dark:border-[#ceff49] dark:text-[#ceff49] border-[#88af2e] text-[#88af2e];
   }
 
   .awardWinning {
-    @apply border-[#ffd000] text-[#ffd000];
+    @apply dark:border-[#ffd000] dark:text-[#ffd000] border-[#ccad00] text-[#ccad00];
   }
 
   .boysLove {
-    @apply border-[#539dff] text-[#539dff];
+    @apply dark:border-[#539dff] dark:text-[#539dff] border-[#417bcc] text-[#417bcc];
   }
 
   .comedy {
-    @apply border-[#ff9d1c] text-[#ff9d1c];
+    @apply dark:border-[#ff9d1c] dark:text-[#ff9d1c] border-[#cc7a17] text-[#cc7a17];
   }
 
   .drama {
-    @apply border-[#ff7272] text-[#ff7272];
+    @apply dark:border-[#ff7272] dark:text-[#ff7272] border-[#cc5a5a] text-[#cc5a5a];
   }
 
   .fantasy {
-    @apply border-[#dbdbdb] text-[#dbdbdb];
+    @apply dark:border-[#dbdbdb] dark:text-[#dbdbdb] border-[#727272] text-[#727272];
   }
 
   .girlsLove {
-    @apply border-[#ff72e8] text-[#ff72e8];
+    @apply dark:border-[#ff72e8] dark:text-[#ff72e8] border-[#cc5bb7] text-[#cc5bb7];
   }
 
   .gourmet {
-    @apply border-[#ffa16b] text-[#ffa16b]
+    @apply dark:border-[#ffa16b] dark:text-[#ffa16b] border-[#cc8156] text-[#cc8156];
   }
 
   .horror {
-    @apply border-[#ff5a5a] text-[#ff5a5a];
+    @apply dark:border-[#ff5a5a] dark:text-[#ff5a5a] border-[#cc4646] text-[#cc4646];
   }
 
   .mystery {
-    @apply text-[#a659ff] border-[#a659ff];
+    @apply dark:border-[#a659ff] dark:text-[#a659ff] border-[#8146cc] text-[#8146cc];
   }
 
   .romance {
-    @apply border-[#ff6297] text-[#ff6297];
+    @apply dark:border-[#ff6297] dark:text-[#ff6297] border-[#cc4d75] text-[#cc4d75];
   }
 
   .sciFi {
-    @apply border-[#d6b2ff] text-[#d6b2ff]
+    @apply dark:border-[#d6b2ff] dark:text-[#d6b2ff] border-[#9574b6] text-[#9574b6];
   }
 
   .slifeOfLife {
-    @apply border-[#07c500] text-[#07c500];
+    @apply dark:border-[#07c500] dark:text-[#07c500] border-[#059d00] text-[#059d00];
   }
 
   .sports {
-    @apply border-[#4bdfb2] text-[#4bdfb2];
+    @apply dark:border-[#4bdfb2] dark:text-[#4bdfb2] border-[#3aad8f] text-[#3aad8f];
   }
 
   .supernatural {
-    @apply border-[#b07eff] text-[#b07eff];
+    @apply dark:border-[#b07eff] dark:text-[#b07eff] border-[#8c65cc] text-[#8c65cc];
   }
 
   .suspense {
-    @apply border-[#ff684d] text-[#ff684d];
+    @apply dark:border-[#ff684d] dark:text-[#ff684d] border-[#cc503c] text-[#cc503c];
   }
 
 
@@ -193,18 +211,16 @@
 
     100% {
       opacity: 1;
-      transform: translateY(0)
+      transform: translateY(0);
     }
   }
 
-
-
   /* Published Text */
   .published {
-    @apply overflow-hidden text-nowrap text-sm border-r-[2px] h-fit pb-0 pr-[2px] opacity-0 text-neutral-500;
+    @apply h-fit overflow-hidden text-nowrap border-r-[2px] pb-0 pr-[2px] text-sm text-neutral-500 opacity-0;
     animation:
       typing-effect 4s steps(40) forwards 6s,
-      blinking-effect .5s infinite 6s
+      blinking-effect 0.5s infinite 6s;
   }
 
   @keyframes typing-effect {
@@ -213,17 +229,17 @@
     }
 
     100% {
-      @apply w-full opacity-100
+      @apply w-full opacity-100;
     }
   }
 
   @keyframes blinking-effect {
     0% {
-      @apply border-r-transparent
+      @apply border-r-transparent;
     }
 
     100% {
-      @apply border-r-orange-900
+      @apply border-r-orange-900;
     }
   }
 }

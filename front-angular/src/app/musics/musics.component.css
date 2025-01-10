@@ -4,23 +4,23 @@
 
 @layer components {
   .filter-item {
-    @apply cursor-pointer select-none rounded-md border border-solid border-[#222222] p-[6px] text-xs font-light duration-200 hover:scale-110 sm:p-2;
+    @apply cursor-pointer select-none rounded-md border border-solid border-[#e2e2e2] dark:border-[#222222] p-[6px] text-xs font-light duration-200 hover:scale-110 sm:p-2;
   }
 
   p.disabled-filter {
-    @apply cursor-not-allowed bg-transparent text-neutral-600 hover:scale-100 hover:bg-transparent;
+    @apply cursor-not-allowed bg-transparent dark:text-neutral-600 text-neutral-300 hover:scale-100 hover:bg-transparent;
   }
 
   .opening-enabled {
-    @apply bg-[#0f2209];
+    @apply dark:bg-[#0f2209] bg-[#e4ffe6];
   }
 
   .ending-enabled {
-    @apply bg-[#2b0b31];
+    @apply dark:bg-[#2b0b31] bg-[#fdeaff];
   }
 
   .ost-enabled {
-    @apply bg-[#122141];
+    @apply dark:bg-[#122141] bg-[#e0eeff];
   }
 
   .svg-box {
@@ -28,16 +28,16 @@
   }
 
   .svg-list-option {
-    @apply fill-neutral-600 stroke-neutral-600 duration-200 hover:scale-110;
+    @apply dark:fill-neutral-600 dark:stroke-neutral-600 fill-neutral-500 stroke-neutral-500 duration-200 hover:scale-110;
   }
 
   div.disabled-filter,
   div.disabled-filter svg {
-    @apply bg-transparent fill-neutral-800 stroke-neutral-800 hover:scale-100;
+    @apply bg-transparent dark:fill-neutral-800 dark:stroke-neutral-800 fill-neutral-300 stroke-neutral-300 hover:scale-100;
   }
 
   .list-block-filter-enabled {
-    @apply bg-neutral-800 bg-opacity-50;
+    @apply dark:bg-neutral-800 bg-neutral-300 bg-opacity-50;
   }
 
   .music-box {
@@ -50,22 +50,22 @@
   }
 
   .title {
-    @apply text-2xl text-neutral-200;
+    @apply text-2xl dark:text-neutral-200 text-neutral-700;
   }
 
   /* Line */
   .line {
-    @apply h-[1px] flex-grow bg-neutral-800;
+    @apply h-[1px] flex-grow dark:bg-neutral-800 bg-neutral-400;
   }
 
   .music-box-2 {
-    @apply first:rounded-t-lg last:rounded-b-lg odd:bg-[#1d1d1d] even:bg-[#222222];
+    @apply first:rounded-t-lg last:rounded-b-lg dark:odd:bg-[#1d1d1d] dark:even:bg-[#222222] odd:bg-[#ececec] even:bg-[#f5f5f5];
     animation: genre-fade-in 0.4s forwards ease-out;
   }
 
   /* Music card */
   .music {
-    @apply flex cursor-pointer flex-col gap-0 p-3 sm:px-5 sm:py-4 duration-100 hover:bg-neutral-900;
+    @apply flex cursor-pointer flex-col gap-0 p-3 sm:px-5 sm:py-4 duration-100 dark:hover:bg-neutral-900 hover:bg-[#dadada];
     animation: genre-fade-in 0.1s forwards ease-out;
   }
 
@@ -88,20 +88,20 @@
   }
 
   .name {
-    @apply text-lg text-neutral-300 group-hover:text-orange-400;
+    @apply text-lg dark:text-neutral-300 text-neutral-700 dark:group-hover:text-orange-400 group-hover:text-rose-600;
   }
 
   .anime {
-    @apply font-light text-stone-500 group-hover:text-gray-500;
+    @apply font-light text-stone-500 dark:group-hover:text-gray-500 group-hover:text-gray-800;
   }
 
   .author {
-    @apply font-light text-neutral-500 group-hover:text-gray-400;
+    @apply font-light text-neutral-500 dark:group-hover:text-gray-400 group-hover:text-gray-950;
   }
 
   /* Button Show More */
   .btn-show-more {
-    @apply flex w-full items-center justify-end gap-2 rounded-b-lg bg-[#2e2e2e] px-5 py-2 text-sm;
+    @apply flex w-full items-center justify-end gap-2 rounded-b-lg bg-[#e6e6e6] dark:bg-[#2e2e2e] dark:text-neutral-400 text-neutral-700 px-5 py-2 text-sm;
     animation: genre-fade-in 0.1s forwards;
   }
 

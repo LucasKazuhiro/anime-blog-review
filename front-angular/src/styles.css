@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply font-lexend text-neutral-400;
+    @apply font-lexend dark:text-neutral-400 text-neutral-700;
   }
 
   *::-webkit-scrollbar {

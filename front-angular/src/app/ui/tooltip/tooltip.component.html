@@ -6,17 +6,17 @@
       'opacity-0': !isTooltipActive,
       '-translate-y-10': isTooltipActive,
     }"
-    class="absolute bottom-0 duration-200 ease-in-out"
+    class="absolute bottom-0 opacity-0 duration-200 ease-in-out"
   >
     <!-- TEXT -->
     <div
-      class="relative z-[5] block w-56 rounded-lg border-[1.5px] border-zinc-800 bg-zinc-900 p-3 text-center text-sm text-zinc-500"
+      class="relative z-[5] block w-56 rounded-lg border-[1.5px] border-neutral-400 bg-zinc-100 p-3 text-center text-sm text-neutral-500 dark:border-neutral-700 dark:bg-zinc-900 dark:text-zinc-500"
     >
       {{ text }}
     </div>
     <!-- ARROW DOWN OF THE BOX -->
     <p
-      class="absolute bottom-[0%] z-10 h-4 w-4 -translate-x-1/2 translate-y-[50%] rotate-45 transform rounded-br-sm border-b-[1.5px] border-r-[1.5px] border-zinc-800 bg-zinc-900"
+      class="absolute bottom-[0%] z-10 h-4 w-4 -translate-x-1/2 translate-y-[50%] rotate-45 transform rounded-br-sm border-b-[1.5px] border-r-[1.5px] border-neutral-400 bg-zinc-100 dark:border-neutral-700 dark:bg-zinc-900"
     ></p>
   </div>
 

@@ -16,6 +16,6 @@
   }
 
   td span {
-    @apply font-lexend font-extralight text-[#868686];
+    @apply font-lexend dark:font-light text-[#868686];
   }
 }

@@ -5,12 +5,12 @@
 @layer components {
   /* Menu items style */
   .button-menu {
-    @apply relative px-2 py-2 text-sm text-neutral-200 hover:text-main focus:text-main md:px-4 md:py-2;
+    @apply relative px-2 py-2 text-sm dark:text-neutral-200 text-neutral-950 md:px-4 md:py-2;
   }
 
   /* Colorized rectangle */
   .button-menu::after {
-    @apply absolute left-0 top-4 block rotate-90 rounded-full text-transparent transition-all content-[attr(data-title)] px-2 py-2 md:px-4 md:py-2;
+    @apply absolute left-0 top-4 block rotate-90 rounded-full px-2 py-2 text-transparent transition-all content-[attr(data-title)] md:px-4 md:py-2;
     transform: rotateX(88deg);
     z-index: -1;
   }
@@ -33,6 +33,10 @@
     background-color: var(--active-menu-bg-color);
     transform: rotateX(0deg);
     @apply top-0;
+  }
+
+  .active-page, .active-page-root-review{
+    @apply text-black;
   }
 
   /* Triggers reviews button in root & review pages */

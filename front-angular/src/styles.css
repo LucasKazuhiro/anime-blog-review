@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply font-lexend dark:text-neutral-400 text-neutral-700;
+    @apply font-lexend text-neutral-700 dark:text-neutral-400;
   }
 
   *::-webkit-scrollbar {
@@ -21,7 +21,7 @@
   }
 
   ::selection {
-    @apply text-[#ececec] bg-purple-950;
+    @apply bg-neutral-950 text-white dark:bg-purple-600 dark:bg-opacity-35 dark:text-[#ececec];
   }
 
   img {

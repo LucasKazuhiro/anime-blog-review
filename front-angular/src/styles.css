@@ -5,6 +5,7 @@
 @layer base {
   * {
     @apply font-lexend text-neutral-700 dark:text-neutral-400;
+    transition: background-color .5s;
   }
 
   *::-webkit-scrollbar {

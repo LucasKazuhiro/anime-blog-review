@@ -93,14 +93,16 @@
           <!-- REVIEW HEADER -->
           <div>
             <!-- REVIEW DATE -->
-            <p class="text-sm text-neutral-600 group-hover:text-neutral-500">
+            <p
+              class="text-sm text-neutral-400 group-hover:text-neutral-600 dark:text-neutral-500 dark:group-hover:text-neutral-400"
+            >
               {{ review.reviewDate }}
             </p>
 
             <!-- REVIEW TITLE -->
             <div class="flex items-end gap-4">
               <h1
-                class="text-2xl font-bold text-neutral-200 group-hover:text-orange-400"
+                class="text-2xl font-bold text-neutral-600 group-hover:text-orange-400 dark:text-neutral-200"
               >
                 {{ review.name }}
               </h1>
@@ -126,7 +128,7 @@
 
           <!-- REVIEW INTRO -->
           <p
-            class="font-extralight leading-7 text-neutral-300 group-hover:text-neutral-100 line-clamp-5"
+            class="line-clamp-5 font-light leading-7 text-neutral-500 group-hover:text-neutral-950 dark:text-neutral-400 dark:group-hover:text-neutral-300"
           >
             {{ review.intro }}
           </p>

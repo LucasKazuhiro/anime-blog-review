@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .svg-theme {
+    animation: add-theme .5s forwards;
+  }
+
+  @keyframes add-theme {
+    from {
+      transform: translateY(-50px);
+    }
+
+    to {
+      transform: translateY(0px);
+    }
+  }
+
+  .remove-theme {
+    animation: remove-theme .5s forwards;
+  }
+
+  @keyframes remove-theme {
+    from {
+      transform: translateY(0px);
+    }
+
+    to {
+      transform: translateY(50px);
+    }
+  }
+}

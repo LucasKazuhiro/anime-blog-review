@@ -59,7 +59,7 @@
   }
 
   .music-box-2 {
-    @apply first:rounded-t-lg last:rounded-b-lg dark:odd:bg-[#1d1d1d] dark:even:bg-[#222222] odd:bg-[#ececec] even:bg-[#f5f5f5];
+    @apply first:rounded-t-lg last:rounded-b-lg overflow-hidden dark:odd:bg-[#1d1d1d] dark:even:bg-[#222222] odd:bg-[#ececec] even:bg-[#f5f5f5];
     animation: genre-fade-in 0.4s forwards ease-out;
   }
 

@@ -37,7 +37,7 @@
 
   div.disabled-filter,
   div.disabled-filter svg {
-    @apply bg-transparent dark:fill-neutral-800 dark:stroke-neutral-800 fill-neutral-300 stroke-neutral-300 hover:scale-100;
+    @apply bg-transparent dark:fill-neutral-800 dark:stroke-neutral-800 fill-neutral-300 stroke-neutral-300 hover:scale-100 cursor-not-allowed;
   }
 
   .list-block-filter-enabled {

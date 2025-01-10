@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   private fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
 
   // All types of music
-  private music_types: string[] = ['op', 'ed', 'ost']
+  private music_types: string[] = ['op', 'ed', 'ost', 'dub']
 
   public isMenuMobileEnabled: boolean = false;
 
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
     }
 
     // Create debounce to toggle theme button
-    this.toggleThemeDebounce.pipe(debounceTime(550), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+    this.toggleThemeDebounce.pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.toggleTheme();
     })
   }
@@ -151,7 +151,7 @@ export class AppComponent implements OnInit {
       }
 
       if (theme) theme.classList.remove("remove-theme");
-    }, 500)
+    }, 300)
   }
 
   private activeDarkMode() {

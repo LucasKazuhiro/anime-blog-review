@@ -36,7 +36,7 @@
 
   /* Info Box */
   .info-box {
-    @apply flex flex-row gap-3 px-6 pb-4 pt-4 hover:bg-neutral-200 dark:hover:bg-neutral-800;
+    @apply flex flex-row gap-3 px-6 pb-4 pt-4 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-none;
   }
 
   .link-img {

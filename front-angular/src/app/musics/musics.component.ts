@@ -41,6 +41,9 @@ export class MusicsComponent implements OnInit {
   public allMusicsOsts: Music[] = [];
   public displayMusicsOsts: Music[] = [];
 
+  public allMusicsDubs: Music[] = [];
+  public displayMusicsDubs: Music[] = [];
+
   public allMusics: Music[] = [];
 
 
@@ -48,15 +51,17 @@ export class MusicsComponent implements OnInit {
   public musicsOpsLoaded = 5;
   public musicsEdsLoaded = 5;
   public musicsOstsLoaded = 5;
+  public musicsDubsLoaded = 5;
   public allMusicsLoaded = 10;
 
 
   // Varibles to store the searched value and search results
   public searchedMusic: string = "";
-  public searchedResults: { openings: Music[]; endings: Music[]; osts: Music[] } = {
+  public searchedResults: { openings: Music[]; endings: Music[]; osts: Music[], dubs: Music[] } = {
     openings: [],
     endings: [],
-    osts: []
+    osts: [],
+    dubs: []
   };
 
   // Filters selected
@@ -64,6 +69,7 @@ export class MusicsComponent implements OnInit {
   public openingEnabled: boolean = false;
   public endingEnabled: boolean = false;
   public ostEnabled: boolean = false;
+  public dubEnabled: boolean = false;
   public listEnabled: boolean = false;
   public blockEnabled: boolean = true;
 
@@ -74,22 +80,25 @@ export class MusicsComponent implements OnInit {
     combineLatest([
       this.animeService.musicOps$,
       this.animeService.musicEds$,
-      this.animeService.musicOsts$
+      this.animeService.musicOsts$,
+      this.animeService.musicDubs$
     ])
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(([ops, eds, osts]) => {
+      .subscribe(([ops, eds, osts, dubs]) => {
         // Update the arrays that store all values of each type of music
         this.allMusicsOps = ops;
         this.allMusicsEds = eds;
         this.allMusicsOsts = osts;
+        this.allMusicsDubs = dubs;
 
         // At the beginning, display all data
         this.displayMusicsOps = this.allMusicsOps;
         this.displayMusicsEds = this.allMusicsEds;
         this.displayMusicsOsts = this.allMusicsOsts;
+        this.displayMusicsDubs = this.allMusicsDubs;
 
         // Combine the arrays (to search)
-        const combinedData = [...this.allMusicsOps, ...this.allMusicsEds, ...this.allMusicsOsts];
+        const combinedData = [...this.allMusicsOps, ...this.allMusicsEds, ...this.allMusicsOsts, ...this.allMusicsDubs];
 
         // Update Fuse collection
         this.fuse.setCollection(combinedData);
@@ -116,7 +125,8 @@ export class MusicsComponent implements OnInit {
       const categorizedMusics = searchedMatches.reduce<{
         openings: Music[],
         endings: Music[],
-        osts: Music[]
+        osts: Music[],
+        dubs: Music[]
       }>
         ((acc, item: Music) => {
           switch (item.type) {
@@ -132,10 +142,14 @@ export class MusicsComponent implements OnInit {
               acc.osts.push(item);
               break;
 
+            case "dub":
+              acc.dubs.push(item);
+              break;
+
             default:
           }
           return acc;
-        }, { openings: [], endings: [], osts: [] });
+        }, { openings: [], endings: [], osts: [], dubs: [] });
 
       this.searchedResults = categorizedMusics;
       this.updateDisplaySearchResults();
@@ -145,17 +159,19 @@ export class MusicsComponent implements OnInit {
       this.musicsOpsLoaded = 5;
       this.musicsEdsLoaded = 5;
       this.musicsOstsLoaded = 5;
+      this.musicsDubsLoaded = 5;
       this.allMusicsLoaded = 10;
 
       // If input is empty, return all musics of all types
       this.displayMusicsOps = this.allMusicsOps;
       this.displayMusicsEds = this.allMusicsEds;
       this.displayMusicsOsts = this.allMusicsOsts;
+      this.displayMusicsDubs = this.allMusicsDubs;
       this.allMusics = [];
     }
   }
 
-  // Filter musics by type (op, ed, ost)
+  // Filter musics by type (op, ed, ost, dub)
   public editMusicTypeSearch(typeMusic: string) {
     // Block filters if theres no searched value
     if (this.searchedMusic !== '' && this.blockEnabled) {
@@ -176,10 +192,14 @@ export class MusicsComponent implements OnInit {
           case "originalSoundtrack":
             this.ostEnabled = true;
             break;
+
+          case "dub":
+            this.dubEnabled = true;
+            break;
         }
       }
       else {
-        // Remote the type from the array
+        // Remove the type from the array
         this.typesForSearch = this.typesForSearch.filter(item => item !== typeMusic);
 
         // Remove the button color
@@ -194,6 +214,10 @@ export class MusicsComponent implements OnInit {
 
           case "originalSoundtrack":
             this.ostEnabled = false;
+            break;
+
+          case "dub":
+            this.dubEnabled = false;
             break;
         }
       }
@@ -215,6 +239,7 @@ export class MusicsComponent implements OnInit {
     this.displayMusicsOps = []
     this.displayMusicsEds = []
     this.displayMusicsOsts = []
+    this.displayMusicsDubs = []
 
     if (this.blockEnabled) {
       if (this.typesForSearch.length !== 0) {
@@ -222,12 +247,14 @@ export class MusicsComponent implements OnInit {
         if (this.typesForSearch.includes('opening')) this.displayMusicsOps = this.searchedResults.openings;
         if (this.typesForSearch.includes('ending')) this.displayMusicsEds = this.searchedResults.endings;
         if (this.typesForSearch.includes('originalSoundtrack')) this.displayMusicsOsts = this.searchedResults.osts;
+        if (this.typesForSearch.includes('dub')) this.displayMusicsDubs = this.searchedResults.dubs;
       }
       else {
         // Returns all music types results
         this.displayMusicsOps = this.searchedResults.openings;
         this.displayMusicsEds = this.searchedResults.endings;
         this.displayMusicsOsts = this.searchedResults.osts;
+        this.displayMusicsDubs = this.searchedResults.dubs;
       }
     }
     else if (this.listEnabled) {
@@ -264,6 +291,14 @@ export class MusicsComponent implements OnInit {
         for (let i = 1; i <= 5; i++) {
           setTimeout(() => {
             this.musicsOstsLoaded += 1;
+          }, i * 30);
+        }
+        break;
+
+      case "dub":
+        for (let i = 1; i <= 5; i++) {
+          setTimeout(() => {
+            this.musicsDubsLoaded += 1;
           }, i * 30);
         }
         break;

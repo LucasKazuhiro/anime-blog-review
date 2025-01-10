@@ -4,7 +4,8 @@
 
 @layer base {
   * {
-    @apply font-lexend dark:text-neutral-400 text-neutral-700;
+    @apply font-lexend text-neutral-700 dark:text-neutral-400;
+    transition: background-color .5s;
   }
 
   *::-webkit-scrollbar {
@@ -12,16 +13,15 @@
   }
 
   *::-webkit-scrollbar-track {
-    @apply bg-neutral-950;
+    @apply dark:bg-neutral-950 bg-neutral-200;
   }
 
   *::-webkit-scrollbar-thumb {
-    @apply rounded-lg bg-neutral-800;
-    border: 4px solid #0a0a0a;
+    @apply rounded-lg border-4 border-solid dark:border-neutral-950 dark:bg-neutral-700 border-neutral-200 bg-neutral-500;
   }
 
   ::selection {
-    @apply text-[#ececec] bg-purple-950;
+    @apply bg-neutral-950 text-white dark:bg-purple-600 dark:bg-opacity-35 dark:text-[#ececec];
   }
 
   img {

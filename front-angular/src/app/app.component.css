@@ -4,7 +4,7 @@
 
 @layer components {
   .svg-theme {
-    animation: add-theme .5s forwards;
+    animation: add-theme .3s forwards;
   }
 
   @keyframes add-theme {
@@ -18,7 +18,7 @@
   }
 
   .remove-theme {
-    animation: remove-theme .5s forwards;
+    animation: remove-theme .3s forwards;
   }
 
   @keyframes remove-theme {

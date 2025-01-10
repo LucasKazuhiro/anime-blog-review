@@ -62,23 +62,47 @@ export class NavMenuComponent implements OnInit {
   private updateActivePageColor() {
     const currentPage = this.router.url;
 
-    switch (currentPage) {
-      case "/":
-      case "/reviews":
+    // Colors of the menu in dark mode
+    if (document.documentElement.classList.contains('dark')) {
+      switch (currentPage) {
+        case "/":
+        case "/reviews":
+          this.activeColor = "#cf3d6e";
+          break;
+
+        case "/favorites":
+          this.activeColor = '#e4a42d';
+          break;
+
+        case "/musics":
+          this.activeColor = '#14afc4';
+          break;
+      }
+
+      if (currentPage.includes('/review/')) {
         this.activeColor = "#cf3d6e";
-        break;
-
-      case "/favorites":
-        this.activeColor = '#e4a42d';
-        break;
-
-      case "/musics":
-        this.activeColor = '#14afc4';
-        break;
+      }
     }
+    // Color of the menu in light mode
+    else {
+      switch (currentPage) {
+        case "/":
+        case "/reviews":
+          this.activeColor = "#ff80ae";
+          break;
 
-    if (currentPage.includes('/review/')) {
-      this.activeColor = "#cf3d6e";
+        case "/favorites":
+          this.activeColor = '#ffc75e';
+          break;
+
+        case "/musics":
+          this.activeColor = '#3dcde0';
+          break;
+      }
+
+      if (currentPage.includes('/review/')) {
+        this.activeColor = "#ff80ae";
+      }
     }
   }
 

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+
   /* Menu items style */
   .button-menu {
     @apply relative px-2 py-2 text-sm dark:text-neutral-200 text-neutral-950 md:px-4 md:py-2;
@@ -17,15 +18,15 @@
 
   /* Color of each rectangle (which will show on hover) */
   .button-menu:nth-child(1)::after {
-    background-color: #ac1648;
+    @apply dark:bg-[#ac1648] bg-[#ff70a0];
   }
 
   .button-menu:nth-child(2)::after {
-    background-color: #cc880b;
+    @apply dark:bg-[#cc880b] bg-[#f3b748];
   }
 
   .button-menu:nth-child(3)::after {
-    background-color: #008697;
+    @apply dark:bg-[#008697] bg-[#3ac2d4];
   }
 
   /* Color of rectangle when clicked/enabled */
@@ -35,7 +36,8 @@
     @apply top-0;
   }
 
-  .active-page, .active-page-root-review{
+  .active-page,
+  .active-page-root-review {
     @apply text-black;
   }
 

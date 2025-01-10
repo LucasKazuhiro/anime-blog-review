@@ -77,6 +77,9 @@ export class AnimeService {
   private musicOsts = new BehaviorSubject<Music[]>([]);
   public musicOsts$ = this.musicOsts.asObservable();
 
+  private musicDubs = new BehaviorSubject<Music[]>([]);
+  public musicDubs$ = this.musicDubs.asObservable();
+
 
   constructor(private http: HttpClient) { }
 
@@ -252,6 +255,10 @@ export class AnimeService {
 
           case 'ost':
             this.musicOsts.next(data);
+            break;
+
+          case 'dub':
+            this.musicDubs.next(data);
             break;
 
           default:

@@ -24,6 +24,19 @@
   /* Favorite Item */
   .fav-item {
     @apply grid grid-cols-3 gap-1 min-[530px]:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-3 2xl:grid-cols-5;
+    animation: fade-in 1s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .content-box {
@@ -38,11 +51,9 @@
 
   .content-box::after {
     @apply z-[1];
-    background: radial-gradient(
-      500px circle at var(--mouse-x) var(--mouse-y),
-      var(--border-light-color, rgba(172, 172, 172, 0.6)),
-      transparent 44%
-    );
+    background: radial-gradient(500px circle at var(--mouse-x) var(--mouse-y),
+        var(--border-light-color, rgba(172, 172, 172, 0.6)),
+        transparent 44%);
   }
 
   /* Trigger 'after' (radial gradient) */
@@ -56,7 +67,7 @@
   }
 
   .img {
-    @apply h-full rounded-md object-cover duration-300;
+    @apply h-full rounded-md object-cover duration-300 transition-transform;
   }
 
   .content-box:hover .img {

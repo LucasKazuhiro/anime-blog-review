@@ -23,6 +23,10 @@
     @apply dark:bg-[#122141] bg-[#e0eeff];
   }
 
+  .dub-enabled {
+    @apply dark:bg-[#4b3017] bg-[#ffeee0];
+  }
+
   .svg-box {
     @apply flex h-[34px] w-[38px] cursor-pointer items-center justify-center rounded-sm px-1 duration-200;
   }
@@ -33,7 +37,7 @@
 
   div.disabled-filter,
   div.disabled-filter svg {
-    @apply bg-transparent dark:fill-neutral-800 dark:stroke-neutral-800 fill-neutral-300 stroke-neutral-300 hover:scale-100;
+    @apply bg-transparent dark:fill-neutral-800 dark:stroke-neutral-800 fill-neutral-300 stroke-neutral-300 hover:scale-100 cursor-not-allowed;
   }
 
   .list-block-filter-enabled {
@@ -59,7 +63,7 @@
   }
 
   .music-box-2 {
-    @apply first:rounded-t-lg last:rounded-b-lg dark:odd:bg-[#1d1d1d] dark:even:bg-[#222222] odd:bg-[#ececec] even:bg-[#f5f5f5];
+    @apply first:rounded-t-lg last:rounded-b-lg overflow-hidden dark:odd:bg-[#1d1d1d] dark:even:bg-[#222222] odd:bg-[#ececec] even:bg-[#f5f5f5];
     animation: genre-fade-in 0.4s forwards ease-out;
   }
 

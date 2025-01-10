@@ -23,6 +23,10 @@
     @apply dark:bg-[#122141] bg-[#e0eeff];
   }
 
+  .dub-enabled {
+    @apply dark:bg-[#4b3017] bg-[#ffeee0];
+  }
+
   .svg-box {
     @apply flex h-[34px] w-[38px] cursor-pointer items-center justify-center rounded-sm px-1 duration-200;
   }

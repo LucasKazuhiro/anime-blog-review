@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   private fav_types: string[] = ['tvs', 'films', 'chars_male', 'chars_female', 'chars_no_idea', 'seiyuus_male', 'seiyuus_female', 'studios']
 
   // All types of music
-  private music_types: string[] = ['op', 'ed', 'ost']
+  private music_types: string[] = ['op', 'ed', 'ost', 'dub']
 
   public isMenuMobileEnabled: boolean = false;
 

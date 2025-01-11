@@ -51,3 +51,27 @@ To develop this project, Angular was used for the frontend, Tailwind for styling
         </td>
     </tr>
 </table>
+
+# Requirements
+1. Install [`Node.js`](https://nodejs.org/en) and ensure it includes the `npm` package manager.
+2. Install the [`Angular CLI`](https://angular.dev/installation#install-angular-cli) globally.
+3. Install [`Python`](https://www.python.org/downloads/) and ensure it inclues the `pip` package manager.
+
+# How to run locally
+1. Run a `git clone` of the repository:
+```
+git clone https://github.com/LucasKazuhiro/anime-blog-review.git
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

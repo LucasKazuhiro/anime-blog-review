@@ -27,6 +27,15 @@ To develop this project, Angular was used for the frontend, Tailwind for styling
             <img alt="Python" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
         </td>
     </tr>
+     <tr>
+        <th>
+            Libraries
+        </th>
+        <td></td>
+        <td>
+            <img alt="Pandas" src="https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white"/>
+        </td>
+    </tr>
     <tr>
         <th>
             Frameworks

@@ -62,8 +62,27 @@ To develop this project, Angular was used for the frontend, Tailwind for styling
 ```
 git clone https://github.com/LucasKazuhiro/anime-blog-review.git
 ```
-
-
+2. Open the `back-flask` folder and initialize a [`virtual environment`](https://flask.palletsprojects.com/en/stable/installation/#create-an-environment) [OPTIONAL]
+3. Install the dependencies listed in `requirements.txt`:
+```
+pip install -r requirements.txt
+```
+4. Open the `front-angular` folder and install the dependencies:
+```
+npm install
+```
+5. Go back to the `back-flask` folder and run:
+```
+flask run
+```
+6. Go back to the `front-angular` folder and run:
+```
+ng serve
+```
+7. Access `localhost` to open the website:
+```
+http://localhost:4200
+```
 
 
 

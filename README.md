@@ -92,3 +92,8 @@ ng serve
 ```
 http://localhost:4200
 ```
+
+<br>
+
+# References
+This website was inspired by the [`heykperks.moe`](https://heykperks.moe/) project created by [`heyKPerks`](https://github.com/heyKPerks). The source code can be found on [`MyAnimeProfile`](https://github.com/heyKPerks/MyAnimeProfile) repository.

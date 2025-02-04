@@ -29,7 +29,7 @@ export class TooltipComponent implements AfterViewInit {
 
         case "center":
           // Calculates the number of pixels to the left that the toolbox needs to move.
-          this.moveToTheLeft = (tooltipBox.getBoundingClientRect().width / 2) - 11;
+          this.moveToTheLeft = (tooltipBox.getBoundingClientRect().width / 2) - 10;
           tooltipBox.style.left = `-${this.moveToTheLeft}px`;
 
           arrowDown.style.left = `50%`;
